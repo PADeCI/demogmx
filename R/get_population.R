@@ -35,7 +35,6 @@ get_population<- function(v_state = "National",
                           v_init_age_grps = c("0","5","15","25","45", "55","65","70"),
                           age_grps = T) {
   require(tidyverse)
-  require(fst)
 
   appDir <- system.file( package = "demogmx")
   GLOBAL_MX_POPULATION_FILE <- paste0(appDir, "/data", "/df_pop_state_age_sex.Rdata")
