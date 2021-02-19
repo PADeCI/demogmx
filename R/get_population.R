@@ -32,7 +32,7 @@
 get_population<- function(v_state = "National",
                           v_year  = "2021",
                           select_sex    = unique(df_pop_state_age_sex$sex),
-                          v_init_age_grps,
+                          v_init_age_grps = c("0","5","15","25","45", "55","65","70"),
                           age_grps = T) {
   require(tidyverse)
   require(fst)

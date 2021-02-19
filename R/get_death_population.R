@@ -35,18 +35,18 @@
 get_death_population <- function( v_state = "National",
                             v_year  = "2021",
                             select_sex    = unique(df_mortrate_state_age_sex$sex),
-                            v_init_age_grps,
+                            v_init_age_grps = c("0","5","15","25","45", "55","65","70"),
                             age_grps = T) {
   require(fst)
   require(tidyverse)
 
   appDir <- system.file( package = "demogmx")
   GLOBAL_MX_POPULATION_DEATH_FILE <- paste0(appDir, "/data", "/df_mortrate_state_age_sex.Rdata")
-  #load(GLOBAL_MX_POPULATION_DEATH_FILE)
-  df_deaths_state_age_sex <- read.fst("data/df_deaths_state_age_sex.fst")
+  load(GLOBAL_MX_POPULATION_DEATH_FILE)
+  #df_deaths_state_age_sex <- read.fst("data/df_deaths_state_age_sex.fst")
 
   # Filter Data Outcome -----------------------------------------------------
-  df_mort_outcome <- df_deaths_state_age_sex[df_deaths_state_age_sex$state %in% v_state,]
+  df_mort_outcome <- df_mortrate_state_age_sex[df_mortrate_state_age_sex$state %in% v_state,]
   df_mort_outcome <- df_mort_outcome[df_mort_outcome$year %in% v_year,]
   df_mort_outcome <- df_mort_outcome[df_mort_outcome$sex %in% select_sex,]
   #df_mort_outcome <- df_mort_outcome[df_mort_outcome$age %in% select_age,]

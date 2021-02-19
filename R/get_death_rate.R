@@ -11,7 +11,7 @@
 ##
 ##************************************************************************
 ##*
-
+load("data/df_mortrate_state_age_sex.Rdata")
 
 #'Get death rate
 #'
@@ -34,8 +34,8 @@
 #'v_init_age_grps = c("21", "22", "23"), age_grps= F)
 get_death_rate <- function(v_state = "National",
                            v_year  = "2021",
-                           select_sex    = unique(df_pop_state_age_sex$sex),
-                           v_init_age_grps,
+                           select_sex    = unique(df_mortrate_state_age_sex$sex),
+                           v_init_age_grps = c("0","5","15","25","45", "55","65","70"),
                            age_grps = T
                            ) {
 
