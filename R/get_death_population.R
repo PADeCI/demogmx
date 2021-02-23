@@ -37,7 +37,6 @@ get_death_population <- function( v_state = "National",
                             select_sex    = unique(df_mortrate_state_age_sex$sex),
                             v_init_age_grps = c("0","5","15","25","45", "55","65","70"),
                             age_grps = T) {
-  require(fst)
   require(tidyverse)
 
   appDir <- system.file( package = "demogmx")
