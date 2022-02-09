@@ -1,65 +1,63 @@
 ##************************************************************************
-## Script Name: Get population
+## Script Name: get_population
 ## Purpose:
 ##
+## Created: February, 2022
+## Authors:
+## - Mariana Fernandez
+## - David Garibay-Treviño, MSc
 ##
-## Created:
-## Authors: Mariana Fernandez
-##
-## GitHub: marianafdz465
-##
+## GitHub:
+## - marianafdz465
+## - du-gartre
 ##
 ##************************************************************************
 
-#'Get the population
-#'\code{get_population} get function that allows user to
-#'get a dataset with the subset of different params
-#'@param v_state State(s) of desired data
-#'@param v_year Year(s) of desired data
-#'@param select_sex Sex (Female/Male/Total)
-#'@param v_init_age_grps Specifies the age bins to aggregate and return
-#'@param age_grps (default is True)
+#' Get population
 #'
-#'@return A dataset with the data selected
+#' \code{get_population} Function that allows user to get a demographic dataset
+#' regarding population and population proportions based on the parameter
+#' set given by the user
 #'
-#'@param export
+#' @param v_state State(s) of desired data.
+#' @param v_year Year(s) of desired data. Must have numbers between 1970 and
+#'  2050.
+#' @param v_sex Vector selecting sex. Options: Female, Male and Total.
+#' @param v_age Specifies the age bins to aggregate and return.
+#' @param age_groups Specifies whether to aggregate the output by age groups.
 #'
-#'@examples
-#'get_population(v_state = "Aguascalientes", v_year = "2021", select_sex = "Total",
-#' v_init_age_grps = c("0","5","15","25","45", "55","65","70"), age_grps= T)
-#' get_population(v_state = "Aguascalientes", v_year = c("2021", "2022"), select_sex = "Female",
-#' v_init_age_grps = c("21", "22", "23"), age_grps= F)
-get_population<- function(v_state = "National",
-                          v_year  = "2021",
-                          select_sex    = unique(df_pop_state_age_sex$sex),
-                          v_init_age_grps = c("0","5","15","25","45", "55","65","70"),
-                          age_grps = T) {
-  require(tidyverse)
+#' @return A demographic dataset based on specified parameters.
+#' @param export
+#'
+#' @examples
+#' get_population(v_states =  "Chiapas", v_year = 2015, v_sex = "Total",
+#' v_age = c(0, 15, 45, 75), age_groups = FALSE)
+#'
+#' get_population(v_states = c("Aguascalientes", "Campeche"),
+#' v_year = c(2010, 2021), v_sex = "Male", v_age = c(0, 15, 45, 75),
+#' age_groups = TRUE)
+#'
+#' @export
+get_population<- function(v_states   = "National",
+                          v_year     = "2021",
+                          v_sex      = "Total",
+                          v_age      = c("0","5","15","25","45", "55","65","70"),
+                          age_groups = TRUE) {
 
-  appDir <- system.file( package = "demogmx")
-  GLOBAL_MX_POPULATION_FILE <- paste0(appDir, "/data", "/df_pop_state_age_sex.Rdata")
-  load(GLOBAL_MX_POPULATION_FILE)
-  #df_pop_state_age_sex <- read.fst("data/df_pop_state_age_sex.fst")
+  # Execute auxiliary function ----------------------------------------------
+  df_pop_aux <- get_death_population(v_states   = v_states,
+                                     v_year     = v_year,
+                                     v_sex      = v_sex,
+                                     v_age      = v_age,
+                                     age_groups = age_groups)
 
-  # Filter Data Outcome -----------------------------------------------------
-  df_pop_outcome <- df_pop_state_age_sex[df_pop_state_age_sex$state %in% v_state,]
-  df_pop_outcome <- df_pop_outcome[df_pop_outcome$year %in% v_year,]
-  df_pop_outcome <- df_pop_outcome[df_pop_outcome$sex %in% select_sex,]
-  #dfpopt_outcome <- df_mort_outcome[df_mort_outcome$age %in% select_age,]
+  # Obtain death rate and remove population column --------------------------
+  df_pop <-  df_pop_aux %>%
+    group_by(year, state, sex) %>%
+    mutate(proportion = prop.table(population)) %>%
+    ungroup() %>%
+    select(-deaths)
 
-  if(age_grps == F){
-    df <- df_pop_outcome[df_pop_outcome$age %in% v_init_age_grps,]
-  }else{
-    df <- df_pop_outcome %>%
-      mutate(AgeGrp = cut(age, breaks = c(v_init_age_grps, Inf),
-                          include.lowest = TRUE, right = FALSE)) %>%
-      group_by( year,state, CVE_GEO,sex, AgeGrp ) %>%
-      summarise(population = sum(population) # Population by age group
-                )    # Total number of deaths
-  }
-
-  assign("df_pop_age_sex_outcome", df, envir = .GlobalEnv)
-
-  return(df)
+  return(df_pop)
 }
 

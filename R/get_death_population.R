@@ -1,67 +1,90 @@
 ##************************************************************************
-## Script Name: Count Population (Deaths)
+## Script Name: get_death_population
 ## Purpose:
 ##
+## Created: February, 2022
+## Authors:
+## - Mariana Fernandez
+## - David Garibay-Treviño, MSc
 ##
-## Created:
-## Authors: Mariana Fernandez
-##
-## GitHub: marianafdz465
-##
+## GitHub:
+## - marianafdz465
+## - du-gartre
 ##
 ##************************************************************************
 
 
-#'Get death population
+#' Get death population
 #'
-#'\code{get_death_population} get function that allows user to
-#'get a dataset with the subset of different params
+#' \code{get_death_population} function that allows the user to
+#' get a dataset of the population and deaths based on different parameters
 #'
-#'@param v_state State(s) of desired data
-#'@param v_year Year(s) of desired data
-#'@param select_sex Sex (Female/Male/Total)
-#'@param v_init_age_grps Specifies the age bins to aggregate and return
-#'@param age_grps (default is True)
+#' @param v_states State(s) of desired data.
+#' @param v_year Year(s) of desired data. Must have numbers between 1970 and
+#' 2050. Default is 2021.
+#' @param v_sex Vector selecting sex. Options: Female, Male and Total.
+#' @param v_age Specifies the age bins to aggregate and return.
+#' @param age_groups Specifies whether to aggregate the output by age groups.
+#' @import dplyr
+#' @return A demographic dataset based on the selected parameters.
+#' @param export
 #'
-#'@return A dataset with the data select
+#' @examples
+#' get_death_population(v_states = c("Aguascalientes", "Campeche"),
+#' v_year = c(2021, 2046), v_sex = c("Female", "Total"),  age_groups = TRUE)
 #'
-#'@param export
+#' get_death_population(v_states = "National",  v_year = c(2021, 2046, 2050),
+#' v_sex = "Total", age_groups= FALSE)
 #'
-#'@examples
-#'get_death_population(v_state = "Aguascalientes", v_year = "2021", select_sex = "Total",
-#'v_init_age_grps = c("0","5","15","25","45", "55","65","70"), age_grps= T)
-#'get_death_population(v_state = "Aguascalientes", v_year = c("2021", "2022"), select_sex = "Female",
-#'v_init_age_grps = c("21", "22", "23"), age_grps= F)
-get_death_population <- function( v_state = "National",
-                            v_year  = "2021",
-                            select_sex    = unique(df_mortrate_state_age_sex$sex),
-                            v_init_age_grps = c("0","5","15","25","45", "55","65","70"),
-                            age_grps = T) {
-  require(tidyverse)
+#' @export
+get_death_population <- function( v_states = "National",
+                                  v_year   = "2021",
+                                  v_sex    = "Total",
+                                  v_age    = c("0","5","15","25","45", "55","65","70"),
+                                  age_groups = TRUE) {
+  # Import base data --------------------------------------------------------
+  load("data/df_mortrate_state_age_sex.Rdata")
 
-  appDir <- system.file( package = "demogmx")
-  GLOBAL_MX_POPULATION_DEATH_FILE <- paste0(appDir, "/data", "/df_mortrate_state_age_sex.Rdata")
-  load(GLOBAL_MX_POPULATION_DEATH_FILE)
-  #df_deaths_state_age_sex <- read.fst("data/df_deaths_state_age_sex.fst")
-
-  # Filter Data Outcome -----------------------------------------------------
-  df_mort_outcome <- df_mortrate_state_age_sex[df_mortrate_state_age_sex$state %in% v_state,]
-  df_mort_outcome <- df_mort_outcome[df_mort_outcome$year %in% v_year,]
-  df_mort_outcome <- df_mort_outcome[df_mort_outcome$sex %in% select_sex,]
-  #df_mort_outcome <- df_mort_outcome[df_mort_outcome$age %in% select_age,]
-
-  if(age_grps == F){
-    df <- df_mort_outcome[df_mort_outcome$age %in% v_init_age_grps,]
-  }else{
-    df <- df_mort_outcome %>%
-      mutate(AgeGrp = cut(age, breaks = c(v_init_age_grps, Inf),
-                          include.lowest = TRUE, right = FALSE)) %>%
-      group_by( year,state, CVE_GEO,sex, AgeGrp ) %>%
-      summarise(population = sum(population), # Population by age group
-                deaths     = sum(deaths))    # Total number of deaths
+  # Sanity Checks -----------------------------------------------------------
+  # Check if selected state(s) is(are) part of the available options set
+  if (!all(v_states %in% unique(df_mortrate_state_age_sex$state))) {
+    stop("v_states must be a character element or vector containing at least one of the next names: \n \n",
+         paste(levels(df_mortrate_state_age_sex$state), collapse = ", "))
+  }
+  # Check if selected sex is part of the available options set
+  if (!all(v_sex %in% unique(df_mortrate_state_age_sex$sex))) {
+    stop(stop("v_sex must be a character element or vector containing at least one of the next names: ",
+              paste(unique(df_mortrate_state_age_sex$sex), collapse = ", ")))
+  }
+  # Check selected year
+  if (!all(v_year %in% seq(1970, 2050))) {
+    stop("v_year must be a numeric value or vector with values between 1970 and 2050")
+  }
+  # Check selected age(s)
+  if (!all(v_age %in% seq(0, 109))) {
+    stop("v_age must be a numeric value or vector with values between 0 and 109")
   }
 
-  assign("df_deaths_age_sex_outcome", df, envir = .GlobalEnv)
+  # Filter data based on parameters -----------------------------------------
+  df_mort_outcome <- df_mortrate_state_age_sex %>%
+    filter(state %in% v_states,
+           year %in% v_year,
+           sex %in% v_sex) %>%
+    ungroup()
 
-  return(df)
+  if (age_groups == FALSE) {
+    df_outcome <- df_mort_outcome %>%
+      filter(age %in% v_age)
+  } else {
+    df_outcome <- df_mort_outcome %>%
+      mutate(age_group = cut(x = age, breaks = c(v_age, Inf),
+                             include.lowest = TRUE)) %>%
+      dplyr::filter(complete.cases(.)) %>%
+      # group_by(year, state, CVE_GEO, sex, age_group) %>%
+      group_by(year, state, sex, age_group) %>%
+      summarise(population = sum(population),
+                deaths     = sum(deaths))
+  }
+
+  return(df_outcome)
 }

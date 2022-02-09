@@ -2,42 +2,44 @@
 % Please edit documentation in R/get_population.R
 \name{get_population}
 \alias{get_population}
-\title{Get the population
-\code{get_population} get function that allows user to
-get a dataset with the subset of different params}
+\title{Get population}
 \usage{
 get_population(
-  v_state = "National",
+  v_states = "National",
   v_year = "2021",
-  select_sex = unique(df_pop_state_age_sex$sex),
-  v_init_age_grps,
-  age_grps = T
+  v_sex = "Total",
+  v_age = c("0", "5", "15", "25", "45", "55", "65", "70"),
+  age_groups = TRUE
 )
 }
 \arguments{
-\item{v_state}{State(s) of desired data}
+\item{v_year}{Year(s) of desired data. Must have numbers between 1970 and
+2050.}
 
-\item{v_year}{Year(s) of desired data}
+\item{v_sex}{Vector selecting sex. Options: Female, Male and Total.}
 
-\item{select_sex}{Sex (Female/Male/Total)}
+\item{v_age}{Specifies the age bins to aggregate and return.}
 
-\item{v_init_age_grps}{Specifies the age bins to aggregate and return}
+\item{age_groups}{Specifies whether to aggregate the output by age groups.}
 
-\item{age_grps}{(default is True)}
+\item{v_state}{State(s) of desired data.}
 
 \item{export}{}
 }
 \value{
-A dataset with the data selected
+A demographic dataset based on specified parameters.
 }
 \description{
-Get the population
-\code{get_population} get function that allows user to
-get a dataset with the subset of different params
+\code{get_population} Function that allows user to get a demographic dataset
+regarding population and population proportions based on the parameter
+set given by the user
 }
 \examples{
-get_population(v_state = "Aguascalientes", v_year = "2021", select_sex = "Total",
-v_init_age_grps = c("0","5","15","25","45", "55","65","70"), age_grps= T)
-get_population(v_state = "Aguascalientes", v_year = c("2021", "2022"), select_sex = "Female",
-v_init_age_grps = c("21", "22", "23"), age_grps= F)
+get_population(v_states =  "Chiapas", v_year = 2015, v_sex = "Total",
+v_age = c(0, 15, 45, 75), age_groups = FALSE)
+
+get_population(v_states = c("Aguascalientes", "Campeche"),
+v_year = c(2010, 2021), v_sex = "Male", v_age = c(0, 15, 45, 75),
+age_groups = TRUE)
+
 }
