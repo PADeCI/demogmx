@@ -109,7 +109,7 @@ get_migration <- function(v_states   = "Aguascalientes",
   # Expand by years
   df_migration_aux2 <- df_migration_aux %>%
     group_by(year, state, age, sex, type) %>%
-    separate(col = year, sep = "-", into = c("a", "b")) %>%
+    tidyr::separate(col = year, sep = "-", into = c("a", "b")) %>%
     mutate(a = as.numeric(a),
            b = as.numeric(b)) %>%
     slice(rep(row_number(), 5)) %>%
@@ -128,7 +128,7 @@ get_migration <- function(v_states   = "Aguascalientes",
   # Expand by age
   df_migration_aux3 <- df_migration_aux2 %>%
     group_by(year, state, age, sex, type) %>%
-    separate(col = age, sep = "-", into = c("age_1", "age_2")) %>%
+    tidyr::separate(col = age, sep = "-", into = c("age_1", "age_2")) %>%
     ungroup() %>%
     slice(rep(row_number(), each = 5)) %>%
     group_by(year, state, age_1, age_2, sex, type) %>%

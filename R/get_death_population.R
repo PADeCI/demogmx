@@ -49,7 +49,7 @@ get_death_population <- function( v_states = "National",
   # Check if selected state(s) is(are) part of the available options set
   if (!all(v_states %in% unique(df_mortrate_state_age_sex$state))) {
     stop("v_states must be a character element or vector containing at least one of the next names: \n \n",
-         paste(levels(df_mortrate_state_age_sex$state), collapse = ", "))
+         paste(unique(df_mortrate_state_age_sex$state), collapse = ", "))
   }
   # Check if selected sex is part of the available options set
   if (!all(v_sex %in% unique(df_mortrate_state_age_sex$sex))) {
