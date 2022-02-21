@@ -19,11 +19,11 @@ library(demogmx)
 # no functions required
 
 # 01.2 Execute function ---------------------------------------------------
-df_outcome <- get_death_population(v_states = c("National", "Mexico City"),
+df_death_pop_outcome <- get_death_population(v_state = c("National", "Mexico City"),
                                    v_year = c(2010, 2015, 2020),
-                                   v_sex = c("Total", "Female"),
+                                   v_sex = c("Total", "Female", "Male"),
                                    v_age = c(0, 15, 45, 70),
                                    age_groups = TRUE)
 
 
-View(df_outcome)
+df_death_pop_outcome

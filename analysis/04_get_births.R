@@ -19,9 +19,9 @@ library(demogmx)
 # no functions required
 
 # 04.2 Execute function ---------------------------------------------------
-df_outcome <- get_births(v_states = c("National", "Mexico City"),
+df_birth_outcome <- get_births(v_state = c("National", "Mexico City"),
                          v_year = c(2010, 2015, 2020),
                          year_groups = FALSE)
 
 
-df_outcome
+df_birth_outcome

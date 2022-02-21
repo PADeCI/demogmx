@@ -19,7 +19,7 @@ library(demogmx)
 # no functions required
 
 # 05.2 Execute function ---------------------------------------------------
-df_outcome <- get_migration(v_states   = "Aguascalientes",
+df_outcome <- get_migration(v_state   = "Aguascalientes",
                             v_year     = c(2000, 2010, 2025),
                             v_sex      = c("Male", "Female", "Total"),
                             v_age      = c(0, 15, 24, 36),
@@ -27,5 +27,5 @@ df_outcome <- get_migration(v_states   = "Aguascalientes",
                             age_groups = FALSE)
 
 
-View(df_outcome)
+df_outcome
 
