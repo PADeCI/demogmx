@@ -5,39 +5,40 @@
 \title{Get death population}
 \usage{
 get_death_population(
-  v_states = "National",
+  v_state = "National",
   v_year = "2021",
   v_sex = "Total",
-  v_age = c("0", "5", "15", "25", "45", "55", "65", "70"),
+  v_age = c(0, 5, 15, 25, 45, 55, 65, 70),
   age_groups = TRUE
 )
 }
 \arguments{
-\item{v_states}{State(s) of desired data.}
+\item{v_state}{Character vector specifying the state(s) that the function
+will return.}
 
-\item{v_year}{Year(s) of desired data. Must have numbers between 1970 and
-2050. Default is 2021.}
+\item{v_year}{Numeric vector that specifies the year(s) to return. Must have
+numbers between 1970 and 2050. Default is 2021.}
 
-\item{v_sex}{Vector selecting sex. Options: Female, Male and Total.}
+\item{v_sex}{Character vector that selects sex. Options: Female, Male and
+Total.}
 
-\item{v_age}{Specifies the age bins to aggregate and return.}
+\item{v_age}{Numeric vector that specifies the age(s) to return.}
 
 \item{age_groups}{Specifies whether to aggregate the output by age groups.}
-
-\item{export}{}
 }
 \value{
 A demographic dataset based on the selected parameters.
 }
 \description{
-\code{get_death_population} function that allows the user to
-get a dataset of the population and deaths based on different parameters
+\code{get_death_population} function that allows the user to get a
+demographic dataset of the population and deaths based on the given
+parameters.
 }
 \examples{
-get_death_population(v_states = c("Aguascalientes", "Campeche"),
+get_death_population(v_state = c("Aguascalientes", "Campeche"),
 v_year = c(2021, 2046), v_sex = c("Female", "Total"),  age_groups = TRUE)
 
-get_death_population(v_states = "National",  v_year = c(2021, 2046, 2050),
+get_death_population(v_state = "National",  v_year = c(2021, 2046, 2050),
 v_sex = "Total", age_groups= FALSE)
 
 }

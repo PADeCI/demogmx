@@ -15,9 +15,9 @@
 
 #' Get population
 #'
-#' \code{get_population} Function that allows user to get a demographic dataset
-#' regarding population and population proportions based on the parameter
-#' set given by the user
+#' \code{get_population} is a function that allows the user to get a demographic
+#' dataset regarding population and population proportions based on the
+#' given parameters.
 #'
 #' @param v_state State(s) of desired data.
 #' @param v_year Year(s) of desired data. Must have numbers between 1970 and
@@ -27,25 +27,24 @@
 #' @param age_groups Specifies whether to aggregate the output by age groups.
 #'
 #' @return A demographic dataset based on specified parameters.
-#' @param export
 #'
 #' @examples
-#' get_population(v_states =  "Chiapas", v_year = 2015, v_sex = "Total",
+#' get_population(v_state =  "Chiapas", v_year = 2015, v_sex = "Total",
 #' v_age = c(0, 15, 45, 75), age_groups = FALSE)
 #'
-#' get_population(v_states = c("Aguascalientes", "Campeche"),
+#' get_population(v_state = c("Aguascalientes", "Campeche"),
 #' v_year = c(2010, 2021), v_sex = "Male", v_age = c(0, 15, 45, 75),
 #' age_groups = TRUE)
 #'
 #' @export
-get_population<- function(v_states   = "National",
+get_population<- function(v_state   = "National",
                           v_year     = "2021",
                           v_sex      = "Total",
                           v_age      = c("0","5","15","25","45", "55","65","70"),
                           age_groups = TRUE) {
 
   # Execute auxiliary function ----------------------------------------------
-  df_pop_aux <- get_death_population(v_states   = v_states,
+  df_pop_aux <- get_death_population(v_state   = v_state,
                                      v_year     = v_year,
                                      v_sex      = v_sex,
                                      v_age      = v_age,
@@ -56,7 +55,8 @@ get_population<- function(v_states   = "National",
     group_by(year, state, sex) %>%
     mutate(proportion = prop.table(population)) %>%
     ungroup() %>%
-    select(-deaths)
+    select(-deaths) %>%
+    relocate(CVE_GEO, .before = sex)
 
   return(df_pop)
 }

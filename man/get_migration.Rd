@@ -5,7 +5,7 @@
 \title{Get migration}
 \usage{
 get_migration(
-  v_states = "Aguascalientes",
+  v_state = "Aguascalientes",
   v_year = c(2000, 2010, 2025),
   v_sex = c("Female", "Male", "Total"),
   v_age = c(0, 15, 24, 36),
@@ -14,6 +14,8 @@ get_migration(
 )
 }
 \arguments{
+\item{v_state}{State(s) of desired data.}
+
 \item{v_year}{Year(s) of desired data. Must have numbers between 1970 and
 2050.}
 
@@ -22,24 +24,19 @@ get_migration(
 \item{v_age}{Specifies the age bins to aggregate and return.}
 
 \item{age_groups}{Specifies whether to aggregate the output by age groups.}
-
-\item{v_state}{State(s) of desired data.}
-
-\item{export}{}
 }
 \value{
 A demographic dataset based on specified parameters.
 }
 \description{
-\code{get_migration} Function that allows user to get a demographic dataset
-regarding migration information based on the parameter set given by the
-user
+\code{get_migration} is function that allows the user to get a demographic
+dataset regarding migration based on the given parameters.
 }
 \examples{
-get_population(v_states =  "Chiapas", v_year = 2015, v_sex = "Total",
+get_population(v_state =  "Chiapas", v_year = 2015, v_sex = "Total",
 v_age = c(0, 15, 45, 75), age_groups = FALSE)
 
-get_population(v_states = c("Aguascalientes", "Campeche"),
+get_population(v_state = c("Aguascalientes", "Campeche"),
 v_year = c(2010, 2021), v_sex = "Male", v_age = c(0, 15, 45, 75),
 age_groups = TRUE)
 
