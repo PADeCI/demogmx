@@ -1,14 +1,25 @@
+#*****************************************************************************#
+# This script loads the unformatted data of mortality and population          #
+# projections from CONAPO from 1970 to 2050, having specific information by   #
+# state, age and sex. We also add an homologated state code (CVE_GEO)         #
+#                                                                             #
+# Author: Fernando Alarid-Escudero                                            #
+# Author: David Garibay-Treviño                                               #
+# E-mail: fernando.alarid@cide.edu                                            #
+# E-mail: david.garibay@cide.edu                                              #
+#*****************************************************************************#
 
+rm(list = ls()) # to clean the workspace
 
-
-
-# 01 Libraries ------------------------------------------------------------
+# 01 Load packages and functions ---------------------------------------
+## 01.01 Load packages -------------------------------------------------
 library(dplyr)
 
+## 01.02 Load functions ------------------------------------------------
+# no functions required
 
 # 02 Import data ----------------------------------------------------------
 load("data-raw/df_mortrate_state_age_sex.Rdata")
-
 
 # 03 Manipulate data ------------------------------------------------------
 df_mortrate_state_age_sex <- df_mortrate_state_age_sex %>%

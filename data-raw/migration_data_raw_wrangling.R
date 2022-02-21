@@ -13,18 +13,18 @@
 
 rm(list = ls()) # to clean the workspace
 
-# 05.01 Load packages and functions ---------------------------------------
-## 05.01.01 Load packages -------------------------------------------------
+# 01 Load packages and functions ---------------------------------------
+## 01.01 Load packages -------------------------------------------------
 library(data.table)
 library(dplyr)
 library(stringr)
 
-## 05.01.02 Load functions ------------------------------------------------
+## 01.02 Load functions ------------------------------------------------
 # no functions required
 
 
-# 05.02 Migration data ----------------------------------------------------
-## 05.02.01 Load data -----------------------------------------------------
+# 02 Migration data ----------------------------------------------------
+## 02.01 Load data -----------------------------------------------------
 
 ## Inter-state migration
 df_state_mig_base <- data.table::fread(input = "data-raw/mig_interestatal_quin_proyecciones.csv",
@@ -47,8 +47,8 @@ v_names_states <- c("Aguascalientes", "Baja California",
                     "Tlaxcala", "Veracruz", "Yucatan", "Zacatecas",
                     "National")
 
-## 05.02.02 Rename variables and select observations above 1970 -----------
-# Inter-state migration
+## 02.02 Rename variables and select observations above 1970 -----------
+### 02.02.01 Inter-state migration -------------------------------------
 df_state_mig_aux <- df_state_mig_base %>%
   rename(year       = AÑO,
          state      = ENTIDAD,
@@ -63,7 +63,7 @@ df_state_mig_aux <- df_state_mig_base %>%
                              Mujeres = "Female"))
 
 
-# International migration
+### 02.02.02 International migration ----------------------------------
 df_inter_mig_aux <- df_inter_mig_base %>%
   rename(year       = AÑO,
          state      = ENTIDAD,
@@ -79,8 +79,8 @@ df_inter_mig_aux <- df_inter_mig_base %>%
   filter(!(year %in% c("1950-1955", "1955-1960", "1960-1965", "1965-1970"))) %>%
   mutate(age = str_replace(string = age, pattern = "--", replacement = "-"))
 
-## 05.02.03 Create factor "Total" in sex variable -------------------------
-# Inter-state migration
+## 02.03 Create factor "Total" in sex variable -------------------------
+### 02.03.01 Inter-state migration -------------------------------------
 df_state_mig_aux2 <- df_state_mig_aux %>%
   bind_rows(df_state_mig_aux %>% # Add Total to sex variable
             group_by(year, state, age) %>%
@@ -90,7 +90,7 @@ df_state_mig_aux2 <- df_state_mig_aux %>%
             mutate(sex = "Total")) %>%
   arrange(year, state, age, sex)
 
-# International migration
+### 02.03.02 International migration -----------------------------------
 df_inter_mig_aux2 <- df_inter_mig_aux %>%
   bind_rows(df_inter_mig_aux %>% # Add Total to sex variable
               group_by(year, state, age) %>%
@@ -100,9 +100,9 @@ df_inter_mig_aux2 <- df_inter_mig_aux %>%
               mutate(sex = "Total")) %>%
   arrange(year, state, age, sex)
 
-## 05.02.04 Rename elements to English in state variable ------------------
-# Inter-state migration
-## CVE_GEO
+## 02.04 Rename elements to English in state variable ------------------
+### 02.04.01 Inter-state migration -------------------------------------
+## CVE_GEO codes
 df_mig_states_cve <- df_state_mig_aux2 %>%
   mutate(CVE_GEO = replace(CVE_GEO, state == "Aguascalientes"     , "01"),
          CVE_GEO = replace(CVE_GEO, state == "Baja California"    , "02"),
@@ -139,7 +139,7 @@ df_mig_states_cve <- df_state_mig_aux2 %>%
          CVE_GEO = replace(CVE_GEO, state == "República Mexicana" , "00")) %>%
   mutate(CVE_GEO = as.numeric(CVE_GEO))
 
-## state
+## state names
 df_mig_states <- df_mig_states_cve %>%
   mutate(state = replace(state, state == "Aguascalientes"     , "01"),
          state = replace(state, state == "Baja California"    , "02"),
@@ -177,10 +177,11 @@ df_mig_states <- df_mig_states_cve %>%
   mutate(state = as.factor(state),
          sex   = as.factor(sex))
 
+# Assign English level names in state variable
 levels(df_mig_states$state) <- v_names_states
 
-# International migration
-## CVE_GEO
+### 02.04.02 International migration --------------------------------------
+## CVE_GEO codes
 df_mig_inter_cve <- df_inter_mig_aux2 %>%
   mutate(CVE_GEO = replace(CVE_GEO, state == "Aguascalientes"     , "01"),
          CVE_GEO = replace(CVE_GEO, state == "Baja California"    , "02"),
@@ -217,7 +218,7 @@ df_mig_inter_cve <- df_inter_mig_aux2 %>%
          CVE_GEO = replace(CVE_GEO, state == "República Mexicana" , "00")) %>%
   mutate(CVE_GEO = as.numeric(CVE_GEO))
 
-# state
+## state names
 df_mig_inter <- df_mig_inter_cve %>%
   mutate(state = replace(state, state == "Aguascalientes"     , "01"),
          state = replace(state, state == "Baja California"    , "02"),
@@ -255,21 +256,19 @@ df_mig_inter <- df_mig_inter_cve %>%
   mutate(state = as.factor(state),
          sex   = as.factor(sex))
 
+# Assign English level names in state variable
 levels(df_mig_inter$state) <- v_names_states
 
 # General migration
-df_migration <- df_mig_inter %>%
-  mutate(type = "International") %>%
-  bind_rows(df_mig_states) %>%
-  mutate(type = if_else(is.na(type), "Interstate", type))
 
+## 02.05 General migration category in colum "type" -----------------------
 df_mig_inter_2 <- df_mig_inter %>%
   mutate(type = "International") %>%
   bind_rows(df_mig_states) %>%
   mutate(type = if_else(is.na(type), "Interstate", type))
 
 df_migration <- df_mig_inter_2 %>%
-  bind_rows(df_mig_inter_2 %>% # Add Total to type variable
+  bind_rows(df_mig_inter_2 %>% # create and append Total category
               group_by(year, state, age, sex) %>%
               summarise(emigrants = sum(emigrants),
                         immigrants = sum(immigrants),
@@ -277,9 +276,9 @@ df_migration <- df_mig_inter_2 %>%
               mutate(type = "Total")) %>%
   arrange(year, state, age, sex, type)
 
-# 05.03 Save data ---------------------------------------------------------
-save(df_mig_states, file = "data/df_mig_states.Rdata")
-save(df_mig_inter, file = "data/df_mig_inter.Rdata")
+# 03 Save data ---------------------------------------------------------
+# save(df_mig_states, file = "data/df_mig_states.Rdata")
+# save(df_mig_inter, file = "data/df_mig_inter.Rdata")
 save(df_migration, file = "data/df_migration.Rdata")
 
 # write.csv(df_mig_states, file = "data/df_mig_states.csv")
