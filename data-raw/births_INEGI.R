@@ -79,7 +79,6 @@ df_births_INEGI_1 <- df_births_INEGI_0 %>%
          births  = Births) %>%
   select(year, state, sex, CVE_GEO, births, prop)
 
-
 ## CVE_GEO codes
 df_births_INEGI_2 <- df_births_INEGI_1 %>%
   mutate(state = replace(state, CVE_GEO ==  1, "Aguascalientes"     ),
@@ -146,6 +145,8 @@ df_births_INEGI <- df_births_INEGI_2 %>%
 
 # Visualizations ----------------------------------------------------------
 
+df_births_INEGI_0
+
 df_tot_long %>%
   filter(State == "Total",
          Sex != "Total") %>%
@@ -159,7 +160,7 @@ df_tot_long %>%
   geom_line()
 
 
-df_tot_long %>%
+plt_male_birts_prop <- df_births_INEGI_0 %>%
   filter(Sex == "Male",
          State == "Total") %>%
   ggplot(aes(x = year, y = prop)) +
@@ -175,7 +176,44 @@ df_tot_long %>%
        subtitle = "Mexico, 1985 - 2020",
        caption = "INEGI, 2020")
 
-df_tot_long %>%
+# ggsave(plt_male_birts_prop,
+#        filename = "figs/plt_male_births_prop.png",
+#        width = 9, height = 5)
+
+# df_tot_long %>%
+#   filter(Sex == "Male",
+#          State == "Total") %>%
+#   ggplot(aes(x = year, y = prop)) +
+#   geom_line() +
+#   geom_abline(slope = 0, intercept = 0.5, linetype = "dashed", color = "blue") +
+#   scale_x_continuous(breaks = seq(from = 1985, to = 2020, by = 5),
+#                      minor_breaks = seq(from = 1985, to = 2020, by = 1)) +
+#   scale_y_continuous(limits = c(0.49, 0.51),
+#                      breaks = seq(from = 0.49, to = 0.51, by = 0.002)) +
+#   theme_bw() +
+#   theme(panel.grid.major.x = element_line(size = 1.5)) +
+#   labs(title = "Proportion of male births",
+#        subtitle = "Mexico, 1985 - 2020",
+#        caption = "INEGI, 2020")
+
+
+# df_tot_long %>%
+#   filter(Sex == "Male",
+#          State == "Total") %>%
+#   ggplot(aes(x = year, y = prop)) +
+#   geom_line() +
+#   geom_abline(slope = 0, intercept = 0.5, linetype = "dashed", color = "blue") +
+#   scale_x_continuous(breaks = seq(from = 1985, to = 2020, by = 5),
+#                      minor_breaks = seq(from = 1985, to = 2020, by = 1)) +
+#   scale_y_continuous(limits = c(0.49, 0.51),
+#                      breaks = seq(from = 0.49, to = 0.51, by = 0.002)) +
+#   theme_bw() +
+#   theme(panel.grid.major.x = element_line(size = 1.5)) +
+#   labs(title = "Proportion of male births",
+#        subtitle = "Mexico, 1985 - 2020",
+#        caption = "INEGI, 2020")
+
+plt_male_births_prop_states <- df_births_INEGI_0 %>%
   filter(Sex == "Male",
          State != "Total") %>%
   ggplot(aes(x = year, y = prop, color = State)) +
@@ -188,6 +226,24 @@ df_tot_long %>%
         legend.position = "bottom") +
   labs(title = "Proportion of males",
        subtitle = "Mexico states, 1985 - 2020")
+
+# df_births_states <- df_births_INEGI_0 %>%
+#   filter(Sex == "Male",
+#          State != "Total")
+#
+# plty_prop_males_states <- plot_ly(data = df_births_states, x = ~year, y = ~prop, color = ~State,
+#         type = "scatter", mode = "lines+markers",
+#         line = list(width = 1.3),
+#         marker = list(size = 4)) %>%
+#   layout(showlegend = T, autosize = TRUE)
+#
+# class(plty_prop_males_states)
+#
+# htmlwidgets::saveWidget(widget = plty_prop_males_states,
+#                         file = "figs/prop_males_states.html",
+#                         selfcontained = TRUE)
+
+
 
 df_tot_sum <- df_tot_long %>%
   filter(State != "Total",
