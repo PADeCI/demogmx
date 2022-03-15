@@ -9,7 +9,7 @@ Teaching in Economics (CIDE) \And Fernando Alarid-Escudero\\Center for
 Research and\\
 Teaching in Economics (CIDE)
 }
-\title{A mexican demographic information Package \pkg{demogmx}}
+\title{\pkg{demogmx}: An R mexican demographic information package}
 
 \Plainauthor{David U. Garibay-Treviño, Fernando Alarid-Escudero}
 \Plaintitle{A mexican demographic information Package demogmx}
@@ -127,10 +127,10 @@ R> x
 \begin{small}
 \begin{equation}\label{eq:si_hp_ode}
 \begin{split}
-\frac{dP_{1, j}}{dt} & = b_{j}(t) - \left(d_{1, j}(t)+ \eta_{1, j}(t) + \theta_{1, j}(t) + \mu_{1, j}(t) + \mu_{1, j}^{H}(t)\right) \\
-\frac{dP_{i, j}}{dt} & = d_{i-1, j}(t)P_{i-1, j} - \left(d_{i, j}(t) + \eta_{i, j}(t) +         \theta_{i, j}(t) + \mu_{i, j}(t) + \mu_{i, j}^{H}(t)\right) \\
-\frac{dDOC_{i, j}}{dt} & = \mu_{i, j}(t) \\
-\frac{dDH_{i, j}}{dt} & = \mu^{H}_{i, j}(t) \\
+\frac{dP_{1, j}}{dt} & = b_{j}(t) - \left(d_{1, j}(t)+ \eta_{1, j}(t) + \theta_{1, j}(t) + \mu_{1, j}(t) + \mu_{1, j}^{H}(t)\right) P_{1, j} \\
+\frac{dP_{i, j}}{dt} & = d_{i-1, j}(t)P_{i-1, j} - \left(d_{i, j}(t) + \eta_{i, j}(t) +         \theta_{i, j}(t) + \mu_{i, j}(t) + \mu_{i, j}^{H}(t)\right) P_{1, j} \\
+\frac{dDOC_{i, j}}{dt} & = \mu_{i, j}(t) P_{1, j} \\
+\frac{dDH_{i, j}}{dt} & = \mu^{H}_{i, j}(t) P_{1, j} \\
 \end{split}
 \end{equation}
 \end{small}
@@ -146,6 +146,10 @@ rate for age group \(i\) and sex group \(j\) in year \(t\),
 \(\eta_{i, j}\) represents migration rate for age group \(i\) and sex
 group \(j\), while \(\theta_{i, j}\) is the immigration rate for age
 group \(i\) and sex group \(j\).
+
+\[\frac{dP_{1, j}}{dt} = births_j + (immigration - emmigration - aging_{i, j} -  background\ mort)P_{1,j}\]
+
+\[\frac{dP_{i, j}}{dt} = (aging_{i-1, j})P_{(i-1), j} + (immigration - emmigration - aging_{i,j} - background\ mort)P_{i,j}\]
 
 
 
