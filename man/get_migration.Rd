@@ -5,7 +5,7 @@
 \title{Get migration}
 \usage{
 get_migration(
-  v_state = "Aguascalientes",
+  v_state = "National",
   v_year = c(2000, 2010, 2025),
   v_sex = c("Female", "Male", "Total"),
   v_age = c(0, 15, 24, 36),
@@ -23,13 +23,21 @@ get_migration(
 
 \item{v_age}{Specifies the age bins to aggregate and return.}
 
+\item{v_type}{Indicates whether type of migration to include. It can be
+Interstate migration, International migration or Total migration.}
+
 \item{age_groups}{Specifies whether to aggregate the output by age groups.}
 }
 \value{
-A demographic dataset based on specified parameters.
+A demographic dataset containing the selected year, state, the state
+code (CVE_GEO), the age (group, when \code{age_groups = TRUE}), the number of
+emigrants, the number of immigrants, the type of migration, and the rate of
+emigration and immigration, respectively.
+
+the proportion of each row, in relation to the selected year and sex.
 }
 \description{
-\code{get_migration} is function that allows the user to get a demographic
+\code{get_migration} is a function that allows the user to get a demographic
 dataset regarding migration based on the given parameters.
 }
 \examples{

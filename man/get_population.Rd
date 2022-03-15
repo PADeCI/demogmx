@@ -25,7 +25,9 @@ get_population(
 \item{age_groups}{Specifies whether to aggregate the output by age groups.}
 }
 \value{
-A demographic dataset based on specified parameters.
+A demographic dataset indicating the year, the state, the state code
+(CVE_GEO), the age (group, when \code{age_groups = TRUE}), the population and
+the proportion of each row, in relation to the selected year and sex.
 }
 \description{
 \code{get_population} is a function that allows the user to get a demographic

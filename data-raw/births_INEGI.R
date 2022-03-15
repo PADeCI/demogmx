@@ -73,11 +73,12 @@ df_births_INEGI_0 <- df_tot_long_0 %>%
 
 # Format rename columns
 df_births_INEGI_1 <- df_births_INEGI_0 %>%
-  rename(CVE_GEO = State_id,
-         state   = State,
-         sex     = Sex,
-         births  = Births) %>%
-  select(year, state, sex, CVE_GEO, births, prop)
+  rename(CVE_GEO    = State_id,
+         state      = State,
+         sex        = Sex,
+         births     = Births,
+         birth_prop = prop) %>%
+  dplyr::select(year, state, sex, CVE_GEO, births, birth_prop)
 
 ## CVE_GEO codes
 df_births_INEGI_2 <- df_births_INEGI_1 %>%
@@ -116,26 +117,25 @@ df_births_INEGI_2 <- df_births_INEGI_1 %>%
          state = replace(state, CVE_GEO ==  0, "National")) %>%
   mutate(state = as.factor(state))
 
+# # Age == 200 is the population of all ages
+# df_pop_filt <- df_mortrate_state_age_sex %>%
+#   bind_rows(df_mortrate_state_age_sex %>%
+#               group_by(year, state, sex, CVE_GEO) %>%
+#               mutate(population = sum(population),
+#                      age = 200))
 
-df_pop_filt<- df_mortrate_state_age_sex %>%
-  bind_rows(df_mortrate_state_age_sex %>%
-              group_by(year, state, sex, CVE_GEO) %>%
-              mutate(population = sum(population),
-                     age = 200))
-
-# Obtain all the population of each state
+# Obtain the total population of each state by sex
 df_pop_states <- df_mortrate_state_age_sex %>%
   filter(state != "MCMA") %>%
   group_by(year, state, sex, CVE_GEO) %>%
   summarise(population = sum(population)) %>%
   ungroup()
 
-
 # Include population information
 df_births_INEGI <- df_births_INEGI_2 %>%
   left_join(y = df_pop_states,
             by = c("year", "state", "CVE_GEO", "sex")) %>%
-  select(-prop)
+  mutate(birth_rate = births/population)
 
 
 # # Save data

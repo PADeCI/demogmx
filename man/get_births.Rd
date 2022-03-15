@@ -17,7 +17,9 @@ numbers between 1970 and 2050. Default is 2021.}
 year groups.}
 }
 \value{
-A demographic dataset based on the selected parameters.
+A demographic dataset containing the selected year
+(group, when \code{year_groups = TRUE}), state, state code (CVE_GEO),
+the number of births and the birth rate in each row,
 }
 \description{
 \code{get_births} is a function that allows the user to get a demographic

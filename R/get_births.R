@@ -1,6 +1,5 @@
 ##************************************************************************
 ## Script Name: get_births
-## Purpose:
 ##
 ## Created: February, 2022
 ## Authors:
@@ -24,7 +23,9 @@
 #' year groups.
 #' @import dplyr
 #'
-#' @return A demographic dataset based on the selected parameters.
+#' @return A demographic dataset containing the selected year
+#' (group, when \code{year_groups = TRUE}), state, state code (CVE_GEO),
+#' the number of births and the birth rate in each row,
 #'
 #' @examples
 #' get_births(v_state = c("Aguascalientes", "Campeche"),
@@ -57,11 +58,7 @@ get_births<- function(v_state     = "National",
     filter(state %in% v_state) %>%
     mutate(birth_rate = births/population)
 
-  if (year_groups == FALSE) {
-    df_outcome <- df_birth_aux %>%
-      filter(year %in% v_year) %>%
-      relocate(births, .before = population)
-  } else {
+  if (year_groups) {
     df_outcome <- df_birth_aux %>%
       mutate(year_group = cut(x = year, breaks = c(v_year, Inf),
                               include.lowest = TRUE, dig.lab = 4)) %>%
@@ -70,7 +67,14 @@ get_births<- function(v_state     = "National",
       summarise(population = sum(population),
                 births     = sum(births),
                 birth_rate  = sum(births)/sum(population)) %>%
-      ungroup()
+      ungroup() %>%
+      select(year_group, state, CVE_GEO, births, birth_rate)
+
+  } else {
+    df_outcome <- df_birth_aux %>%
+      filter(year %in% v_year) %>%
+      select(year, state, CVE_GEO, births, birth_rate) %>%
+      arrange(state, CVE_GEO, year)
   }
   return(df_outcome)
 }
@@ -80,7 +84,8 @@ get_births<- function(v_state     = "National",
 #'
 #' \code{get_births_INEGI} is a function that allows the user to get a
 #' demographic dataset of the number and rate of births based on the given
-#' parameters. The difference
+#' parameters. This function returns the recorded births by INEGI and allows to
+#' specify the sex.
 #'
 #' @param v_state Character vector specifying the state(s) that the function
 #' will return.
@@ -91,7 +96,10 @@ get_births<- function(v_state     = "National",
 #' year groups.
 #' @import dplyr
 #'
-#' @return A demographic dataset based on the selected parameters.
+#' @return A demographic dataset containing the selected year
+#' (group, when \code{year_groups = TRUE}), state, state code (CVE_GEO), sex,
+#' the number of births the proportion of births (in relation to the total
+#' births in that year), and the birth rate.
 #'
 #' @examples
 # get_births_INEGI(v_state = c("Aguascalientes", "Campeche"),
@@ -126,24 +134,33 @@ get_births_INEGI <- function(v_state     = "National",
 
   # Filter data based on parameters -----------------------------------------
   df_birth_aux <- df_births_INEGI %>%
-    filter(state %in% v_state) %>%
-    filter(sex   %in% v_sex) %>%
-    mutate(birth_rate = births/population)
+    filter(state %in% v_state)
 
-  if (year_groups == FALSE) {
-    df_outcome <- df_birth_aux %>%
-      filter(year %in% v_year) %>%
-      select(year, state, CVE_GEO, sex, births, population, birth_rate)
-  } else {
+  if (year_groups) {
     df_outcome <- df_birth_aux %>%
       mutate(year_group = cut(x = year, breaks = c(v_year, Inf),
                               include.lowest = TRUE, dig.lab = 4)) %>%
       filter(complete.cases(.)) %>%
       group_by(state, CVE_GEO, year_group, sex) %>%
-      summarise(population = sum(population),
-                births     = sum(births),
+      summarise(population  = sum(population),
+                births      = sum(births),
                 birth_rate  = sum(births)/sum(population)) %>%
-      ungroup()
+      ungroup() %>%
+      # To obtain birth proportions by sex
+      group_by(state, CVE_GEO, year_group) %>%
+      mutate(birth_prop = births/births[sex == "Total"]) %>%
+      ungroup() %>%
+      filter(sex   %in% v_sex) %>%
+      select(year_group, state, CVE_GEO, sex, births,
+             birth_prop, birth_rate) %>%
+      arrange(state, CVE_GEO, year, sex)
+
+  } else {
+    df_outcome <- df_birth_aux %>%
+      filter(year %in% v_year,
+             sex   %in% v_sex) %>%
+      select(year, state, CVE_GEO, sex, births, birth_prop, birth_rate) %>%
+      arrange(state, CVE_GEO, year, sex)
   }
   return(df_outcome)
 }

@@ -1,6 +1,5 @@
 ##************************************************************************
 ## Script Name: get_deaths
-## Purpose:
 ##
 ## Created: February, 2022
 ## Authors:

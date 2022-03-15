@@ -1,6 +1,5 @@
 ##************************************************************************
 ## Script Name: get_migration
-## Purpose:
 ##
 ## Created: February, 2022
 ## Authors:
@@ -13,7 +12,7 @@
 
 #' Get migration
 #'
-#' \code{get_migration} is function that allows the user to get a demographic
+#' \code{get_migration} is a function that allows the user to get a demographic
 #' dataset regarding migration based on the given parameters.
 #'
 #' @param v_state State(s) of desired data.
@@ -21,8 +20,17 @@
 #'  2050.
 #' @param v_sex Vector selecting sex. Options: Female, Male and Total.
 #' @param v_age Specifies the age bins to aggregate and return.
+#' @param v_type Indicates whether type of migration to include. It can be
+#' Interstate migration, International migration or Total migration.
 #' @param age_groups Specifies whether to aggregate the output by age groups.
-#' @return A demographic dataset based on specified parameters.
+#'
+#' @return A demographic dataset containing the selected year, state, the state
+#' code (CVE_GEO), the age (group, when \code{age_groups = TRUE}), the number of
+#' emigrants, the number of immigrants, the type of migration, and the rate of
+#' emigration and immigration, respectively.
+#'
+#' the proportion of each row, in relation to the selected year and sex.
+#'
 #'
 #' @examples
 #' get_population(v_state =  "Chiapas", v_year = 2015, v_sex = "Total",
@@ -44,7 +52,7 @@ get_migration <- function(v_state   = "National",
   # Check if selected state(s) is(are) part of the available options set
   if (!all(v_state %in% unique(df_migration$state))) {
     stop("v_state must be a character element or vector containing at least one of the next names:\n\n",
-         paste(unique(df_mortrate_state_age_sex$state), collapse = ", "))
+         paste(unique(df_migration$state), collapse = ", "))
   }
   # Check if selected sex is part of the available options set
   if (!all(v_sex %in% unique(df_migration$sex))) {
@@ -71,22 +79,21 @@ get_migration <- function(v_state   = "National",
   # Whether to group data by age --------------------------------------------
   if (age_groups) {
     df_outcome <- df_migration_expanded %>%
-      mutate(age_group = cut(x = age, breaks = c(v_age, Inf),
-                             include.lowest = TRUE)) %>%
       filter(year  %in% v_year,
              state %in% v_state,
-             age   %in% v_age,
              sex   %in% v_sex,
              type  %in% v_type,
              complete.cases(.)) %>%
-      # group_by(year, state, CVE_GEO, sex, age_group) %>%
+      mutate(age_group = cut(x = age, breaks = c(v_age, Inf),
+                             include.lowest = TRUE)) %>%
       group_by(year, state, CVE_GEO, sex, age_group, type) %>%
       summarise(emigrants  = sum(emigrants),
                 immigrants = sum(immigrants),
                 population = sum(population)) %>%
       ungroup() %>%
       mutate(em_rate = emigrants/population,
-             im_rate = immigrants/population)
+             im_rate = immigrants/population) %>%
+      select(-population)
   } else {
     df_outcome <- df_migration_expanded %>%
       filter(year  %in% v_year,
@@ -97,7 +104,8 @@ get_migration <- function(v_state   = "National",
       select(year, state, CVE_GEO, sex, age, emigrants,
              immigrants, type, population) %>%
       mutate(em_rate = emigrants/population,
-             im_rate = immigrants/population)
+             im_rate = immigrants/population) %>%
+      select(-population)
   }
   return(df_outcome)
 }

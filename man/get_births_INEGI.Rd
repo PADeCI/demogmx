@@ -6,8 +6,8 @@
 \usage{
 get_births_INEGI(
   v_state = "National",
-  v_year = 2021,
-  v_sex = "Total",
+  v_year = 2010,
+  v_sex = c("Female", "Male", "Total"),
   year_groups = TRUE
 )
 }
@@ -24,18 +24,18 @@ numbers between 1985 and 2020. Default is 2021.}
 year groups.}
 }
 \value{
-A demographic dataset based on the selected parameters.
+A demographic dataset containing the selected year
+(group, when \code{year_groups = TRUE}), state, state code (CVE_GEO), sex,
+the number of births the proportion of births (in relation to the total
+births in that year), and the birth rate.
 }
 \description{
 \code{get_births_INEGI} is a function that allows the user to get a
 demographic dataset of the number and rate of births based on the given
-parameters. The difference
+parameters. This function returns the recorded births by INEGI and allows to
+specify the sex.
 }
 \examples{
-get_births(v_state = c("Aguascalientes", "Campeche"),
-v_year = c(1995, 2021, 2046), year_groups = TRUE)
 
-get_births(v_state = "National",  v_year = c(1985, 2005, 2046),
-age_groups= FALSE)
 
 }

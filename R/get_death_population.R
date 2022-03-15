@@ -1,6 +1,5 @@
 ##************************************************************************
 ## Script Name: get_death_population
-## Purpose:
 ##
 ## Created: February, 2022
 ## Authors:

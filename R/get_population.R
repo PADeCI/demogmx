@@ -1,6 +1,5 @@
 ##************************************************************************
 ## Script Name: get_population
-## Purpose:
 ##
 ## Created: February, 2022
 ## Authors:
@@ -26,7 +25,9 @@
 #' @param v_age Specifies the age bins to aggregate and return.
 #' @param age_groups Specifies whether to aggregate the output by age groups.
 #'
-#' @return A demographic dataset based on specified parameters.
+#' @return A demographic dataset indicating the year, the state, the state code
+#' (CVE_GEO), the age (group, when \code{age_groups = TRUE}), the population and
+#' the proportion of each row, in relation to the selected year and sex.
 #'
 #' @examples
 #' get_population(v_state =  "Chiapas", v_year = 2015, v_sex = "Total",
