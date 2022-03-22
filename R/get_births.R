@@ -68,7 +68,8 @@ get_births<- function(v_state     = "National",
                 births     = sum(births),
                 birth_rate  = sum(births)/sum(population)) %>%
       ungroup() %>%
-      select(year_group, state, CVE_GEO, births, birth_rate)
+      select(year_group, state, CVE_GEO, births, birth_rate) %>%
+      arrange(year_group, state, CVE_GEO)
 
   } else {
     df_outcome <- df_birth_aux %>%
@@ -153,7 +154,7 @@ get_births_INEGI <- function(v_state     = "National",
       filter(sex   %in% v_sex) %>%
       select(year_group, state, CVE_GEO, sex, births,
              birth_prop, birth_rate) %>%
-      arrange(state, CVE_GEO, year, sex)
+      arrange(year_group, state, CVE_GEO, sex)
 
   } else {
     df_outcome <- df_birth_aux %>%

@@ -21,7 +21,7 @@
 #' @param v_year Numeric vector that specifies the year(s) to return. Must have
 #' numbers between 1985 and 2020. Default is 2021.
 #' @param v_sex Character vector selecting sex. Options: Female, Male and Total.
-#' @param v_age
+#' @param v_age Numeric vector that specifies the age(s) to return.
 #' @param age_groups Logical. Specifies whether to aggregate the output by
 #' age groups.
 #'
@@ -33,7 +33,9 @@
 #' @export
 #'
 #' @examples
-get_aging_rate <- function(v_state    = c("National", "Aguascalientes"),
+#' df_aging <- get_aging_rate(v_state = "National", v_year = seq(1985, 2020),
+#' v_sex = "Total", v_age = c(0, 89), age_groups = T)
+get_aging_rate <- function(v_state    = "National",
                            v_year     = 2021,
                            v_sex      = c("Female", "Male", "Total"),
                            v_age      = c(0, 15, 24, 36),
@@ -91,9 +93,10 @@ get_aging_rate <- function(v_state    = c("National", "Aguascalientes"),
 
   # Calculate the aging population and the aging rate
   df_outcome <- df_aux_1 %>%
-    mutate(aging_pop = population + emigrants - immigrants - deaths) %>%
+    mutate(aging_pop = population + immigrants - emigrants - deaths) %>%
     mutate(aging_rate = aging_pop/population) %>%
-    select(year, state, CVE_GEO, sex, all_of(str_age_grp), aging_pop, aging_rate)
+    select(year, state, CVE_GEO, sex, all_of(str_age_grp), aging_pop, aging_rate) %>%
+    dplyr::filter(complete.cases(.))
 
   return(df_outcome)
 }

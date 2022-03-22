@@ -41,7 +41,7 @@
 #' age_groups = TRUE)
 #'
 #' @export
-get_migration <- function(v_state   = "National",
+get_migration <- function(v_state    = "National",
                           v_year     = c(2000, 2010, 2025),
                           v_sex      = c("Female", "Male", "Total"),
                           v_age      = c(0, 15, 24, 36),

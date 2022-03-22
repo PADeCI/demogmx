@@ -5,7 +5,7 @@
 \title{Get aging rate}
 \usage{
 get_aging_rate(
-  v_state = c("National", "Aguascalientes"),
+  v_state = "National",
   v_year = 2021,
   v_sex = c("Female", "Male", "Total"),
   v_age = c(0, 15, 24, 36),
@@ -21,6 +21,8 @@ numbers between 1985 and 2020. Default is 2021.}
 
 \item{v_sex}{Character vector selecting sex. Options: Female, Male and Total.}
 
+\item{v_age}{Numeric vector that specifies the age(s) to return.}
+
 \item{age_groups}{Logical. Specifies whether to aggregate the output by
 age groups.}
 }
@@ -32,4 +34,8 @@ the aging population and the aging rate.
 \description{
 \code{get_aging_rate} is a function that allows the user to get a demographic
 dataset regarding the aging rate based on the given parameters.
+}
+\examples{
+df_aging <- get_aging_rate(v_state = "National", v_year = seq(1985, 2020),
+v_sex = "Total", v_age = c(0, 89), age_groups = T)
 }
