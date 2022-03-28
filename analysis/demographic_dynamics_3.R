@@ -22,9 +22,9 @@ demog.mod.ns <- function(t, init, parameters, n.ages){
   with(as.list(parameters),
        {
          # Initial age
-         derivs[1] <- v_births[t] - (m_r_aging[1, t] + m_r_mort[1, t])*init[1]
+         derivs[1] <- v_r_births[t] - (m_r_aging[1, t] + m_r_mort[1, t])*init[1]
 
-         # Rest of ages (does not include v_births)
+         # Rest of ages (does not include v_r_births)
          for(i in 2:n.ages) {
            derivs[i] <- (m_r_aging[i - 1, t]) * init[i - 1] - (m_r_aging[i, t] + m_r_mort[i, t])*init[i]
          }
@@ -39,7 +39,7 @@ demog.mod.ns <- function(t, init, parameters, n.ages){
 demog.mod.ns.vec <- function(t, init, parameters, n.ages){
   with(as.list(parameters),
        {
-         Dg <- c(v_births[t], (m_r_aging[, t]*init)[-n.ages])
+         Dg <- c(v_r_births[t], (m_r_aging[, t]*init)[-n.ages])
          dD_dt <- Dg - (m_r_aging[, t] + m_r_mort[, t])*init
          return(list(dD_dt))
        }
@@ -87,8 +87,8 @@ v_r_births <- df_births$births/n_pop_init
 # v_r_births_density <- df_births$birth_rate
 
 # Store in parm list
-parm_ns$v_births <- v_r_births
-names(parm_ns$v_births) <- v_times
+parm_ns$v_r_births <- v_r_births
+names(parm_ns$v_r_births) <- v_times
 
 ## Death data -------------------------------------------------------------
 df_deaths <- get_deaths(v_state = "National", v_year = seq(1985, 2020),
@@ -151,7 +151,7 @@ demog.mod.ns <- function(t, init, parameters, n.ages){
 
   with(as.list(parameters),
        {
-         derivs[1] <- v_births[t] - (m_r_emigration[1, t] - m_r_immigration[1, t] + m_r_aging[1, t] + m_r_mort[1, t])*init[1]
+         derivs[1] <- v_r_births[t] - (m_r_emigration[1, t] - m_r_immigration[1, t] + m_r_aging[1, t] + m_r_mort[1, t])*init[1]
          for(i in 2:n.ages) {
            derivs[i] <- (m_r_aging[i-1, t]) * init[i-1] - (m_r_emigration[i, t] - m_r_immigration[i, t] + m_r_aging[i, t] + m_r_mort[i, t])*init[i]
          }
@@ -165,7 +165,7 @@ demog.mod.ns.vec <- function(t, init, parameters, n.ages){
   with(as.list(parameters),
        {
          # Vector of demographic growth
-         v_D_growth <- c(v_births[t], ((m_r_immigration[, t] + m_r_aging[, t])*init)[-n.ages])
+         v_D_growth <- c(v_r_births[t], ((m_r_immigration[, t] + m_r_aging[, t])*init)[-n.ages])
          # Vector of demographic variation
          v_dD_dt <- v_D_growth - (m_r_emigration[, t] + m_r_aging[, t] + m_r_mort[, t])*init
 
@@ -181,7 +181,7 @@ n_ages <- length(v_pop_init)
 # Original version
 system.time(
   test_ns <- lsoda(y = v_pop_init, func = demog.mod.ns,
-                   times = 1:35, parms = parm_ns, n.ages = n_ages)
+                   times = 1:36, parms = parm_ns, n.ages = n_ages)
 )
 
 # Vectorized version
@@ -226,13 +226,17 @@ ggplot(subset(df_pop_state),
        aes(x = year, y = population/n_pop_init,
            linetype = "Data", col = "Data")) +
   geom_line() +
-  geom_line(aes(x = 1985:2020, y = c(1, rowSums(test_ns[, -1])),
+  geom_line(aes(x = 1985:2020,
+                y = c(rowSums(test_ns[, -1])),
                 linetype = "Model",
                 col = "Model")) +
-  scale_color_manual("Source", labels = c("Data", "Model"), values = c("black", "red")) +
-  scale_linetype_manual("Source", labels = c("Data", "Model"), values = c(1, 2)) +
+  scale_color_manual(name = "Source", labels = c("Data", "Model"), values = c("black", "red")) +
+  scale_linetype_manual(name = "Source", labels = c("Data", "Model"), values = c(1, 2)) +
+  scale_x_continuous(breaks = seq(from = 1985, to = 2020, by = 5),
+                     minor_breaks = seq(from = 1985, to = 2020, by = 1)) +
   ylab("Relative population over time") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom",
+        panel.grid.major.x = element_line(size = 1))
 
 # Vectorized model
 ggplot(subset(df_pop_state),
@@ -244,13 +248,16 @@ ggplot(subset(df_pop_state),
                 y = c(rowSums(test_vec_ns[,-1])),
                 linetype = "Model",
                 col = "Model")) +
-  scale_color_manual("Source", labels = c("Data", "Model"), values = c("black", "red")) +
-  scale_linetype_manual("Source", labels = c("Data", "Model"), values = c(1, 2)) +
+  scale_color_manual(name = "Source", labels = c("Data", "Model"), values = c("black", "red")) +
+  scale_linetype_manual(name = "Source", labels = c("Data", "Model"), values = c(1, 2)) +
+  scale_x_continuous(breaks = seq(from = 1985, to = 2020, by = 5),
+                     minor_breaks = seq(from = 1985, to = 2020, by = 1)) +
   ylab("Relative population over time") +
-  theme(legend.position = "bottom")
-  # # There is a kind of offset in the model data #*****************************
-  # coord_cartesian(xlim = c(1985, 1990),
-  #                 ylim = c(1, 1.25))
+  theme(legend.position = "bottom",
+        panel.grid.major.x = element_line(size = 1))
+# # There is a kind of offset in the model data #*****************************
+# coord_cartesian(xlim = c(1985, 1990),
+#                 ylim = c(1, 1.25))
 
 dim(subset(df_pop_state, year < 2020))
 dim(test_vec_ns)
