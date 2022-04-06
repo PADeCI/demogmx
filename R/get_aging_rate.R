@@ -21,7 +21,8 @@
 #' @param v_year Numeric vector that specifies the year(s) to return. Must have
 #' numbers between 1985 and 2020. Default is 2021.
 #' @param v_sex Character vector selecting sex. Options: Female, Male and Total.
-#' @param v_age Numeric vector that specifies the age(s) to return.
+#' @param v_age Numeric vector that specifies the age(s) to return. Must have
+#' values between 0 and 89.
 #' @param age_groups Logical. Specifies whether to aggregate the output by
 #' age groups.
 #'
@@ -59,8 +60,8 @@ get_aging_rate <- function(v_state    = "National",
     stop("v_age must be a integer value or vector with values between 0 and 89")
   }
   # Check age groups option
-  if (!is.logical(age_groups)) {
-    stop("age_groups must be a logical value (TRUE / FALSE)")
+  if (!is.logical(age_groups) | length(age_groups) != 1) {
+    stop("age_groups must be a logical value (TRUE / FALSE) of length 1")
   }
 
 

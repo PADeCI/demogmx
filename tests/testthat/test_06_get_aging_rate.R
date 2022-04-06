@@ -223,7 +223,7 @@ test_that("the ungrouped output has the correct dimensions", {
   age_grp    <- 9
   size_grp <- years_grp*states_grp*sexes_grp*age_grp
 
-  expect_equal(dim(df_gp)[1], size_grp)
+  expect_equal(dim(df_ar)[1], size_grp)
 
   # Only males
   df_ar <- get_aging_rate(v_state = c("Guerrero", "Mexico City"),

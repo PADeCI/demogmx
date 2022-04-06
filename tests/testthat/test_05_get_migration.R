@@ -29,7 +29,7 @@ test_that("state inputs are correct", {
                              v_type = "Total",
                              age_groups = TRUE),
                regexp = paste('v_state must be a character element or vector containing at least one of the next names:',
-                              paste(unique(df_mortrate_state_age_sex$state), collapse = ", "),
+                              paste(unique(df_migration$state), collapse = ", "),
                               sep = "\n\n") )
 
   # Not an exact match
@@ -40,7 +40,7 @@ test_that("state inputs are correct", {
                              v_type = "Total",
                              age_groups = TRUE),
                regexp = paste('v_state must be a character element or vector containing at least one of the next names:',
-                              paste(unique(df_mortrate_state_age_sex$state), collapse = ", "),
+                              paste(unique(df_migration$state), collapse = ", "),
                               sep = "\n\n"))
 
   # Not a character
@@ -51,7 +51,7 @@ test_that("state inputs are correct", {
                              v_type = "Total",
                              age_groups = TRUE),
                regexp = paste('v_state must be a character element or vector containing at least one of the next names:',
-                              paste(unique(df_mortrate_state_age_sex$state), collapse = ", "),
+                              paste(unique(df_migration$state), collapse = ", "),
                               sep = "\n\n"))
 
   # Multiple errors
@@ -62,7 +62,7 @@ test_that("state inputs are correct", {
                             v_type = "Total",
                             age_groups = TRUE),
                regexp = paste('v_state must be a character element or vector containing at least one of the next names:',
-                              paste(unique(df_mortrate_state_age_sex$state), collapse = ", "),
+                              paste(unique(df_migration$state), collapse = ", "),
                               sep = "\n\n"))
 })
 
@@ -296,7 +296,7 @@ test_that("the ungrouped output has the correct dimensions", {
   years_grp  <- 8
   states_grp <- 2
   sexes_grp  <- 3
-  age_grp    <- 8
+  age_grp    <- 9
   types_grp  <- 3
 
   size_grp <- years_grp*states_grp*sexes_grp*age_grp*types_grp

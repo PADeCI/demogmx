@@ -77,3 +77,18 @@ vignettes/*.pdf
 /*_files/
 
 # End of https://www.toptal.com/developers/gitignore/api/r,macos
+figs/prop_males_states_files/crosstalk-1.2.0/css/crosstalk.min.css
+figs/prop_males_states_files/crosstalk-1.2.0/js/crosstalk.js
+figs/prop_males_states_files/crosstalk-1.2.0/js/crosstalk.js.map
+figs/prop_males_states_files/crosstalk-1.2.0/js/crosstalk.min.js
+figs/prop_males_states_files/crosstalk-1.2.0/js/crosstalk.min.js.map
+figs/prop_males_states_files/crosstalk-1.2.0/scss/crosstalk.scss
+figs/prop_males_states_files/htmlwidgets-1.5.4/htmlwidgets.js
+figs/prop_males_states_files/jquery-3.5.1/jquery-AUTHORS.txt
+figs/prop_males_states_files/jquery-3.5.1/jquery.js
+figs/prop_males_states_files/jquery-3.5.1/jquery.min.js
+figs/prop_males_states_files/jquery-3.5.1/jquery.min.map
+figs/prop_males_states_files/plotly-binding-4.10.0/plotly.js
+figs/prop_males_states_files/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css
+figs/prop_males_states_files/plotly-main-2.5.1/plotly-latest.min.js
+figs/prop_males_states_files/typedarray-0.1/typedarray.min.js

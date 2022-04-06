@@ -29,12 +29,11 @@ Interstate migration, International migration or Total migration.}
 \item{age_groups}{Specifies whether to aggregate the output by age groups.}
 }
 \value{
-A demographic dataset containing the selected year, state, the state
-code (CVE_GEO), the age (group, when \code{age_groups = TRUE}), the number of
-emigrants, the number of immigrants, the type of migration, and the rate of
+A demographic dataset containing the selected year, the state, the
+state code (CVE_GEO), the age (age group, when \code{age_groups = TRUE}), the
+type of migration, the number of emigrants, the number of immigrants,
+migration balance (immigrants - emigrants), and the rate of
 emigration and immigration, respectively.
-
-the proportion of each row, in relation to the selected year and sex.
 }
 \description{
 \code{get_migration} is a function that allows the user to get a demographic

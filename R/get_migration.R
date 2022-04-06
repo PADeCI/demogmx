@@ -24,13 +24,13 @@
 #' Interstate migration, International migration or Total migration.
 #' @param age_groups Specifies whether to aggregate the output by age groups.
 #'
-#' @return A demographic dataset containing the selected year, state, the state
-#' code (CVE_GEO), the age (group, when \code{age_groups = TRUE}), the number of
-#' emigrants, the number of immigrants, the type of migration, and the rate of
+#' @return A demographic dataset containing the selected year, the state, the
+#' state code (CVE_GEO), the age (age group, when \code{age_groups = TRUE}), the
+#' type of migration, the number of emigrants, the number of immigrants,
+#' migration balance (immigrants - emigrants), and the rate of
 #' emigration and immigration, respectively.
 #'
-#' the proportion of each row, in relation to the selected year and sex.
-#'
+#' @import dplyr
 #'
 #' @examples
 #' get_population(v_state =  "Chiapas", v_year = 2015, v_sex = "Total",
@@ -50,12 +50,12 @@ get_migration <- function(v_state    = "National",
 
   # Sanity Checks -----------------------------------------------------------
   # Check if selected state(s) is(are) part of the available options set
-  if (!all(v_state %in% unique(df_migration$state))) {
+  if (!all(v_state %in% unique(df_migration_expanded$state))) {
     stop("v_state must be a character element or vector containing at least one of the next names:\n\n",
          paste(unique(df_migration$state), collapse = ", "))
   }
   # Check if selected sex is part of the available options set
-  if (!all(v_sex %in% unique(df_migration$sex))) {
+  if (!all(v_sex %in% unique(df_migration_expanded$sex))) {
     stop("v_sex must be a character element or vector containing at least one of the next names: 'Female', 'Male', 'Total'")
   }
   # Check selected year
@@ -91,7 +91,8 @@ get_migration <- function(v_state    = "National",
                 immigrants = sum(immigrants),
                 population = sum(population)) %>%
       ungroup() %>%
-      mutate(em_rate = emigrants/population,
+      mutate(migration = immigrants - emigrants,
+             em_rate = emigrants/population,
              im_rate = immigrants/population) %>%
       select(-population)
   } else {
@@ -103,7 +104,8 @@ get_migration <- function(v_state    = "National",
              type  %in% v_type) %>%
       select(year, state, CVE_GEO, sex, age, emigrants,
              immigrants, type, population) %>%
-      mutate(em_rate = emigrants/population,
+      mutate(migration = immigrants - emigrants,
+             em_rate = emigrants/population,
              im_rate = immigrants/population) %>%
       select(-population)
   }
