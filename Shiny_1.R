@@ -1,5 +1,4 @@
 
-
 # Libraries ---------------------------------------------------------------
 library(shiny)
 library(ggplot2)
@@ -47,6 +46,9 @@ ui <- navbarPage(
                h3(actionButton(inputId = "button_prop_births",
                                label = "Sex proportion",
                                class = "btn-primary"),
+                  align = "center"),
+               h3(downloadButton(outputId = "download_birth_data",
+                              label = "Download data"),
                   align = "center"),
                br(),
                h6("NOTE 1: The graphs that have Female and Male sex are taken from
@@ -168,7 +170,7 @@ ui <- navbarPage(
 # Server ------------------------------------------------------------------
 server <- function(input, output, session) {
   ## Births ---------------------------------------------------------------
-  ### Reactive parameters -------------------------------------------------
+  ### Reactive objects ----------------------------------------------------
   # For birth plots
   df_births <- reactive({
 
@@ -188,20 +190,21 @@ server <- function(input, output, session) {
   # Title - number of births plot
   txt_n_births <- eventReactive(input$button_n_births, {
 
-    if (length(input$sel_sex_births) == 1 & input$sel_sex_births == "Total") {
-      paste("Total births between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
-    } else if (length(input$sel_sex_births) == 1 & input$sel_sex_births == "Males") {
-      paste("Male births between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
-    } else if (length(input$sel_sex_births) == 1 & input$sel_sex_births == "Females"){
-      paste("Female births between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
+    if (all(length(input$sel_sex_births) == 1 & input$sel_sex_births == "Total")) {
+      paste("Total number of births between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
+    } else if (all(length(input$sel_sex_births) == 1 & input$sel_sex_births == "Males")) {
+      paste("Number of males born between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
+    } else if (all(length(input$sel_sex_births) == 1 & input$sel_sex_births == "Females")){
+      paste("Number of females born between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
     } else {
-      paste("Births between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
+      paste("Number of births between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
     }
   })
   # Plot - number of births
   plt_n_births <- eventReactive(input$button_n_births, {
     # Define breaks
     v_sel_year_births <- seq(input$sel_year_births[1], input$sel_year_births[2])
+
     v_mult_5_births <- c(input$sel_year_births[1],
                          v_sel_year_births[which(v_sel_year_births %% 5 == 0)],
                          input$sel_year_births[2])
@@ -211,35 +214,60 @@ server <- function(input, output, session) {
              mapping = aes(x = year, y = births, color = state, linetype = sex)) +
         theme_bw(base_size = 11) +
         geom_line(size = 1) +
-        theme(legend.position = "bottom",
+        theme(legend.box = "vertical",
+              legend.position = "bottom",
               legend.key.width = unit(x = 1.5, units = "cm"),
-              text = element_text(size = 22)) +
-        scale_y_continuous(labels = scales::comma)
+              text = element_text(size = 22),
+              panel.grid.major.x = element_line(size = 1.5)) +
+        scale_y_continuous(labels = scales::comma,
+                           name = "Number of births") +
+        scale_x_continuous(name = "Year",
+                           breaks = v_mult_5_births,
+                           minor_breaks = v_sel_year_births) +
+        guides(color = guide_legend(title = "State"),
+               linetype = guide_legend(title = "Sex"))
+
+      # ggplot(data = df_births_sex(),
+      #        mapping = aes(x = year, y = births, color = state, linetype = sex)) +
+      #   scale_y_continuous(name = "Number of births") +
+      #   scale_x_continuous(name = "Year") +
+      #   guides(color = guide_legend(title = "State"),
+      #          linetype = guide_legend(title = "Sex")) +
+      #   plt_base(maj_breaks = v_mult_5_births,
+      #            min_breaks = v_sel_year_births)
+
+
     } else {
       ggplot(data = df_births(),
              mapping = aes(x = year, y = births, color = state)) +
         theme_bw(base_size = 11) +
         geom_line(size = 1) +
-        theme(legend.position = "bottom",
+        theme(legend.box = "vertical",
+              legend.position = "bottom",
               legend.key.width = unit(x = 1.5, units = "cm"),
-              text = element_text(size = 22)) +
-        scale_y_continuous(labels = scales::comma) +
-        scale_x_continuous(breaks = v_mult_5_births,
-                           minor_breaks = v_sel_year_births)
+              text = element_text(size = 22),
+              panel.grid.major.x = element_line(size = 1.5)) +
+        scale_y_continuous(labels = scales::comma,
+                           name = "Number of births") +
+        scale_x_continuous(name = "Year",
+                           breaks = v_mult_5_births,
+                           minor_breaks = v_sel_year_births) +
+        guides(color = guide_legend(title = "State"),
+               linetype = guide_legend(title = "Sex"))
     }
 
   })
   # Title - birth rate plot
   txt_r_births <- eventReactive(input$button_r_births, {
 
-    if (length(input$sel_sex_births) == 1 & input$sel_sex_births == "Total") {
-      paste("Total birth rate between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
-    } else if (length(input$sel_sex_births) == 1 & input$sel_sex_births == "Males") {
-      paste("Male birth rate between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
-    } else if (length(input$sel_sex_births) == 1 & input$sel_sex_births == "Females"){
-      paste("Female birth rate between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
+    if (all(length(input$sel_sex_births) == 1 & input$sel_sex_births == "Total")) {
+      paste("Total birth rate between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
+    } else if (all(length(input$sel_sex_births) == 1 & input$sel_sex_births == "Male")) {
+      paste("Male birth rate between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
+    } else if (all(length(input$sel_sex_births) == 1 & input$sel_sex_births == "Female")){
+      paste("Female birth rate between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
     } else {
-      paste("Birth rates between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
+      paste("Birth rates between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
     }
   })
   # Plot - birth rate plot
@@ -255,27 +283,41 @@ server <- function(input, output, session) {
              mapping = aes(x = year, y = birth_rate, color = state, linetype = sex)) +
         theme_bw(base_size = 11) +
         geom_line(size = 1) +
-        theme(legend.position = "bottom",
+        theme(legend.box = "vertical",
+              legend.position = "bottom",
               legend.key.width = unit(x = 1.5, units = "cm"),
-              text = element_text(size = 22)) +
-        scale_y_continuous(labels = scales::comma)
+              text = element_text(size = 22),
+              panel.grid.major.x = element_line(size = 1.5)) +
+        scale_y_continuous(labels = scales::comma,
+                           name = "Birth rate") +
+        scale_x_continuous(name = "Year",
+                           breaks = v_mult_5_births,
+                           minor_breaks = v_sel_year_births) +
+        guides(color = guide_legend(title = "State"),
+               linetype = guide_legend(title = "Sex"))
     } else {
       ggplot(data = df_births(),
              mapping = aes(x = year, y = birth_rate, color = state)) +
         theme_bw(base_size = 11) +
         geom_line(size = 1) +
-        theme(legend.position = "bottom",
+        theme(legend.box = "vertical",
+              legend.position = "bottom",
               legend.key.width = unit(x = 1.5, units = "cm"),
-              text = element_text(size = 22)) +
-        scale_y_continuous(labels = scales::comma) +
-        scale_x_continuous(breaks = v_mult_5_births,
-                           minor_breaks = v_sel_year_births)
+              text = element_text(size = 22),
+              panel.grid.major.x = element_line(size = 1.5)) +
+        scale_y_continuous(labels = scales::comma,
+                           name = "Birth rate") +
+        scale_x_continuous(name = "Year",
+                           breaks = v_mult_5_births,
+                           minor_breaks = v_sel_year_births) +
+        guides(color = guide_legend(title = "State"),
+               linetype = guide_legend(title = "Sex"))
     }
 
   })
   # Title - proportion of births plot
   txt_prop_births <- eventReactive(input$button_prop_births, {
-    paste("Female birth proportion between ", input$sel_year_births[1], " and ", input$sel_year_births[1])
+    paste("Proportion of births that are female between ", input$sel_year_births[1], " and ", input$sel_year_births[2])
   })
   # Plot -proportion of births plot
   plt_prop_births <- eventReactive(input$button_prop_births, {
@@ -294,17 +336,19 @@ server <- function(input, output, session) {
            mapping = aes(x = year, y = birth_prop, color = state)) +
       theme_bw(base_size = 11) +
       geom_line(size = 1) +
-      theme(legend.position = "bottom",
+      geom_hline(yintercept = 0.5, size = 1.5, color = "black",
+                 linetype = "dashed", alpha = 0.4) +
+      theme(legend.box = "vertical",
+            legend.position = "bottom",
             legend.key.width = unit(x = 1.5, units = "cm"),
-            text = element_text(size = 22)) +
-      scale_y_continuous(labels = scales::comma)
-      # coord_cartesian(ylim = c(0.4, 0.6))
-
-    # ggplot(data = filter(df_births_sex, sex == "Female"),
-    #        mapping = aes(x = year, y = birth_prop, color = state)) +
-    #   theme_bw(base_size = 11) +
-    #   geom_line(size = 1)
-
+            text = element_text(size = 22),
+            panel.grid.major.x = element_line(size = 1.5)) +
+      scale_y_continuous(labels = scales::comma,
+                         name = "Proportion") +
+      scale_x_continuous(name = "Year",
+                         breaks = v_mult_5_births,
+                         minor_breaks = v_sel_year_births) +
+      guides(color = guide_legend(title = "State"))
   })
 
   ### Render outputs ------------------------------------------------------
@@ -320,6 +364,21 @@ server <- function(input, output, session) {
   output$caption_prop_births <- renderText({txt_prop_births()})
   # Plot - birth rate
   output$plt_prop_births_UI <- renderPlot({plt_prop_births()})
+  # Download - birth data
+  output$download_birth_data <- downloadHandler(
+    filename = "birth_data.zip",
+    content = function(file) {
+      owd <- setwd(tempdir())
+      on.exit(setwd(owd))
+
+      fs <- c("df_births.csv", "df_births_sex.csv")
+      write.csv(x = df_births(),     file = "df_births.csv", row.names = F)
+      write.csv(x = df_births_sex(), file = "df_births_sex.csv", row.names = F)
+
+      zip(zipfile = file, files = fs)
+    },
+    contentType = "application/zip"
+  )
 
   ## Migration ------------------------------------------------------------
   ### Render UI's  --------------------------------------------------------
@@ -340,7 +399,7 @@ server <- function(input, output, session) {
 
   })
 
-  ### Reactive parameters -------------------------------------------------
+  ### Reactive objects ----------------------------------------------------
   # For migration plots
   df_migration <- reactive({
 
@@ -426,7 +485,7 @@ server <- function(input, output, session) {
 
 
   ## Population -----------------------------------------------------------
-  ### Reactive parameters -------------------------------------------------
+  ### Reactive objects ----------------------------------------------------
 
   ### Event reactive elements ---------------------------------------------
 
@@ -434,7 +493,7 @@ server <- function(input, output, session) {
 
 
   ## Mortality ------------------------------------------------------------
-  ### Reactive parameters -------------------------------------------------
+  ### Reactive objects ----------------------------------------------------
 
   ### Event reactive elements ---------------------------------------------
 
@@ -442,3 +501,22 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
+
+
+
+## Plotting functions ------------------------------------------------------
+# plt_base <- function(maj_breaks, min_breaks) {
+#   list(
+#     theme_bw(base_size = 11),
+#     geom_line(size = 1),
+#     theme(legend.box = "vertical",
+#           legend.position = "bottom",
+#           legend.key.width = unit(x = 1.5, units = "cm"),
+#           text = element_text(size = 22),
+#           panel.grid.major.x = element_line(size = 1.5)),
+#     scale_y_continuous(labels = scales::comma),
+#     scale_x_continuous(name = "Year",
+#                        breaks = maj_breaks,
+#                        minor_breaks = min_breaks)
+#   )
+# }
