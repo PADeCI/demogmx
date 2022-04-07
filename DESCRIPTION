@@ -1,14 +1,25 @@
 Package: demogmx
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Demographic data for Mexico
 Version: 0.1.0
-Author: Fernando Alarid-Escudero
-Maintainer: David Garibay <yourself@somewhere.net>
+Authors@R: 
+    c(person(given = "Fernando",
+             family = "Alarid-Escudero",
+             role = c("aut", "cre"),
+             email = "fernando.alarid@cide.edu",
+             comment = c(ORCID = "0000-0001-5076-1172")),
+      person(given = "David",
+             family = "Garibay",
+             role = "aut",
+             email = "david.garibay@cide.edu"))
+Maintainer: David Garibay <david.garibay@cide.edu>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Imports:
+    dplyr
 Depends: 
     R (>= 2.10)
 RoxygenNote: 7.1.2
