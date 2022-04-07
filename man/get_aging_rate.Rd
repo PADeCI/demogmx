@@ -21,7 +21,8 @@ numbers between 1985 and 2020. Default is 2021.}
 
 \item{v_sex}{Character vector selecting sex. Options: Female, Male and Total.}
 
-\item{v_age}{Numeric vector that specifies the age(s) to return.}
+\item{v_age}{Numeric vector that specifies the age(s) to return. Must have
+values between 0 and 89.}
 
 \item{age_groups}{Logical. Specifies whether to aggregate the output by
 age groups.}
