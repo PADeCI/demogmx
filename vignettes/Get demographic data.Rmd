@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This document is intended to demonstrate the use of the functions contained within the `demogmx` package. This package contains functions to obtain data-sets regarding births, population, migration (immigration and emigration), mortality and aging rate in Mexico. All these functions are very similar in the way they are used and, and once you become familiar with one of them, the use of the others becomes very intuitive.
+This document demonstrates the use of the functions contained within the `demogmx` package. This package includes functions to obtain data-sets regarding births, population, migration (immigration and emigration), mortality, and aging rate in Mexico. All these functions are very similar in the way they are used, and once you become familiar with one of them, the use of the others becomes very intuitive.
 
 To start, first we load the package:
 
@@ -19,7 +19,7 @@ library(demogmx)
 
 ```
 
-To obtain information from the functions, it is important to know what are the characteristics of their required inputs. In general, the information is disaggregated by year, state, sex and age. In some cases there are other variables like the type of migration in the `get_migration()` function. To obtain information at a state level, we have to put their name in English and with english characters. Following is the list of state names of the data-sets:
+To obtain information from the functions, it is important to know the characteristics of their required inputs. The information is disaggregated by year, state, sex, and age. In some cases, there are other variables like the type of migration in the `get_migration()` function. To obtain information at a state level, we have to put their name in English and English characters. Following is the list of state names of the data-sets:
 
 ```{r echo=FALSE}
 as.character(unique(df_migration$state))
