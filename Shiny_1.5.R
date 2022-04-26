@@ -10,11 +10,14 @@ library(shinycssloaders)
 # User Interface ----------------------------------------------------------
 ui <- navbarPage(
   title = "demogmx::",
+  position = "fixed-top",
+  tags$style(type="text/css", "body {padding-top: 60px;}"),
 
   ## Birthts ----------------------------------------------------------------
   tabPanel("Births",
            sidebarLayout(
              sidebarPanel(
+               style = "position:fixed; width:33%;",
                selectInput(inputId = "sel_state_births",
                            label = "State(s)",
                            choices = unique(df_birth_pop_states$state),
@@ -86,6 +89,7 @@ ui <- navbarPage(
   tabPanel("Migration",
            sidebarLayout(
              sidebarPanel(
+               style = "position:fixed; width:33%;",
                radioButtons(inputId = "mig_options_A",
                             label = "Select an option",
                             choices = list("International migration" = "International",
@@ -126,6 +130,7 @@ ui <- navbarPage(
   tabPanel("Population",
            sidebarLayout(
              sidebarPanel(
+               style = "position:fixed; width:33%;",
                radioButtons(inputId = "pop_options_A",
                             label = "Select an option",
                             choices = list("One year graphs" = "one_year_pop",
@@ -144,6 +149,7 @@ ui <- navbarPage(
   tabPanel("Mortality",
            sidebarLayout(
              sidebarPanel(
+               style = "position:fixed; width:33%;",
                radioButtons(inputId = "mort_options_A",
                             label = "Select an option",
                             choices = list("One year graphs" = "one_year_mort",
@@ -162,6 +168,7 @@ ui <- navbarPage(
   tabPanel("Aging rate",
            sidebarLayout(
              sidebarPanel(
+               style = "position:fixed; width:33%;",
                selectInput(inputId = "sel_state_aging",
                            label = "State(s)",
                            choices = unique(df_births_INEGI$state),
@@ -211,7 +218,7 @@ ui <- navbarPage(
                   align = "center"),
                plotOutput(outputId = "plt_aging_rate",
                           width = "120vh",
-                          height = "55vw")
+                          height = "40vw")
              )
            ))
 )
