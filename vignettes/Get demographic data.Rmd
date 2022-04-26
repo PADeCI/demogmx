@@ -1,0 +1,243 @@
+---
+title: "Get demographic data"
+author: "PADeCI"
+date: "April 2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This document is intended to demonstrate the use of the functions contained within the `demogmx` package. This package contains functions to obtain data-sets regarding births, population, migration (immigration and emigration), mortality and aging rate in Mexico. All these functions are very similar in the way they are used and, and once you become familiar with one of them, the use of the others becomes very intuitive.
+
+To start, first we load the package:
+
+```{r}
+# Load libraries
+library(demogmx)
+
+```
+
+To obtain information from the functions, it is important to know what are the characteristics of their required inputs. In general, the information is disaggregated by year, state, sex and age. In some cases there are other variables like the type of migration in the `get_migration()` function. To obtain information at a state level, we have to put their name in English and with english characters. Following is the list of state names of the data-sets:
+
+```{r echo=FALSE}
+as.character(unique(df_migration$state))
+```
+
+As we can see, the last element is *National,* with it we can obtain the aggregated information of all the country.
+
+The list of sex names that can be used as inputs in the functions is the following:
+
+```{r echo=FALSE}
+as.character(unique(df_migration$sex))
+```
+
+In the present version of the package, the functions can vary the range of ages that can accept as inputs. In some cases they can accepts ages from 0 to 109 years, as is the case with `get_population()` or from 0 to 89, if we use `get_migration( )`.
+
+Most of the functions have the option `age_groups` that only accepts logical values as inputs. When `age_groups = FALSE` the data-sets will only return the data of the ages that are inside a vector. When `age_groups = TRUE`, the data-sets will grouped by age groups that will be bounded by the elements inside the age vector.
+
+Suppose that we have the next age vector:
+
+```{r}
+v_ages <- c(0, 10, 15, 20)
+```
+
+-   If `age_groups = FALSE`, the data-set will only contain the information of the people with 0, 10, 15, and 20 years of age.
+
+-   If `age_groups = TRUE`, the data-set will be grouped in the following blocks:
+
+    -   The group of people between 0 and 10 years of age.
+
+    -   The group of people between 11 and 15 years of age.
+
+    -   The group of people between 16 and 20 years of age.
+
+    -   The group of people with 20 years and more. In the data-sets, the last age block will have an `Inf` indicating that the upper bound of the block is an infinite positive number.
+
+Now let's look at examples of the use of each of the functions
+
+# Births
+
+In the present version of the package there are two functions to obtain birth information from Mexico. One that gives the information without disaggregating by sex and contains projections from 1970 to 2050, and another that has the sex disaggretation but only has data from 1985 to 2020.
+
+In this function there is no `age_groups` option, here there is the `year_groups` option that aggregates the information by age in the same way as we explained above.
+
+## General births from 1970 to 2050
+
+This function contains the next inputs:
+
+-   `v_state` requires an element or a vector of characters containing the names of the desired states.
+
+-   `v_year` needs a numeric element or vector with the years of the information.
+
+-   `year_groups` needs a logical argument that indicates if data will be grouped by years.
+
+```{r}
+# Get data without grouping by year range
+get_births(v_state = c("Guerrero", "Zacatecas", "National"),
+           v_year = c(1970, 2000, 2020),
+           year_groups = FALSE) 
+```
+
+```{r}
+# Get data grouping by year range
+get_births(v_state = c("Michoacan", "Guerrero", "Zacatecas", "National"),
+           v_year = c(1970, 2000, 2020),
+           year_groups = TRUE)
+```
+
+Note that the column regarding the year changed its name based in whether we chose to group the data. If the data was not grouped the column is named `year`. If it was grouped now it is named `year_group`.
+
+If any of the functions of this package receives a wrong input, they will throw an error message and the list of accepted values, based on where the error occurred.
+
+```{r error=TRUE}
+# Throw an error
+get_births(v_state = 55, # Is not a character and is not a state name.
+           v_year = c(1970, 2000, 2020),
+           year_groups = FALSE) 
+```
+
+## Births by sex
+
+This function now have a new parameter input: `v_sex`. This input accepts the character arguments "Female", "Male" and "Total", giving the information of each sex or of the aggregation of both.
+
+```{r}
+# Get data without grouping by year range
+get_births_INEGI(v_state = c( "Guerrero", "National"),
+                 v_year = c(2000, 2020),
+                 v_sex = c("Female", "Total"),
+                 year_groups = FALSE) 
+```
+
+```{r}
+# Get data grouping by year range
+get_births_INEGI(v_state = c( "Guerrero", "National"),
+                 v_year = c(2000, 2020),
+                 v_sex = c("Female", "Total"),
+                 year_groups = TRUE) 
+```
+
+# Population
+
+The `get_population( )` function now have the next input parameters:
+
+-   `v_age` a numeric vector that indicates the ages that will be returned in the output data-set.
+
+-   `age_groups` a logical argument that groups the data by age.
+
+```{r}
+# Get population data without grouping by age
+get_population(v_state = "Mexico City",
+               v_year = 2000,
+               v_sex = c("Female", "Male"),
+               v_age = c(10, 25, 100),
+               age_groups = FALSE)
+```
+
+```{r}
+# Get population data grouping by age
+get_population(v_state = "Mexico City",
+               v_year = 2000,
+               v_sex = c("Female", "Male"),
+               v_age = c(10, 25, 100),
+               age_groups = TRUE)
+```
+
+# Migration
+
+The `get_population( )` function now have the next input parameters:
+
+-   `v_type` defines the type of migration that will be present in the data-set output. It can be *Interstate* migration, *International* migration and *Total* migration.
+
+```{r}
+# Get migration data without grouping by age
+get_migration(v_state = "Mexico City",
+              v_year = 2010,
+              v_sex = "Total",
+              v_age = 27,
+              v_type = c("Interstate", "International"),
+              age_groups = FALSE)
+```
+
+```{r}
+# Get migration data without grouping by age
+get_migration(v_state = "Mexico City",
+              v_year = 2010,
+              v_sex = "Total",
+              v_age = c(25, 50),
+              v_type = c("Interstate", "International"),
+              age_groups = FALSE)
+```
+
+```{r}
+# Get migration data grouping by age
+get_migration(v_state = "Mexico City",
+              v_year = 2010,
+              v_sex = "Total",
+              v_age = c(25, 50),
+              v_type = c("Interstate", "International"),
+              age_groups = TRUE)
+```
+
+Note that if `v_state = National` and `v_type = Interstate`, the function will return an empty tibble because there is no interstate migration at a National level.
+
+```{r}
+# Get migration data without grouping by age
+get_migration(v_state = "National",
+              v_year = 2010,
+              v_sex = "Total",
+              v_age = c(0, 10, 15),
+              v_type = "Interstate",
+              age_groups = FALSE)
+```
+
+# Mortality
+
+This function works identically as `get_population( )`
+
+```{r}
+# Get mortality data without grouping by age
+get_deaths(v_state = c("Guanajuato", "Nuevo Leon"),
+           v_year = 2015,
+           v_sex = c("Male", "Total"),
+           v_age = c(15, 25, 35),
+           age_groups = FALSE)
+```
+
+```{r}
+# Get mortality data grouping by age
+get_deaths(v_state = c("Guanajuato", "Nuevo Leon"),
+           v_year = 2015,
+           v_sex = c("Male", "Total"),
+           v_age = c(15, 25, 35),
+           age_groups = TRUE)
+```
+
+# Aging rate
+
+The aging rate is obtained by dividing the aging population by the total population of the state in a given moment.
+
+```{r}
+get_aging_rate(v_state = "National",
+               v_year = seq(2000, 2010),
+               v_sex = "Total",
+               v_age = 47, 
+               age_groups = FALSE)
+```
+
+```{r}
+get_aging_rate(v_state = "National",
+               v_year = seq(2000, 2010),
+               v_sex = "Total",
+               v_age = 47, 
+               age_groups = TRUE)
+```
+
+# Get help
+
+Finally, it is possible to get help of each of the `demogmx` functions as any other package. You can go to the help tab and search for information about a specific function or you can write `?` before the function in the console as it is in the following code chunk.
+
+```{r help}
+# ?get_population
+```
