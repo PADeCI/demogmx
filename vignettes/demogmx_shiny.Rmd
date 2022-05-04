@@ -20,15 +20,104 @@ Talk about
 -   Organization of the shiny app
 
     -   Tabs for each type of information available in the package: births, population, migration, mortality and aging rate.
+    -   Each tab provides options and filters that the user can specify to obtain different visualization and download data-sets.
 
 ![](demog_shiny_figs/shiny_tabs.png "Organization of the shiny app"){width="100%"}
 
 # Births tab
 
+-   Select States **(1)**
+
+    -   You can choose as many as you want, it is important to note that the magnitudes of each state's population can alter the visualization of the graphs.
+
+-   Select years **(2)**
+
+    -   Important to check the notes. If in the Sex option, *Female* or *Male* are selected, the available years reduce to 1985 to 2020
+
+-   Select Sex **(3)**
+
+    -   As we were saying, there are three possible options to select: *Female*, *Male* or *Total*. If the latter is selected the graphs will show the aggregated data of both sexes.
+
+-   Available graphs
+
+    -   Number of births **(4)**
+
+        -   X-axis the year of the data. To ease the visualization, the thicker gray lines are placed in the years that are multiples of five.
+
+        -   Y-axis the number of births.
+
+        -   Each state will have a unique color in the graph.
+
+        -   Each sex will have a different type of line.
+
+    -   Birth rate **(5)**
+
+        -   Birth rate is the number of births divided by the size of the population in a certain location.
+
+        -   This graph has a very similar structure as the number of births, but in the Y-axis it measures the Birth rate.
+
+    -   Sex proportion **(6)**
+
+        -   This graph do not depend of the selected sexes.
+
+        -   It shows the proportion of births that are female in the years defined by the user.
+
+-   Download Data **(7)**
+
+    -   You can download a data-set based on the characteristics defined in the side bar panel of the `Births` tab
+
+    -   The format of the downloaded file is .zip and within it there are two .csv files, one based on the information of CONAPO and the other containing the information provided by INEGI. **(INCLUIR ENLACES DE LAS PÁGINAS QUE FUERON FUENTE DE LOS DATOS)**
+
+**Add a graph with the numbers, with examples of the visualizations and examples of the downloadable data-sets.**
+
 # Migration tab
+
+First options (show image):
+
+-   Type of migration data or
+
+-   Download data option
+
+## International, Interstate and Total migration
+
+The first three options show the International, the Interstate and the Total migration, respectively. The Total migration is the aggregation of the other two.
+
+Note that if you choose National in the State(s) option and you've selected Interstate migration, the graphs will be in blank because at a country level there is only international migration.
+
+## By year or by age?
+
+There are two additional options. To generate visualizations that show the data across multiple years (**by year**) or to generate them showing the migration characteristics by age based in the migration that occurred in a single year (**by age**).
+
+In both cases you can define the *states* and the *sex* that will be shown in the visualizations.
+
+No matter the type of graph you choose (by year or by age) the available set of graphs will be the same. The main difference will be the X-axis of the graphs, if *By year* is chosen, it will have the years that are selected, if you choose *By age*, it will show the ages that have been selected.
+
+**EXAMPLES**
+
+-   Number of emigrants
+
+-   Number of immigrants
+
+-   Net migration (**I should get this graph**)
+
+    -   also I should make a better arrangement of the buttons
+
+-   Emigration rate
+
+-   Immigration rate
+
+## Download data
+
+This option allows to download the data defined by the user. In this case we can select all the available types of migration, states, years, sexes and ranges of the data contained in the `demogmx` package.
+
+First, the characteristics of the migration data have to be defined and then it can be downloaded by clicking the ***Download data***button at the bottom of the side bar panel of the `Migration` tab. The data will be downloaded in a
+
+INSERT EXAMPLE: screenshot
 
 # Population tab
 
 # Mortality tab
+
+Shares the initial structure of the population tab
 
 # Aging rate tab
