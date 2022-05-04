@@ -51,7 +51,7 @@ v_ages <- c(0, 10, 15, 20)
 
     -   The group of people between 16 and 20 years of age.
 
-    -   The group of people with 20 years and more. In the data-sets, the last age block will have an `Inf` indicating that the upper bound of the block is an infinite positive number.
+    -   The group of people 20 years old and older. In the data-sets, the last age block will have an `Inf` indicating that the upper bound of the block is an infinite positive number.
 
     -   We will notice how the age groups have been made looking at the `age_group` column. This column is made with the interval notation.
 
