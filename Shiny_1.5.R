@@ -171,7 +171,7 @@ ui <- navbarPage(
                style = "position:fixed; width:33%;",
                selectInput(inputId = "sel_state_aging",
                            label = "State(s)",
-                           choices = unique(df_births_INEGI$state),
+                           choices = unique(df_birth_pop_states$state),
                            selected = "National",
                            multiple = TRUE,
                            selectize = TRUE),
@@ -460,7 +460,7 @@ server <- function(input, output, session) {
 
         selectInput(inputId = "sel_state_mig",
                     label = "State(s)",
-                    choices = unique(df_migration_expanded$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
@@ -518,7 +518,7 @@ server <- function(input, output, session) {
       tagList(
         selectInput(inputId = "sel_state_mig",
                     label = "State(s)",
-                    choices = unique(df_migration_expanded$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
@@ -566,7 +566,7 @@ server <- function(input, output, session) {
       tagList(
         selectInput(inputId = "sel_state_mig",
                     label = "State(s)",
-                    choices = unique(df_migration_expanded$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
@@ -1439,7 +1439,7 @@ server <- function(input, output, session) {
       tagList(
         selectInput(inputId = "sel_state_pop",
                     label = "State(s)",
-                    choices = unique(df_mortrate_state_age_sex$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
@@ -1476,7 +1476,7 @@ server <- function(input, output, session) {
       tagList(
         selectInput(inputId = "sel_state_pop",
                     label = "State(s)",
-                    choices = unique(df_mortrate_state_age_sex$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
@@ -1521,7 +1521,7 @@ server <- function(input, output, session) {
       tagList(
         selectInput(inputId = "sel_state_pop",
                     label = "State(s)",
-                    choices = unique(df_mortrate_state_age_sex$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
@@ -1832,7 +1832,7 @@ server <- function(input, output, session) {
       tagList(
         selectInput(inputId = "sel_state_mort",
                     label = "State(s)",
-                    choices = unique(df_mortrate_state_age_sex$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
@@ -1869,7 +1869,7 @@ server <- function(input, output, session) {
       tagList(
         selectInput(inputId = "sel_state_mort",
                     label = "State(s)",
-                    choices = unique(df_mortrate_state_age_sex$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
@@ -1912,7 +1912,7 @@ server <- function(input, output, session) {
       tagList(
         selectInput(inputId = "sel_state_mort",
                     label = "State(s)",
-                    choices = unique(df_mortrate_state_age_sex$state),
+                    choices = unique(df_birth_pop_states$state),
                     selected = "National",
                     multiple = TRUE,
                     selectize = TRUE),
