@@ -110,7 +110,7 @@ get_births(v_state = 55, # Is not a character and is not a state name.
 
 ## Births by sex
 
-This function gives the number of [registered births based on Mexico's National Institute of Statistic and Geography data](https://www.inegi.org.mx/sistemas/olap/Proyectos/bd/continuas/natalidad/nacimientos.asp) (INEGI, by it's acronym in spanish). As in the previous function, it provides birth rate information. This information disaggregated by sex for each state and has estimations from 1980 to 2020.
+This function gives the number of [registered births based on Mexico's National Institute of Statistical and Geographical data](https://www.inegi.org.mx/sistemas/olap/Proyectos/bd/continuas/natalidad/nacimientos.asp) (INEGI, by it's acronym in Spanish). As in the previous function, it provides birth rate information. This information disaggregated by sex for each state and has estimations from 1980 to 2020.
 
 This function has a parameter called `v_sex` that specifies the sexes that will contain the output data-set. This input accepts the character arguments "Female", "Male" and "Total", giving the information of each sex or the aggregation of both, respectively.
 
