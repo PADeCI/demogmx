@@ -57,11 +57,7 @@ En Github está la opción para descargar directamente la base de datos.
 Es importante notar que todas las bases que están en el paquete tienen
 el formato .rda que es particular de R.
 
-<p align="center">
-
-<img src="tutorial_demogmx_1.png" alt="foo" width="700"/>
-
-</p>
+<img src="tutorial_demogmx_1.png" align="center" alt="foo" width="700"/>
 
 **3. Cargar base de datos**
 
