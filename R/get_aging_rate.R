@@ -37,7 +37,7 @@
 #' df_aging <- get_aging_rate(v_state = "National", v_year = seq(1985, 2020),
 #' v_sex = "Total", v_age = c(0, 89), age_groups = T)
 get_aging_rate <- function(v_state    = "National",
-                           v_year     = 2021,
+                           v_year     = 2020,
                            v_sex      = c("Female", "Male", "Total"),
                            v_age      = c(0, 15, 24, 36),
                            age_groups = FALSE) {
@@ -80,9 +80,8 @@ get_aging_rate <- function(v_state    = "National",
                           v_age = v_age, v_type = "Total",
                           age_groups = age_groups)
 
-
   # Manipulate data ---------------------------------------------------------
-  # Obtain string based in whether the age is grouped or not
+  # Obtain character string based in whether the age is grouped or not
   str_age_grp <- ifelse(test = age_groups, yes = "age_group", no = "age")
 
   # Merge population, mortality, and migration dataframes
