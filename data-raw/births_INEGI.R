@@ -13,6 +13,9 @@ library(tidyr)
 
 # Import base data --------------------------------------------------------
 # Registered births in Mexico by state and by year of registration
+# To obtain the information:
+# - "Entidad y Municipio de registro” was selected in Características del nacimiento
+# - “Sexo” was selected in Características del registrado.
 # Source: https://www.inegi.org.mx/sistemas/olap/proyectos/bd/continuas/natalidad/nacimientos.asp?s=est&c=23699&proy=nat_nac
 #
 # In the original dataset, there is the category "Not specified" in sex variable
