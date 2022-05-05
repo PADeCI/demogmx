@@ -237,13 +237,13 @@ get_deaths(v_state = c("Guanajuato", "Nuevo Leon"),
 The aging rate is the proportion of the population with age $i$ that were able to live another year, in other words, the aging rate is the division of the *aging population* between the *total population*.
 
 $$
-aging\ rate = \frac{aging\ population_i}{total\ population_i}
+aging\ rate_i = \frac{aging\ population_i}{total\ population_i}
 $$
 
 The aging population, as we wrote, is the number of people that is able to live another period of time (in this case, another year) in an specific location. Hence, to calculate the aging population in a specific age $i$, we must add the immigrants and subtract the emigrants and deaths to the total population of that age, as it is stated in the next equation.
 
 $$
-aging\ population = population_i + immigrants_i - emigrants_i - deaths_i
+aging\ population_i = population_i + immigrants_i - emigrants_i - deaths_i
 $$
 
 If the age is 0, then it is necessary to substitute the population of age $i$ by the births that occurred, in the specific time and location, to the equation.
