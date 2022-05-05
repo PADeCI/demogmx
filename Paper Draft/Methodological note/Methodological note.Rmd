@@ -1,0 +1,90 @@
+---
+title: "Methodological notes"
+author: "PADeCI"
+date: "5/5/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data sources
+
+## Births
+
+-   CONAPO
+
+    -   
+
+-   INEGI
+
+    -   Registered births by state
+
+    -   Write correctly the specifications used to retrieve the data from the INEGI site
+
+## Population
+
+-   CONAPO
+
+## Migration
+
+-   Two data sets of CONAPO
+
+    -   Interstate migration
+
+    -   International migration
+
+## Deaths
+
+-   CONAPO
+
+# Data processing
+
+-   All datasets share the same state and sex names.
+
+    -   Their names were written in English.
+
+    -   Each state name has a unique Geographical code (CVE_GEO)
+
+-   All datasets were converted to a long format
+
+## Births
+
+-   The original data of CONAPO has the number of births by age group, for every year and state
+
+    -   To obtain the total births in each year, we grouped the data by year and state, then we summed all the values of each age
+
+-   The
+
+## Population
+
+## Migration
+
+-   Converted to
+
+-   Both datasetes were expanded by year and age
+
+    -   The proportion of each age, in everygroup of 5, was assumed as the same proportion of ages within that same groups in the population dataset
+
+-   Once they
+
+## Deaths
+
+# Functions
+
+## Get births
+
+## Get population
+
+## Get migration
+
+## Get deaths
+
+-   The NA's present in `death_rate` were replaced by 0.
+
+    -   This was also made in the `df_mortrate_state_age_sex` base dataset
+
+## Get aging rate
+
+-   This function uses all the others
