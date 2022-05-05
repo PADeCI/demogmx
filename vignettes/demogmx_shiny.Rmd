@@ -25,11 +25,11 @@ Regarding the **access of the data,** a copy of the package data-sets can be obt
 
 Once the shiny app is in execution it will appear as a new window or tab in your browser. This app has three main areas:
 
--   The **tabset panel** - shows the main divisions between the types of demographic information available in the package. The births, migration, population, mortality and aging tabs are available. By selecting a new tab the shiny app will show a new page with specific filters and options, related to the selected type of demographic data, will appear. This panel is shown in the next figure as the area contained in the red rectangle.
+-   The **tabset panel** - shows the main divisions between the types of demographic information available in the package. The births, migration, population, mortality and aging tabs are available. By selecting a new tab the shiny app will show a new page with specific filters and options, related to the selected type of demographic data, will appear. This panel is shown in the next figure as the area contained in the [red rectangle]{style="color: red"}
 
--   The **sidebar panel** - gives different options and filters that the user must to define in order to obtain specific visualizations and data-sets. It is placed at the left side of the window. Each tab has a different sidebar panel because the options and the filters of each type of demographic information will have unique characteristics. This panel can be seen in the next figure as the area contained in the green rectangle.
+-   The **sidebar panel** - gives different options and filters that the user must to define in order to obtain specific visualizations and data-sets. It is placed at the left side of the window. Each tab has a different sidebar panel because the options and the filters of each type of demographic information will have unique characteristics. This panel can be seen in the next figure as the area contained in the [green rectangle]{style="color: green"}.
 
--   The **main panel** - contains the area with the greater extent and it is used to visualize the created graphs, based on the user specifications. This part can be scrolled down in order to see the different visualizations that are available in each tab. The main panel is the area contained in the purple rectangle, in the following figure.
+-   The **main panel** - contains the area with the greater extent and it is used to visualize the created graphs, based on the user specifications. This part can be scrolled down in order to see the different visualizations that are available in each tab. The main panel is the area contained in the [blue rectangle]{style="color: blue"}, in the following figure.
 
 ![](demog_shiny_figs/shiny_structure.png "Structure of the demogmx app"){width="100%"}
 
