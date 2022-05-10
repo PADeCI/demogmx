@@ -9,10 +9,10 @@ Authors@R:
              email = "fernando.alarid@cide.edu",
              comment = c(ORCID = "0000-0001-5076-1172")),
       person(given = "David",
-             family = "Garibay",
+             family = "Garibay-Treviño",
              role = "aut",
              email = "david.garibay@cide.edu"))
-Maintainer: David Garibay <david.garibay@cide.edu>
+Maintainer: David Garibay-Treviño <david.garibay@cide.edu>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
