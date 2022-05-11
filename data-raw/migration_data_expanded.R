@@ -146,7 +146,8 @@ df_migration_expanded <- df_migration_aux3 %>%
   left_join(y = df_pop_cut,
             by = c("year", "state", "CVE_GEO", "sex", "age")) %>%
   mutate(emigrants = round(emigrants*proportion),
-         immigrants = round(immigrants*proportion))
+         immigrants = round(immigrants*proportion)) %>%
+  select(-proportion, -age_grp)
 
 # # SANITY CHECK -- Compare with df_migration_aux2, they should be the same or very similar
 # df_mm <- df_migration_expanded %>%
@@ -158,7 +159,7 @@ df_migration_expanded <- df_migration_aux3 %>%
 # 09 Save data ------------------------------------------------------------
 save(df_migration_expanded, file = "data/df_migration_expanded.rda")
 
-# write.csv(df_migration_expanded, file = "data/df_migration_expanded.csv")
+6# write.csv(df_migration_expanded, file = "data/df_migration_expanded.csv")
 
 
 
