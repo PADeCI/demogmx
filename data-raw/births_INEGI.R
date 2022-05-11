@@ -142,7 +142,7 @@ df_births_INEGI <- df_births_INEGI_2 %>%
 
 
 # # Save data
-# save(df_births_INEGI, file = "data/df_births_INEGI.Rdata")
+# save(df_births_INEGI, file = "data/df_births_INEGI.rda")
 
 
 

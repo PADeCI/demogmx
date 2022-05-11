@@ -274,12 +274,13 @@ df_migration <- df_mig_inter_2 %>%
                         immigrants = sum(immigrants),
                         CVE_GEO = unique(CVE_GEO)) %>%
               mutate(type = "Total")) %>%
-  arrange(year, state, age, sex, type)
+  arrange(year, state, age, sex, type) %>%
+  tibble::as_tibble()
 
 # 03 Save data ---------------------------------------------------------
-# save(df_mig_states, file = "data/df_mig_states.Rdata")
-# save(df_mig_inter, file = "data/df_mig_inter.Rdata")
-save(df_migration, file = "data/df_migration.Rdata")
+# save(df_mig_states, file = "data/df_mig_states.rda")
+# save(df_mig_inter, file = "data/df_mig_inter.rda")
+save(df_migration, file = "data/df_migration.rda")
 
 # write.csv(df_mig_states, file = "data/df_mig_states.csv")
 # write.csv(df_mig_inter, file = "data/df_inter_mig.csv")

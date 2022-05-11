@@ -60,5 +60,5 @@ df_mortrate_state_age_sex <- df_mortrate_state_age_sex %>%
   as_tibble()
 
 # 04 Save data ------------------------------------------------------------
-save(df_mortrate_state_age_sex, file = "data/df_mortrate_state_age_sex.Rdata")
+save(df_mortrate_state_age_sex, file = "data/df_mortrate_state_age_sex.rda")
 
