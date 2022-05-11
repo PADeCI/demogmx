@@ -300,14 +300,14 @@
               v_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">50</span><span class="op">)</span>,
               v_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Interstate"</span>, <span class="st">"International"</span><span class="op">)</span>,
               age_groups <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4 x 11</span></span>
-<span class="co">##    year state   CVE_GEO sex     age emigrants immigrants type  migration em_rate</span>
-<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>010 Mexico~       9 Total    25       279        317 Inte~        38 1.84<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span></span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>010 Mexico~       9 Total    25      <span style="text-decoration: underline;">2</span>900       <span style="text-decoration: underline;">2</span>149 Inte~      -<span style="color: #BB0000;">751</span> 1.91<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span></span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>010 Mexico~       9 Total    50        70        104 Inte~        34 6.46<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span></span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>010 Mexico~       9 Total    50      <span style="text-decoration: underline;">1</span>001        458 Inte~      -<span style="color: #BB0000;">543</span> 9.24<span style="color: #949494;">e</span><span style="color: #BB0000;">-3</span></span>
-<span class="co">## <span style="color: #949494;"># ... with 1 more variable: im_rate &lt;dbl&gt;</span></span></code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4 x 12</span></span>
+<span class="co">##    year state       CVE_GEO sex     age emigrants immigrants type  net_migration</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>010 Mexico City       9 Total    25       279        317 Inte~            38</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>010 Mexico City       9 Total    25      <span style="text-decoration: underline;">2</span>900       <span style="text-decoration: underline;">2</span>149 Inte~          -<span style="color: #BB0000;">751</span></span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>010 Mexico City       9 Total    50        70        104 Inte~            34</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>010 Mexico City       9 Total    50      <span style="text-decoration: underline;">1</span>001        458 Inte~          -<span style="color: #BB0000;">543</span></span>
+<span class="co">## <span style="color: #949494;"># ... with 3 more variables: em_rate &lt;dbl&gt;, im_rate &lt;dbl&gt;, nm_rate &lt;dbl&gt;</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get migration data grouping by age and</span>
 <span class="co"># with both types of migration</span>
@@ -334,10 +334,10 @@
               v_age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">15</span><span class="op">)</span>,
               v_type <span class="op">=</span> <span class="st">"Interstate"</span>,
               age_groups <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 0 x 11</span></span>
-<span class="co">## <span style="color: #949494;"># ... with 11 variables: year &lt;int&gt;, state &lt;chr&gt;, CVE_GEO &lt;dbl&gt;, sex &lt;chr&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   age &lt;int&gt;, emigrants &lt;dbl&gt;, immigrants &lt;dbl&gt;, type &lt;chr&gt;, migration &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   em_rate &lt;dbl&gt;, im_rate &lt;dbl&gt;</span></span></code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 0 x 12</span></span>
+<span class="co">## <span style="color: #949494;"># ... with 12 variables: year &lt;int&gt;, state &lt;chr&gt;, CVE_GEO &lt;dbl&gt;, sex &lt;chr&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   age &lt;int&gt;, emigrants &lt;dbl&gt;, immigrants &lt;dbl&gt;, type &lt;chr&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   net_migration &lt;dbl&gt;, em_rate &lt;dbl&gt;, im_rate &lt;dbl&gt;, nm_rate &lt;dbl&gt;</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="mortality">Mortality<a class="anchor" aria-label="anchor" href="#mortality"></a>

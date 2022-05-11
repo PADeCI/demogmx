@@ -40,11 +40,21 @@ emigration and immigration, respectively.
 dataset regarding migration based on the given parameters.
 }
 \examples{
-get_population(v_state =  "Chiapas", v_year = 2015, v_sex = "Total",
-v_age = c(0, 15, 45, 75), age_groups = FALSE)
 
-get_population(v_state = c("Aguascalientes", "Campeche"),
-v_year = c(2010, 2021), v_sex = "Male", v_age = c(0, 15, 45, 75),
-age_groups = TRUE)
+get_migration(v_state = c("Yucatan", "Sonora"),
+              v_year = 2015,
+              v_sex = "Total",
+              v_age = c(0, 25, 35, 45),
+              v_type = "International",
+              age_groups = TRUE)
+
+
+get_migration(v_state = "Mexico City",
+              v_year = c(2000, 2010),
+              v_sex = "Female",
+              v_age = c(0, 15, 35, 45, 75),
+              v_type = c("Interstate", "International", "Total"),
+              age_groups = FALSE)
+
 
 }

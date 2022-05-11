@@ -8,8 +8,7 @@ get_aging_rate(
   v_state = "National",
   v_year = 2020,
   v_sex = c("Female", "Male", "Total"),
-  v_age = c(0, 15, 24, 36),
-  age_groups = FALSE
+  v_age = c(0, 15, 24, 36)
 )
 }
 \arguments{
