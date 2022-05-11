@@ -1,5 +1,5 @@
 ---
-title: "demogmx::Shiny user vignette"
+title: "Shiny app"
 author: "PADeCI"
 date: "April/2022"
 output: 
