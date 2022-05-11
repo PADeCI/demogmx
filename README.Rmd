@@ -4,11 +4,19 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r eval=FALSE, echo=F}
+#' Check 
+#' https://github.com/DARTH-git/darthpack/blob/master/README.Rmd
 ```
 
-# demogmx <img src="figs/img.png" alt="foo" align="right" width="100"/>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.align = "center")
+```
+
+# demogmx <img src="man/figures/logo.png" alt="foo" align="center" width="100"/>
+
 
 # VERSIÓN EN ESPAÑOL: *Datos demográficos de México*
 
@@ -36,7 +44,7 @@ En Github está la opción para descargar directamente la base de datos. Es impo
 
 <p align="center">
 
-<img src="tutorial_demogmx_1.png" alt="foo" width="700"/>
+<img src="man/figures/tutorial_demogmx_1.png" alt="foo" width="100%"/>
 
 </p>
 
@@ -140,7 +148,7 @@ Once the data base is chosen, it can be directly downloaded from its location in
 
 <p align="center">
 
-<img src="tutorial_demogmx_1.png" alt="foo" width="700"/>
+<img src="man/figures/tutorial_demogmx_1.png" alt="foo" width="100%"/>
 
 </p>
 

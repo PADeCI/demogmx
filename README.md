@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# demogmx <img src="figs/img.png" alt="foo" align="right" width="100"/>
+# demogmx <img src="man/figures/logo.png" alt="foo" align="center" width="100"/>
 
 # VERSIÓN EN ESPAÑOL: *Datos demográficos de México*
 
@@ -59,7 +59,7 @@ el formato .rda que es particular de R.
 
 <p align="center">
 
-<img src="tutorial_demogmx_1.png" alt="foo" width="700"/>
+<img src="man/figures/tutorial_demogmx_1.png" alt="foo" width="100%"/>
 
 </p>
 
@@ -208,7 +208,7 @@ this repository have an .rda format.
 
 <p align="center">
 
-<img src="tutorial_demogmx_1.png" alt="foo" width="700"/>
+<img src="man/figures/tutorial_demogmx_1.png" alt="foo" width="100%"/>
 
 </p>
 
