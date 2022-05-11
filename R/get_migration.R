@@ -91,9 +91,10 @@ get_migration <- function(v_state    = "National",
                 immigrants = sum(immigrants),
                 population = sum(population)) %>%
       ungroup() %>%
-      mutate(migration = immigrants - emigrants,
+      mutate(net_migration = immigrants - emigrants,
              em_rate = emigrants/population,
-             im_rate = immigrants/population) %>%
+             im_rate = immigrants/population,
+             nm_rate = net_migration/population) %>%
       select(-population) %>%
       filter(complete.cases(.))
   } else {
@@ -106,9 +107,10 @@ get_migration <- function(v_state    = "National",
              complete.cases(.)) %>%
       select(year, state, CVE_GEO, sex, age, emigrants,
              immigrants, type, population) %>%
-      mutate(migration = immigrants - emigrants,
+      mutate(net_migration = immigrants - emigrants,
              em_rate = emigrants/population,
-             im_rate = immigrants/population) %>%
+             im_rate = immigrants/population,
+             nm_rate = net_migration/population) %>%
       select(-population) %>%
       filter(complete.cases(.))
   }
