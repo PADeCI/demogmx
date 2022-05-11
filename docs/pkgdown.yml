@@ -1,0 +1,12 @@
+pandoc: 2.14.0.3
+pkgdown: 2.0.3
+pkgdown_sha: ~
+articles:
+  demogmx: demogmx.html
+  demogmx_shiny: demogmx_shiny.html
+  get_demographic_data: get_demographic_data.html
+last_built: 2022-05-11T07:05Z
+urls:
+  reference: https://padeci.github.io/demogmx/reference
+  article: https://padeci.github.io/demogmx/articles
+
