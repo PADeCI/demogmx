@@ -3,11 +3,39 @@ url: https://padeci.github.io/demogmx/
 template:
   bootstrap: 5
 
+# template obtained from template_navbar()
 navbar:
-  right:
-    - text: "github repo"
-      icon: fa-github fa-lg
-      href: https://github.com/PADeCI/demogmx
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right:
+    - github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/PADeCI/demogmx/
+      text: Github repo
+    intro:
+      text: Get started
+      href: articles/demogmx.html
+    articles:
+      text: Articles
+      menu:
+      - text: Shiny app
+        href: articles/demogmx_shiny.html
+      - text: How to use the functions?
+        href: articles/get_demographic_data.html
 
 authors:
   Fernando Alarid-Escudero:
@@ -32,9 +60,9 @@ reference:
   - title: Demographic datasets
     desc: These are the base datasets where the functions retrieve their information.
     contents:
-    - df_births
+    - df_birth_pop_states
     - df_births_INEGI
-    - df_mortrate_state_age
+    - df_mortrate_state_age_sex
     - df_migration
     - df_migration_expanded
 
