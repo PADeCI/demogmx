@@ -39,10 +39,9 @@
 get_aging_rate <- function(v_state    = "National",
                            v_year     = 2020,
                            v_sex      = c("Female", "Male", "Total"),
-                           v_age      = c(0, 15, 24, 36),
-                           age_groups = FALSE) {
-  # Sanity Checks -----------------------------------------------------------
-  # Check if selected state(s) is(are) part of the available options set
+                           v_age      = c(0, 15, 24, 36)) {
+  # # Sanity Checks -----------------------------------------------------------
+  # # Check if selected state(s) is(are) part of the available options set
   if (!all(v_state %in% unique(df_births_INEGI$state))) {
     stop("v_state must be a character element or vector containing at least one of the next names:\n\n",
          paste(unique(df_mortrate_state_age_sex$state), collapse = ", "))
@@ -59,44 +58,81 @@ get_aging_rate <- function(v_state    = "National",
   if (!all(v_age %in% seq(0, 89))) {
     stop("v_age must be a integer value or vector with values between 0 and 89")
   }
-  # Check age groups option
-  if (!is.logical(age_groups) | length(age_groups) != 1) {
-    stop("age_groups must be a logical value (TRUE / FALSE) of length 1")
+
+
+  if (0 %in% v_age) {
+    # Execute auxiliary functions ---------------------------------------------
+    # Obtain births
+    df_births <- get_births_INEGI(v_state = v_state, v_year = v_year,
+                                  v_sex = v_sex, year_groups = FALSE) %>%
+      mutate(age = 0)
+
+    # Obtain population
+    df_pop <- get_population(v_state = v_state, v_year = v_year, v_sex = v_sex,
+                             v_age = v_age, age_groups = FALSE)
+    # Obtain mortality
+    df_mort <- get_deaths(v_state = v_state, v_year = v_year, v_sex = v_sex,
+                          v_age = v_age, age_groups = FALSE)
+    # Obtain migration (emigration and immigration)
+    df_mig <- get_migration(v_state = v_state, v_year = v_year, v_sex = v_sex,
+                            v_age = v_age, v_type = "Total",
+                            age_groups = FALSE)
+
+    # Merge births, population, migration and mortality dataframes
+    # When age == 0
+    df_aux_age_0 <- df_births %>%
+      left_join(x = ., y = dplyr::filter(df_pop, age == 0),
+                by = c("year", "state", "CVE_GEO","sex", "age")) %>%
+      left_join(x = ., y = dplyr::filter(df_mort, age == 0),
+                by = c("year", "state", "CVE_GEO","sex", "age")) %>%
+      left_join(x = ., y = dplyr::filter(df_mig, age == 0),
+                by = c("year", "state", "CVE_GEO","sex", "age")) %>%
+      # Calculate aging rate
+      mutate(aging_pop = births + immigrants - emigrants - deaths) %>%
+      mutate(aging_rate = aging_pop/population) %>%
+      select(year, state, CVE_GEO, sex, age, aging_pop, aging_rate) %>%
+      dplyr::filter(complete.cases(.))
+
+    # Merge the data for the rest of the ages
+    df_aux_1 <- dplyr::filter(df_pop, age != 0) %>%
+      left_join(x = ., y = dplyr::filter(df_mort, age != 0),
+                by = c("year", "state", "CVE_GEO","sex", "age")) %>%
+      left_join(x = ., y = dplyr::filter(df_mig, age != 0),
+                by = c("year", "state", "CVE_GEO","sex", "age")) %>%
+      # Calculate aging rate
+      mutate(aging_pop = population + immigrants - emigrants - deaths) %>%
+      mutate(aging_rate = aging_pop/population) %>%
+      select(year, state, CVE_GEO, sex, age, aging_pop, aging_rate) %>%
+      dplyr::filter(complete.cases(.))
+
+    # Obtain dataframe for age 0 and the rest of the ages
+    df_outcome <- dplyr::bind_rows(df_aux_age_0, df_aux_1)
+
+  } else {
+
+    # Obtain population
+    df_pop <- get_population(v_state = v_state, v_year = v_year, v_sex = v_sex,
+                             v_age = v_age, age_groups = FALSE)
+    # Obtain mortality
+    df_mort <- get_deaths(v_state = v_state, v_year = v_year, v_sex = v_sex,
+                          v_age = v_age, age_groups = FALSE)
+    # Obtain migration (emigration and immigration)
+    df_mig <- get_migration(v_state = v_state, v_year = v_year, v_sex = v_sex,
+                            v_age = v_age, v_type = "Total",
+                            age_groups = FALSE)
+
+    df_outcome <- df_pop %>%
+      left_join(x = ., y = df_mort,
+                by = c("year", "state", "CVE_GEO","sex", "age")) %>%
+      left_join(x = ., y = df_mig,
+                by = c("year", "state", "CVE_GEO","sex", "age")) %>%
+      # Calculate aging rate
+      mutate(aging_pop = population + immigrants - emigrants - deaths) %>%
+      mutate(aging_rate = aging_pop/population) %>%
+      select(year, state, CVE_GEO, sex, age, aging_pop, aging_rate) %>%
+      dplyr::filter(complete.cases(.))
   }
 
-
-  # Execute auxiliary functions ---------------------------------------------
-  # Obtain births
-  df_births <- get_births_INEGI(v_state = v_state, v_year = v_year,
-                                v_sex = v_sex, year_groups = FALSE)
-  # Obtain population
-  df_pop <- get_population(v_state = v_state, v_year = v_year, v_sex = v_sex,
-                           v_age = v_age, age_groups = age_groups)
-  # Obtain mortality
-  df_mort <- get_deaths(v_state = v_state, v_year = v_year, v_sex = v_sex,
-                        v_age = v_age, age_groups = age_groups)
-  # Obtain migration (emigration and immigration)
-  df_mig <- get_migration(v_state = v_state, v_year = v_year, v_sex = v_sex,
-                          v_age = v_age, v_type = "Total",
-                          age_groups = age_groups)
-
-  # Manipulate data ---------------------------------------------------------
-  # Obtain character string based in whether the age is grouped or not
-  str_age_grp <- ifelse(test = age_groups, yes = "age_group", no = "age")
-
-  # Merge population, mortality, and migration dataframes
-  df_aux_1 <- df_pop %>%
-    left_join(x = ., y = df_mort,
-              by = c("year", "state", "CVE_GEO","sex", str_age_grp)) %>%
-    left_join(x = ., y = df_mig,
-              by = c("year", "state", "CVE_GEO","sex", str_age_grp))
-
-  # Calculate the aging population and the aging rate
-  df_outcome <- df_aux_1 %>%
-    mutate(aging_pop = population + immigrants - emigrants - deaths) %>%
-    mutate(aging_rate = aging_pop/population) %>%
-    select(year, state, CVE_GEO, sex, all_of(str_age_grp), aging_pop, aging_rate) %>%
-    dplyr::filter(complete.cases(.))
 
   return(df_outcome)
 }
