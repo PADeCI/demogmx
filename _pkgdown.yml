@@ -1,4 +1,40 @@
-url: ~
+url: https://padeci.github.io/demogmx/
+
 template:
   bootstrap: 5
+
+navbar:
+  right:
+    - text: "github repo"
+      icon: fa-github fa-lg
+      href: https://github.com/PADeCI/demogmx
+
+authors:
+  Fernando Alarid-Escudero:
+    href: https://github.com/feralaes
+  David Garibay-Treviño:
+    href: https://github.com/du-gartre
+  PADeCI:
+    href: https://padeci.org
+    html: <img src= 'man/figures/padeci_logo.png' alt='PADeCI' width='72' />
+
+reference:
+  - title: Get demographic data
+    desc: Obtain demographic datasets based on user specifications.
+    contents:
+    - get_aging_rate
+    - get_births
+    - get_births_INEGI
+    - get_deaths
+    - get_death_population
+    - get_migration
+    - get_population
+  - title: Demographic datasets
+    desc: These are the base datasets where the functions retrieve their information.
+    contents:
+    - df_births
+    - df_births_INEGI
+    - df_mortrate_state_age
+    - df_migration
+    - df_migration_expanded
 
