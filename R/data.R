@@ -8,11 +8,11 @@
 #'
 #' @format A data frame with 2,673 rows and 5 variables:
 #' \describe{
-#' \item{year} {Year of the data}
-#' \item{state} {State where the births occurred}
-#' \item{CVE_GEO} {Geographical code of the state of occurrence}
-#' \item{population} {Number of people living in that year and state}
-#' \item{births} {Number of births that occurred in that year and state}
+#' \item{year}{Year of the data}
+#' \item{state}{State where the births occurred}
+#' \item{CVE_GEO}{Geographical code of the state of occurrence}
+#' \item{population}{Number of people living in that year and state}
+#' \item{births}{Number of births that occurred in that year and state}
 #' }
 #'
 #' @source \url{https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/284ef503-6c57-4a5c-8247-e13241ad4cee}
@@ -26,14 +26,14 @@
 #'
 #' @format A data frame with 3,564 rows and 8 variables:
 #' \describe{
-#' \item{year} {Year of the data}
-#' \item{state} {State where the births occurred}
-#' \item{sex} {Sex of the child}
-#' \item{CVE_GEO} {Geographical code of the state of occurrence}
-#' \item{births} {Number of births that occurred in that year, state and sex}
-#' \item{birth_prop} {Proportion of births in relation to the sum of both sexes}
-#' \item{population} {Number of people living in that year and state}
-#' \item{birth_rate} {Number of births divided by the population with the same year, state and sex.}
+#' \item{year}{Year of the data}
+#' \item{state}{State where the births occurred}
+#' \item{sex}{Sex of the child}
+#' \item{CVE_GEO}{Geographical code of the state of occurrence}
+#' \item{births}{Number of births that occurred in that year, state and sex}
+#' \item{birth_prop}{Proportion of births in relation to the sum of both sexes}
+#' \item{population}{Number of people living in that year and state}
+#' \item{birth_rate}{Number of births divided by the population with the same year, state and sex.}
 #' }
 #'
 #' @source \url{https://www.inegi.org.mx/sistemas/olap/Proyectos/bd/continuas/natalidad/nacimientos.asp}
@@ -50,21 +50,21 @@
 #'
 #' @format A data frame with 84,672 rows and 8 variables:
 #' \describe{
-#' \item{year} {Year of the data}
-#' \item{state} {State where the migration occurred}
-#' \item{CVE_GEO} {Geographical code of the state of occurrence}
-#' \item{sex} {Sex of the migrants}
-#' \item{age_group} {Age group to which belongs the data}
-#' \item{type} {Type of migration: Interstate, International or Total}
-#' \item{emigrants} {Number of emigrants}
-#' \item{immigrants} {Number of immigrants}
-#' \item{migratoin} {Net migration (immigrants - emigrants)}
-#' \item{em_rate} {emigration rate}
-#' \item{im_rate} {immigration rate}
+#' \item{year}{Year of the data}
+#' \item{state}{State where the migration occurred}
+#' \item{CVE_GEO}{Geographical code of the state of occurrence}
+#' \item{sex}{Sex of the migrants}
+#' \item{age_group}{Age group to which belongs the data}
+#' \item{type}{Type of migration: Interstate, International or Total}
+#' \item{emigrants}{Number of emigrants}
+#' \item{immigrants}{Number of immigrants}
+#' \item{migratoin}{Net migration (immigrants - emigrants)}
+#' \item{em_rate}{emigration rate}
+#' \item{im_rate}{immigration rate}
 #' }
 #'
-#' @source \url{ https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/81802225-00c4-49b4-ab49-a491334062b4,
-#'  https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/3f9c8392-153d-4299-a027-9f1b179f6edf}
+#' @source \url{ https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/81802225-00c4-49b4-ab49-a491334062b4, https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/3f9c8392-153d-4299-a027-9f1b179f6edf}
+#'
 "df_migration"
 
 
@@ -76,14 +76,14 @@
 #'
 #' @format A data frame with 2,116,800 rows and 8 variables:
 #' \describe{
-#' \item{year} {Year of the data}
-#' \item{state} {State where the migration occurred}
-#' \item{age} {Age to which belongs the data}
-#' \item{CVE_GEO} {Geographical code of the state of occurrence}
-#' \item{sex} {Sex of the migrants}
-#' \item{emigrants} {Number of emigrants}
-#' \item{immigrants} {Number of immigrants}
-#' \item{type} {Type of migration: Interstate, International or Total}
+#' \item{year}{Year of the data}
+#' \item{state}{State where the migration occurred}
+#' \item{age}{Age to which belongs the data}
+#' \item{CVE_GEO}{Geographical code of the state of occurrence}
+#' \item{sex}{Sex of the migrants}
+#' \item{emigrants}{Number of emigrants}
+#' \item{immigrants}{Number of immigrants}
+#' \item{type}{Type of migration: Interstate, International or Total}
 #' }
 "df_migration_expanded"
 
@@ -96,13 +96,13 @@
 #'
 #' @format A data frame with 882,420 rows and 7 variables:
 #' \describe{
-#' \item{year} {Year of the data}
-#' \item{state} {State of the data}
-#' \item{sex} {Sex of the data}
-#' \item{CVE_GEO} {Geographical code of the state of the data}
-#' \item{age} {Age of the data}
-#' \item{population} {Estimated population by CONAPO}
-#' \item{deaths} {Estimated deaths by CONAPO}
+#' \item{year}{Year of the data}
+#' \item{state}{State of the data}
+#' \item{sex}{Sex of the data}
+#' \item{CVE_GEO}{Geographical code of the state of the data}
+#' \item{age}{Age of the data}
+#' \item{population}{Estimated population by CONAPO}
+#' \item{deaths}{Estimated deaths by CONAPO}
 #' }
 "df_mortrate_state_age_sex"
 

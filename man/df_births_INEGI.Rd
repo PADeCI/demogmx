@@ -7,14 +7,14 @@
 \format{
 A data frame with 3,564 rows and 8 variables:
 \describe{
-\item{year} {Year of the data}
-\item{state} {State where the births occurred}
-\item{sex} {Sex of the child}
-\item{CVE_GEO} {Geographical code of the state of occurrence}
-\item{births} {Number of births that occurred in that year, state and sex}
-\item{birth_prop} {Proportion of births in relation to the sum of both sexes}
-\item{population} {Number of people living in that year and state}
-\item{birth_rate} {Number of births divided by the population with the same year, state and sex.}
+\item{year}{Year of the data}
+\item{state}{State where the births occurred}
+\item{sex}{Sex of the child}
+\item{CVE_GEO}{Geographical code of the state of occurrence}
+\item{births}{Number of births that occurred in that year, state and sex}
+\item{birth_prop}{Proportion of births in relation to the sum of both sexes}
+\item{population}{Number of people living in that year and state}
+\item{birth_rate}{Number of births divided by the population with the same year, state and sex.}
 }
 }
 \source{

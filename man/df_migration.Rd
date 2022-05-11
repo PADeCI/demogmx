@@ -7,22 +7,21 @@
 \format{
 A data frame with 84,672 rows and 8 variables:
 \describe{
-\item{year} {Year of the data}
-\item{state} {State where the migration occurred}
-\item{CVE_GEO} {Geographical code of the state of occurrence}
-\item{sex} {Sex of the migrants}
-\item{age_group} {Age group to which belongs the data}
-\item{type} {Type of migration: Interstate, International or Total}
-\item{emigrants} {Number of emigrants}
-\item{immigrants} {Number of immigrants}
-\item{migratoin} {Net migration (immigrants - emigrants)}
-\item{em_rate} {emigration rate}
-\item{im_rate} {immigration rate}
+\item{year}{Year of the data}
+\item{state}{State where the migration occurred}
+\item{CVE_GEO}{Geographical code of the state of occurrence}
+\item{sex}{Sex of the migrants}
+\item{age_group}{Age group to which belongs the data}
+\item{type}{Type of migration: Interstate, International or Total}
+\item{emigrants}{Number of emigrants}
+\item{immigrants}{Number of immigrants}
+\item{migratoin}{Net migration (immigrants - emigrants)}
+\item{em_rate}{emigration rate}
+\item{im_rate}{immigration rate}
 }
 }
 \source{
-\url{ https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/81802225-00c4-49b4-ab49-a491334062b4,
- https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/3f9c8392-153d-4299-a027-9f1b179f6edf}
+\url{ https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/81802225-00c4-49b4-ab49-a491334062b4, https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050/resource/3f9c8392-153d-4299-a027-9f1b179f6edf}
 }
 \usage{
 df_migration

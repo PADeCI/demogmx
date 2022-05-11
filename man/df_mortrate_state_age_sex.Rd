@@ -7,13 +7,13 @@
 \format{
 A data frame with 882,420 rows and 7 variables:
 \describe{
-\item{year} {Year of the data}
-\item{state} {State of the data}
-\item{sex} {Sex of the data}
-\item{CVE_GEO} {Geographical code of the state of the data}
-\item{age} {Age of the data}
-\item{population} {Estimated population by CONAPO}
-\item{deaths} {Estimated deaths by CONAPO}
+\item{year}{Year of the data}
+\item{state}{State of the data}
+\item{sex}{Sex of the data}
+\item{CVE_GEO}{Geographical code of the state of the data}
+\item{age}{Age of the data}
+\item{population}{Estimated population by CONAPO}
+\item{deaths}{Estimated deaths by CONAPO}
 }
 }
 \usage{

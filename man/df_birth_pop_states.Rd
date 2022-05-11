@@ -7,11 +7,11 @@
 \format{
 A data frame with 2,673 rows and 5 variables:
 \describe{
-\item{year} {Year of the data}
-\item{state} {State where the births occurred}
-\item{CVE_GEO} {Geographical code of the state of occurrence}
-\item{population} {Number of people living in that year and state}
-\item{births} {Number of births that occurred in that year and state}
+\item{year}{Year of the data}
+\item{state}{State where the births occurred}
+\item{CVE_GEO}{Geographical code of the state of occurrence}
+\item{population}{Number of people living in that year and state}
+\item{births}{Number of births that occurred in that year and state}
 }
 }
 \source{

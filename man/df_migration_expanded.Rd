@@ -7,14 +7,14 @@
 \format{
 A data frame with 2,116,800 rows and 8 variables:
 \describe{
-\item{year} {Year of the data}
-\item{state} {State where the migration occurred}
-\item{age} {Age to which belongs the data}
-\item{CVE_GEO} {Geographical code of the state of occurrence}
-\item{sex} {Sex of the migrants}
-\item{emigrants} {Number of emigrants}
-\item{immigrants} {Number of immigrants}
-\item{type} {Type of migration: Interstate, International or Total}
+\item{year}{Year of the data}
+\item{state}{State where the migration occurred}
+\item{age}{Age to which belongs the data}
+\item{CVE_GEO}{Geographical code of the state of occurrence}
+\item{sex}{Sex of the migrants}
+\item{emigrants}{Number of emigrants}
+\item{immigrants}{Number of immigrants}
+\item{type}{Type of migration: Interstate, International or Total}
 }
 }
 \usage{
