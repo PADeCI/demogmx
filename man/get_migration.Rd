@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_migration.R
 \name{get_migration}
 \alias{get_migration}
-\title{Get migration}
+\title{Load migration data}
 \usage{
 get_migration(
   v_state = "National",

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_aging_rate.R
 \name{get_aging_rate}
 \alias{get_aging_rate}
-\title{Get aging rate}
+\title{Load aging rate data}
 \usage{
 get_aging_rate(
   v_state = "National",

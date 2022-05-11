@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_births.R
 \name{get_births_INEGI}
 \alias{get_births_INEGI}
-\title{Get births INEGI}
+\title{Load births data, disaggregated by sex, from 1985 to 2020.}
 \usage{
 get_births_INEGI(
   v_state = "National",

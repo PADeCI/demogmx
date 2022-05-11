@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_population.R
 \name{get_population}
 \alias{get_population}
-\title{Get population}
+\title{Load population data disaggregated by year, state, sex and age.}
 \usage{
 get_population(
   v_state = "National",

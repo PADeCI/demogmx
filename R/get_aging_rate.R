@@ -11,7 +11,7 @@
 ##************************************************************************
 
 
-#' Get aging rate
+#' Load aging rate data
 #'
 #' \code{get_aging_rate} is a function that allows the user to get a demographic
 #' dataset regarding the aging rate based on the given parameters.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_deaths.R
 \name{get_deaths}
 \alias{get_deaths}
-\title{Get death rate}
+\title{Load death data disaggregated by year, state, sex and age.}
 \usage{
 get_deaths(
   v_state = "National",

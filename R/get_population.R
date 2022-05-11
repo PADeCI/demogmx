@@ -12,7 +12,7 @@
 ##
 ##************************************************************************
 
-#' Get population
+#' Load population data disaggregated by year, state, sex and age.
 #'
 #' \code{get_population} is a function that allows the user to get a demographic
 #' dataset regarding population and population proportions based on the

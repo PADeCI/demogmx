@@ -10,7 +10,7 @@
 ##
 ##************************************************************************
 
-#' Get births
+#' Load births data, with projections from 1970 to 2050, without sex disaggregation.
 #'
 #' \code{get_births} is a function that allows the user to get a demographic
 #' dataset of the number and rate of births based on the given parameters.
@@ -81,7 +81,7 @@ get_births<- function(v_state     = "National",
 }
 
 
-#' Get births INEGI
+#' Load births data, disaggregated by sex, from 1985 to 2020.
 #'
 #' \code{get_births_INEGI} is a function that allows the user to get a
 #' demographic dataset of the number and rate of births based on the given

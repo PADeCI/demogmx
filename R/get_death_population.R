@@ -13,7 +13,7 @@
 ##************************************************************************
 
 
-#' Get death population
+#' Load population and death data, disaggregated by year, state, sex and age.
 #'
 #' \code{get_death_population} function that allows the user to get a
 #' demographic dataset of the population and deaths based on the given

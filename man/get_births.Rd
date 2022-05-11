@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_births.R
 \name{get_births}
 \alias{get_births}
-\title{Get births}
+\title{Load births data, with projections from 1970 to 2050, without sex disaggregation.}
 \usage{
 get_births(v_state = "National", v_year = 2021, year_groups = TRUE)
 }
