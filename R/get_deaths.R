@@ -13,7 +13,7 @@
 ##************************************************************************
 
 
-#' Get death rate
+#' Load death data disaggregated by year, state, sex and age.
 #'
 #' \code{get_deaths} is a function that allows the user to get a demographic
 #' dataset regarding deaths and death rates, based on the given paramaters.

@@ -156,7 +156,7 @@ df_migration_expanded <- df_migration_aux3 %>%
 #   arrange(age_grp, year, state, sex, type)
 
 # 09 Save data ------------------------------------------------------------
-save(df_migration_expanded, file = "data/df_migration_expanded.Rdata")
+save(df_migration_expanded, file = "data/df_migration_expanded.rda")
 
 # write.csv(df_migration_expanded, file = "data/df_migration_expanded.csv")
 

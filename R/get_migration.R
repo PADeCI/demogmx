@@ -10,7 +10,7 @@
 ##
 ##************************************************************************
 
-#' Get migration
+#' Load migration data
 #'
 #' \code{get_migration} is a function that allows the user to get a demographic
 #' dataset regarding migration based on the given parameters.

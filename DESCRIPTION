@@ -9,13 +9,15 @@ Authors@R:
              email = "fernando.alarid@cide.edu",
              comment = c(ORCID = "0000-0001-5076-1172")),
       person(given = "David",
-             family = "Garibay",
+             family = "Garibay-Treviño",
              role = "aut",
-             email = "david.garibay@cide.edu"))
-Maintainer: David Garibay <david.garibay@cide.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+             email = "david.garibay@cide.edu"),
+      person("PADeCI", role = "fnd")
+      )
+Maintainer: David Garibay-Treviño <david.garibay@cide.edu>
+Description: demogmx is a collection of functions that retrieve demographic
+    datasets of the mexican population.  
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
@@ -26,3 +28,5 @@ RoxygenNote: 7.1.2
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+URL: https://github.com/PADeCI/demogmx, https://padeci.github.io/demogmx/
+BugReports: https://github.com/PADeCI/demogmx/issues

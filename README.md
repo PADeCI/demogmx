@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# demogmx <img src="figs/img.png" align="right" alt="foo" width="100"/>
+# demogmx <img src="man/figures/logo.png" alt="foo" align="center" width="100"/>
 
 # VERSIÓN EN ESPAÑOL: *Datos demográficos de México*
 
-# Sobre este repositorio :open_book:
+## Sobre este repositorio :open_book:
 
 [PADeCI](https://padeci.org/) es un equipo de investigación
 interdisciplinario ubicado en el [CIDE Región
@@ -28,12 +28,12 @@ abre la oportunidad a que cualquier persona replique el proceso de
 limpieza y generación de datos hecho por PADeCI, siguiendo así los
 principios científicos de *transparencia* y *replicabilidad*.
 
-# Requisitos :computer:
+## Requisitos :computer:
 
 R version 4.1.2 (esta es la versión recomendada para evitar errores en
 el código, también conocidos como *bugs*).
 
-# Uso :inbox_tray:
+## Uso :inbox_tray:
 
 Cualquier persona puede replicar el trabajo de PADeCI, ya sea clonando
 este repositorio en su computadora o descargando archivos específicos.
@@ -43,7 +43,7 @@ la base de datos específica que se desea utilizar en formato raw, a
 continuación se presenta un ejemplo de cómo acceder a los datos usando
 este método.
 
-## Ejemplo de uso de los datos (extracción directa con url de GitHub desde R)
+### Ejemplo de uso de los datos (extracción directa con url de GitHub desde R)
 
 **1. Seleccionar la base de interés**
 
@@ -59,7 +59,7 @@ el formato .rda que es particular de R.
 
 <p align="center">
 
-<img src="tutorial_demogmx_1.png" alt="foo" width="700"/>
+<img src="man/figures/tutorial_demogmx_1.png" alt="foo" width="100%"/>
 
 </p>
 
@@ -90,7 +90,7 @@ View(df_nueva)
 A partir de este punto el usuario puede decidir qué hacer con los datos
 y realizar su propio análisis.
 
-# Descripción de las carpetas :card_index_dividers:
+## Descripción de las carpetas :card_index_dividers:
 
 **1. R:** En esta carpeta se ubican los códigos de las funciones para
 obtener las bases de datos filtradas con base en los parámetros
@@ -116,15 +116,22 @@ la base de migración al ejecutar `df_migration` desde la consola.
 Las bases de datos de esta carpeta contienen las siguientes variables:
 
 -   Variables demográfica
+
     -   Número de habitantes (población)  
     -   Número de nacimientos
     -   Número de muertes
     -   Número de inmigrantes/emigrantes
+
 -   Niveles de desagregación espacial
+
     -   Estatal
+
 -   Niveles de desagregación temporal
+
     -   Año de la(s) variable(s)
+
 -   Variables de características personales
+
     -   Sexo
     -   Edad
 
@@ -132,29 +139,29 @@ Las bases de datos de esta carpeta contienen las siguientes variables:
 datos y fichas técnicas sobre las bases de datos contenidas en este
 repositorio.
 
-# Cómo citar este respositorio :handshake:
+## Cómo citar este respositorio :handshake:
 
-# Autoras y autores :writing_hand:
+### Autoras y autores :writing_hand:
 
-| Name                     | Github                                     | Twitter                                      |
+| Nombre                   | Github                                     | Twitter                                      |
 |--------------------------|--------------------------------------------|----------------------------------------------|
 | Fernando Alarid-Escudero | [GitHub](https://github.com/feralaes)      | [Twitter](https://twitter.com/feralaes)      |
-| David Garibay            | [GitHub](https://github.com/du-gartre)     | [Twitter](https://twitter.com/du_garibay)    |
+| David Garibay-Treviño    | [GitHub](https://github.com/du-gartre)     | [Twitter](https://twitter.com/du_garibay)    |
 | Mariana Fernández        | [GitHub](https://github.com/marianafdz465) | [Twitter](https://twitter.com/marianafdz_97) |
 | Andrea Luviano           | [GitHub](https://github.com/AndreaLuviano) | [Twitter](https://twitter.com/AndreaLuviano) |
 | Regina Isabel Medina     | [GitHub](https://github.com/RMedina19)     | [Twitter](https://twitter.com/regi_medina)   |
 | Hirvin Díaz              | [GitHub](https://github.com/HirvinDiaz)    | [Twitter](https://twitter.com/HazaelDiaz93)  |
 
-# Licencia de uso :scroll:
+## Licencia de uso :scroll:
 
 El contenido de este repositorio debe utilizarse bajo las condiciones de
-la [licencia MIT](LICENSE).
+la [licencia MIT](https://en.wikipedia.org/wiki/MIT_License).
 
 ------------------------------------------------------------------------
 
 # ENGLISH VERSION: *Mexico’s demographic data*
 
-# About this repository :open_book:
+## About this repository :open_book:
 
 [PADeCI](https://padeci.org/) is an interdisciplinary research team
 based at [CIDE Región Centro](https://www.cide.edu/regioncentro/) in
@@ -173,11 +180,11 @@ the repository also opens the opportunity for anyone to replicate the
 process of data cleaning and generation carried out by PADeCI, following
 the scientific principles of *transparency* and *replicability*.
 
-# Requirements :computer:
+## Requirements :computer:
 
 R version 4.1.2 (version recommended to avoid potential bugs.)
 
-# Usage :inbox_tray:
+## Usage :inbox_tray:
 
 Any user can either clone this repository in its own computer or
 download specific files in order to replicate PADeCI’s job.It suffices
@@ -185,7 +192,7 @@ with using the URL of the raw format provided by GitHub of the data base
 of interest. A quick example of how to retrive data with the last method
 is shown below.
 
-## Use example (extracting data with GitHub’s URL from R)
+### Use example (extracting data with GitHub’s URL from R)
 
 **1. Select dataset of interest**
 
@@ -201,7 +208,7 @@ this repository have an .rda format.
 
 <p align="center">
 
-<img src="tutorial_demogmx_1.png" alt="foo" width="700"/>
+<img src="man/figures/tutorial_demogmx_1.png" alt="foo" width="100%"/>
 
 </p>
 
@@ -231,7 +238,7 @@ View(df_new)
 At this stage, the user can decide what to do with data and proceed with
 her own analysis.
 
-# Folders’ description :card_index_dividers:
+## Folders’ description :card_index_dividers:
 
 **1. R:** This folder stores the R scripts that stores functions needed
 for obtaining the filtered datasets based on parmaeters set by the user.
@@ -255,34 +262,42 @@ name. For instance, the migration dataset can be accesed by executing
 The datasets from this folder have the following variables:
 
 -   Demographic variables
+
     -   Number of inhabitants (population)
     -   Number of births
     -   Number of deaths
     -   Number of immigrants/emigrants
+
 -   Spatial dissagregation levels
+
     -   State
+
 -   Temporal dissagregation levels
+
     -   Year of the data
+
 -   Personal characteristic variables
+
     -   Sex
     -   Age
 
 **5. documents:** This folder contains the dictionaries and technical
 reports of the datasets.
 
-# How to cite this repository :handshake:
+## How to cite this repository :handshake:
 
-# Authors :writing_hand:
+### Authors :writing_hand:
 
-| Fernando Alarid-Escudero | [GitHub](https://github.com/feralaes)      | [Twitter](https://twitter.com/feralaes)      |
+| Name                     | Github                                     | Twitter                                      |
 |--------------------------|--------------------------------------------|----------------------------------------------|
-| David Garibay            | [GitHub](https://github.com/du-gartre)     | [Twitter](https://twitter.com/du_garibay)    |
+| Fernando Alarid-Escudero | [GitHub](https://github.com/feralaes)      | [Twitter](https://twitter.com/feralaes)      |
+| David Garibay-Treviño    | [GitHub](https://github.com/du-gartre)     | [Twitter](https://twitter.com/du_garibay)    |
 | Mariana Fernández        | [GitHub](https://github.com/marianafdz465) | [Twitter](https://twitter.com/marianafdz_97) |
 | Andrea Luviano           | [GitHub](https://github.com/AndreaLuviano) | [Twitter](https://twitter.com/AndreaLuviano) |
 | Regina Isabel Medina     | [GitHub](https://github.com/RMedina19)     | [Twitter](https://twitter.com/regi_medina)   |
 | Hirvin Díaz              | [GitHub](https://github.com/HirvinDiaz)    | [Twitter](https://twitter.com/HazaelDiaz93)  |
 
-# License :scroll:
+## License :scroll:
 
 This repository’s content must be used under the terms and conditions of
-the [MIT License](LICENSE)
+the [MIT License](https://en.wikipedia.org/wiki/MIT_License)

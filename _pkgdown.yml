@@ -1,0 +1,68 @@
+url: https://padeci.github.io/demogmx/
+
+template:
+  bootstrap: 5
+
+# template obtained from template_navbar()
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right:
+    - github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/PADeCI/demogmx/
+      text: Github repo
+    intro:
+      text: Get started
+      href: articles/demogmx.html
+    articles:
+      text: Articles
+      menu:
+      - text: Shiny app
+        href: articles/demogmx_shiny.html
+      - text: How to use the functions?
+        href: articles/get_demographic_data.html
+
+authors:
+  Fernando Alarid-Escudero:
+    href: https://github.com/feralaes
+  David Garibay-Treviño:
+    href: https://github.com/du-gartre
+  PADeCI:
+    href: https://padeci.org
+    html: <img src= 'man/figures/padeci_logo.png' alt='PADeCI' width='72' />
+
+reference:
+  - title: Get demographic data
+    desc: Obtain demographic datasets based on user specifications.
+    contents:
+    - get_aging_rate
+    - get_births
+    - get_births_INEGI
+    - get_deaths
+    - get_death_population
+    - get_migration
+    - get_population
+  - title: Demographic datasets
+    desc: These are the base datasets where the functions retrieve their information.
+    contents:
+    - df_birth_pop_states
+    - df_births_INEGI
+    - df_mortrate_state_age_sex
+    - df_migration
+    - df_migration_expanded
+

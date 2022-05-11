@@ -1,5 +1,5 @@
 ---
-title: "Get demographic data"
+title: "How to use the functions?"
 author: "PADeCI"
 date: "April 2022"
 output: html_document
@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This document demonstrates the use of the functions contained in the `demogmx` package. This package includes functions to obtain demographic information regarding births, population, migration (immigration and emigration), mortality, and aging rate in Mexico. All these functions are very similar in the way they work, and once you become familiar with using one, using the rest becomes very intuitive.
+This section demonstrates the use of the functions contained in the `demogmx` package. This package includes functions to obtain demographic information regarding births, population, migration (immigration and emigration), mortality, and aging rate in Mexico. All these functions are very similar in the way they work, and once you become familiar with using one, using the rest becomes very intuitive.
 
 To start, first we load the package:
 
