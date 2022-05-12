@@ -29,10 +29,12 @@
 #'
 #' @examples
 #' get_births(v_state = c("Aguascalientes", "Campeche"),
-#' v_year = c(1995, 2021, 2046), year_groups = TRUE)
+#'            v_year = c(1995, 2021, 2046),
+#'            year_groups = TRUE)
 #'
-#' get_births(v_state = "National",  v_year = c(1985, 2005, 2046),
-#' age_groups= FALSE)
+#' get_births(v_state = "National",
+#'            v_year = c(1985, 2005, 2046),
+#'            year_groups= FALSE)
 #'
 #' @export
 get_births<- function(v_state     = "National",

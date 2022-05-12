@@ -48,13 +48,11 @@ get_migration(v_state = c("Yucatan", "Sonora"),
               v_type = "International",
               age_groups = TRUE)
 
-
 get_migration(v_state = "Mexico City",
               v_year = c(2000, 2010),
               v_sex = "Female",
               v_age = c(0, 15, 35, 45, 75),
               v_type = c("Interstate", "International", "Total"),
               age_groups = FALSE)
-
 
 }

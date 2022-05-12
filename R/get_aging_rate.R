@@ -34,8 +34,11 @@
 #' @export
 #'
 #' @examples
-#' df_aging <- get_aging_rate(v_state = "National", v_year = seq(1985, 2020),
-#' v_sex = "Total", v_age = c(0, 89), age_groups = T)
+#' get_aging_rate(v_state = "National",
+#'                v_year = seq(1991, 1995),
+#'                v_sex = "Total",
+#'                v_age = c(0, 89))
+#'
 get_aging_rate <- function(v_state    = "National",
                            v_year     = 2020,
                            v_sex      = c("Female", "Male", "Total"),
