@@ -3,21 +3,21 @@ Type: Package
 Title: Demographic data for Mexico
 Version: 0.1.0
 Authors@R: 
-    c(person(given = "Fernando",
-             family = "Alarid-Escudero",
+    c(person(given = "David",
+             family = "Garibay-Treviño",
              role = c("aut", "cre"),
+             email = "david.garibay@cide.edu"),
+      person(given = "Fernando",
+             family = "Alarid-Escudero",
+             role = "aut",
              email = "fernando.alarid@cide.edu",
              comment = c(ORCID = "0000-0001-5076-1172")),
-      person(given = "David",
-             family = "Garibay-Treviño",
-             role = "aut",
-             email = "david.garibay@cide.edu"),
       person("PADeCI", role = "fnd")
       )
 Maintainer: David Garibay-Treviño <david.garibay@cide.edu>
 Description: demogmx is a collection of functions that retrieve demographic
     datasets of the mexican population.  
-License: MIT + file LICENSE
+License: BSD + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:

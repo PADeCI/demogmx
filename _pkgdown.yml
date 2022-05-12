@@ -38,10 +38,10 @@ navbar:
         href: articles/get_demographic_data.html
 
 authors:
-  Fernando Alarid-Escudero:
-    href: https://github.com/feralaes
   David Garibay-Treviño:
     href: https://github.com/du-gartre
+  Fernando Alarid-Escudero:
+    href: https://github.com/feralaes
   PADeCI:
     href: https://padeci.org
     html: <img src= 'man/figures/padeci_logo.png' alt='PADeCI' width='72' />

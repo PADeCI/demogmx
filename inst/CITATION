@@ -1,18 +1,13 @@
 citHeader("To cite demogmx in publications use:")
 
 citEntry(
-  entry    = "Article",
-  title    = "Mexico's demographic open data",
-  author   = personList(as.person("Fernando Alarid-Escudero"),
-                   as.person("David Garibay-Treviño")),
-  journal  = "Journal of Statistical Software",
+  entry    = "Misc",
+  title    = "demogmx",
+  author   = personList(
+                as.person("David Garibay-Treviño"),
+                as.person("Fernando Alarid-Escudero")
+                ),
   year     = "2022",
-  volume   = "40",
-  number   = "33",
-  pages    = "1--36",
-  url      = "https://www.jstatsoft.org/index",
-  textVersion = paste("Fernando Alarid-Escudero, David Garibay-Treviño (2022).",
-        "Mexico's demographic open data",
-        "Journal of Statistical Software, 40(33), 1-36.",
-        "URL https://www.jstatsoft.org/index.")
+  url      = "https://padeci.github.io/demogmx/",
+  textVersion = "Mexico's demographic open data"
 )
