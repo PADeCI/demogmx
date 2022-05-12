@@ -22,3 +22,6 @@ build_favicon(pkg = ".", overwrite = TRUE)
 
 # Build home page
 pkgdown::build_home()
+
+
+library(demogmx)

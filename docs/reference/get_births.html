@@ -93,7 +93,8 @@ the number of births and the birth rate in each row,</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">get_births</span><span class="op">(</span>v_state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Aguascalientes"</span>, <span class="st">"Campeche"</span><span class="op">)</span>,</span>
-<span class="r-in">v_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1995</span>, <span class="fl">2021</span>, <span class="fl">2046</span><span class="op">)</span>, year_groups <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in">           v_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1995</span>, <span class="fl">2021</span>, <span class="fl">2046</span><span class="op">)</span>,</span>
+<span class="r-in">           year_groups <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 x 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   year_group  state          CVE_GEO births birth_rate</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -104,9 +105,15 @@ the number of births and the birth rate in each row,</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> (2046,Inf]  Aguascalientes       1  <span style="text-decoration: underline;">76</span>754     0.010<span style="text-decoration: underline;">7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> (2046,Inf]  Campeche             4  <span style="text-decoration: underline;">68</span>578     0.012<span style="text-decoration: underline;">4</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">get_births</span><span class="op">(</span>v_state <span class="op">=</span> <span class="st">"National"</span>,  v_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1985</span>, <span class="fl">2005</span>, <span class="fl">2046</span><span class="op">)</span>,</span>
-<span class="r-in">age_groups<span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_births(v_state = "National", v_year = c(1985, 2005, 2046),     age_groups = FALSE):</span> unused argument (age_groups = FALSE)</span>
+<span class="r-in"><span class="fu">get_births</span><span class="op">(</span>v_state <span class="op">=</span> <span class="st">"National"</span>,</span>
+<span class="r-in">           v_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1985</span>, <span class="fl">2005</span>, <span class="fl">2046</span><span class="op">)</span>,</span>
+<span class="r-in">           year_groups<span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 x 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    year state    CVE_GEO  births birth_rate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">1</span>985 National       0 2<span style="text-decoration: underline;">392</span>768     0.031<span style="text-decoration: underline;">8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>005 National       0 2<span style="text-decoration: underline;">280</span>834     0.021<span style="text-decoration: underline;">7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>046 National       0 1<span style="text-decoration: underline;">735</span>451     0.011<span style="text-decoration: underline;">8</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

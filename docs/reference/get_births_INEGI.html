@@ -106,8 +106,30 @@ births in that year), and the birth rate.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">get_births_INEGI</span><span class="op">(</span>v_state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Aguascalientes"</span>, <span class="st">"Campeche"</span><span class="op">)</span>,</span>
+<span class="r-in">                 v_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1995</span>, <span class="fl">2005</span>, <span class="fl">2015</span><span class="op">)</span>,</span>
+<span class="r-in">                 v_sex <span class="op">=</span> <span class="st">"Male"</span>,</span>
+<span class="r-in">                 year_groups <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 x 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   year_group  state          CVE_GEO sex   births birth_prop birth_rate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> [1995,2005] Aguascalientes       1 Male  <span style="text-decoration: underline;">142</span>856      0.508     0.027<span style="text-decoration: underline;">8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> [1995,2005] Campeche             4 Male  <span style="text-decoration: underline;">101</span>063      0.505     0.026<span style="text-decoration: underline;">2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> (2005,2015] Aguascalientes       1 Male  <span style="text-decoration: underline;">132</span>207      0.509     0.022<span style="text-decoration: underline;">5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> (2005,2015] Campeche             4 Male   <span style="text-decoration: underline;">93</span>836      0.506     0.022<span style="text-decoration: underline;">5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> (2015,Inf]  Aguascalientes       1 Male   <span style="text-decoration: underline;">62</span>873      0.509     0.018<span style="text-decoration: underline;">4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> (2015,Inf]  Campeche             4 Male   <span style="text-decoration: underline;">38</span>489      0.508     0.016<span style="text-decoration: underline;">3</span></span>
 <span class="r-in"></span>
+<span class="r-in"><span class="fu">get_births_INEGI</span><span class="op">(</span>v_state <span class="op">=</span> <span class="st">"National"</span>,</span>
+<span class="r-in">                 v_year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1985</span>, <span class="fl">2005</span>, <span class="fl">2015</span><span class="op">)</span>,</span>
+<span class="r-in">                 v_sex <span class="op">=</span> <span class="st">"Total"</span>,</span>
+<span class="r-in">                 year_groups <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 x 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    year state    CVE_GEO sex    births birth_prop birth_rate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">1</span>985 National       0 Total 2<span style="text-decoration: underline;">634</span>371          1     0.035<span style="text-decoration: underline;">0</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>005 National       0 Total 2<span style="text-decoration: underline;">567</span>313          1     0.024<span style="text-decoration: underline;">5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>015 National       0 Total 2<span style="text-decoration: underline;">353</span>555          1     0.019<span style="text-decoration: underline;">5</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
