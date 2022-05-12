@@ -30,12 +30,17 @@
 #' @return A demographic dataset based on the selected parameters
 #'
 #' @examples
-#' get_deaths(v_state =  "Chiapas", v_year = 2015, v_sex = "Total",
-#' v_age = c(0, 15, 45, 75), age_groups = FALSE)
+#' get_deaths(v_state =  "Chiapas",
+#'            v_year = 2015,
+#'            v_sex = "Total",
+#'            v_age = c(0, 15, 45, 75),
+#'            age_groups = FALSE)
 #'
 #' get_deaths(v_state = c("Aguascalientes", "Campeche"),
-#' v_year = c(2010, 2021), v_sex = "Male", v_age = c(0, 15, 45, 75),
-#' age_groups = TRUE)
+#'            v_year = c(2010, 2021),
+#'            v_sex = "Male",
+#'            v_age = c(0, 15, 45, 75),
+#'            age_groups = TRUE)
 #'
 #' @export
 get_deaths <- function(v_state   = "National",

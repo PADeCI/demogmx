@@ -36,9 +36,13 @@ parameters.
 }
 \examples{
 get_death_population(v_state = c("Aguascalientes", "Campeche"),
-v_year = c(2021, 2046), v_sex = c("Female", "Total"),  age_groups = TRUE)
+                     v_year = c(2021, 2046),
+                     v_sex = c("Female", "Total"),
+                     age_groups = TRUE)
 
-get_death_population(v_state = "National",  v_year = c(2021, 2046, 2050),
-v_sex = "Total", age_groups= FALSE)
+get_death_population(v_state = "National",
+                     v_year = c(2021, 2046, 2050),
+                     v_sex = "Total",
+                     age_groups= FALSE)
 
 }
