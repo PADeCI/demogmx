@@ -36,6 +36,14 @@ parameters. This function returns the recorded births by INEGI and allows to
 specify the sex.
 }
 \examples{
+get_births_INEGI(v_state = c("Aguascalientes", "Campeche"),
+                 v_year = c(1995, 2005, 2015),
+                 v_sex = "Male",
+                 year_groups = TRUE)
 
+get_births_INEGI(v_state = "National",
+                 v_year = c(1985, 2005, 2015),
+                 v_sex = "Total",
+                 year_groups = FALSE)
 
 }

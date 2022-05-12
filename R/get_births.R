@@ -105,11 +105,15 @@ get_births<- function(v_state     = "National",
 #' births in that year), and the birth rate.
 #'
 #' @examples
-# get_births_INEGI(v_state = c("Aguascalientes", "Campeche"),
-# v_year = c(1995, 2005, 2015), v_sex = "Male", year_groups = TRUE)
+#' get_births_INEGI(v_state = c("Aguascalientes", "Campeche"),
+#'                  v_year = c(1995, 2005, 2015),
+#'                  v_sex = "Male",
+#'                  year_groups = TRUE)
 #'
-# get_births_INEGI(v_state = "National",  v_year = c(1985, 2005, 2015),
-# v_sex = "Total", year_groups = FALSE)
+#' get_births_INEGI(v_state = "National",
+#'                  v_year = c(1985, 2005, 2015),
+#'                  v_sex = "Total",
+#'                  year_groups = FALSE)
 #'
 #' @export
 get_births_INEGI <- function(v_state     = "National",
