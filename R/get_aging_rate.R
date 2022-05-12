@@ -23,8 +23,6 @@
 #' @param v_sex Character vector selecting sex. Options: Female, Male and Total.
 #' @param v_age Numeric vector that specifies the age(s) to return. Must have
 #' values between 0 and 89.
-#' @param age_groups Logical. Specifies whether to aggregate the output by
-#' age groups.
 #'
 #' @return A demographic dataset containing the selected year
 #' (group, when \code{year_groups = TRUE}), state, state code (CVE_GEO), sex,

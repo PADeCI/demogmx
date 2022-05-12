@@ -12,8 +12,7 @@ test_that("correct inputs are valid", {
   expect_silent(get_aging_rate(v_state = c("National", "Mexico City"),
                                v_year = 1999,
                                v_sex = "Total",
-                               v_age = c(10, 25, 55, 75),
-                               age_groups = TRUE))
+                               v_age = c(10, 25, 55, 75)))
 })
 
 
@@ -23,8 +22,7 @@ test_that("state inputs are correct", {
   expect_error(get_aging_rate(v_state    = "national", #National <- correct
                               v_year     = 1999,
                               v_sex      = "Total",
-                              v_age      = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age      = c(10, 25, 55, 75)),
                regexp = paste('v_state must be a character element or vector containing at least one of the next names:',
                               paste(unique(df_mortrate_state_age_sex$state), collapse = ", "),
                               sep = "\n\n"))
@@ -33,8 +31,7 @@ test_that("state inputs are correct", {
   expect_error(get_aging_rate(v_state = c("National", "Ags"), # Aguascalientes
                               v_year = 1999,
                               v_sex = "Total",
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = paste('v_state must be a character element or vector containing at least one of the next names:',
                               paste(unique(df_mortrate_state_age_sex$state), collapse = ", "),
                               sep = "\n\n"))
@@ -43,8 +40,7 @@ test_that("state inputs are correct", {
   expect_error(get_aging_rate(v_state = 65, # <- Numeric
                               v_year = 1999,
                               v_sex = "Total",
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = paste('v_state must be a character element or vector containing at least one of the next names:',
                               paste(unique(df_mortrate_state_age_sex$state), collapse = ", "),
                               sep = "\n\n"))
@@ -53,8 +49,7 @@ test_that("state inputs are correct", {
   expect_error(get_aging_rate(v_state = c("national", "Ags"), # Aguascalientes
                               v_year = 1999,
                               v_sex = "Total",
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = paste('v_state must be a character element or vector containing at least one of the next names:',
                               paste(unique(df_mortrate_state_age_sex$state), collapse = ", "),
                               sep = "\n\n"))
@@ -67,31 +62,27 @@ test_that("year inputs are correct", {
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = 1905,
                               v_sex = "Total",
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = "v_year must be a integer value or vector with values between 1985 and 2020")
 
   # Not an integer
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = 1985.6,
                               v_sex = "Total",
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = "v_year must be a integer value or vector with values between 1985 and 2020")
 
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = c(2000, 2010.6),
                               v_sex = "Total",
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = "v_year must be a integer value or vector with values between 1985 and 2020")
 
   # Not a number
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = "aa",
                               v_sex = "Total",
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = "v_year must be a integer value or vector with values between 1985 and 2020")
 })
 
@@ -103,24 +94,21 @@ test_that("sex inputs are correct", {
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = c(2000, 2010, 2020),
                               v_sex = "Tot",
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = "v_sex must be a character element or vector containing at least one of the next names: 'Female', 'Male', 'Total'")
 
   # Not a character
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = c(2000, 2010, 2020),
                               v_sex = 55,
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = "v_sex must be a character element or vector containing at least one of the next names: 'Female', 'Male', 'Total'")
 
   # Multiple errors
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = c(2000, 2010, 2020),
                               v_sex = c(55, "Fem"),
-                              v_age = c(10, 25, 55, 75),
-                              age_groups = TRUE),
+                              v_age = c(10, 25, 55, 75)),
                regexp = "v_sex must be a character element or vector containing at least one of the next names: 'Female', 'Male', 'Total'")
 })
 
@@ -131,54 +119,30 @@ test_that("Age inputs are correct", {
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = c(2000, 2010, 2020),
                               v_sex = "Total",
-                              v_age = 10.6,
-                              age_groups = TRUE),
+                              v_age = 10.6),
                regexp = "v_age must be a integer value or vector with values between 0 and 89")
 
   # Age inputs out of bounds
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = c(2000, 2010, 2020),
                               v_sex = "Total",
-                              v_age = -6,
-                              age_groups = TRUE),
+                              v_age = -6),
                regexp = "v_age must be a integer value or vector with values between 0 and 89")
 
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = c(2000, 2010, 2020),
                               v_sex = "Total",
-                              v_age = 120,
-                              age_groups = TRUE),
+                              v_age = 120),
                regexp = "v_age must be a integer value or vector with values between 0 and 89")
 
   # Multiple errors
   expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
                               v_year = c(2000, 2010, 2020),
                               v_sex = "Total",
-                              v_age = c(-6, 15.6),
-                              age_groups = TRUE),
+                              v_age = c(-6, 15.6)),
                regexp = "v_age must be a integer value or vector with values between 0 and 89")
 })
 
-
-### Age groups inputs ------------------------------------------------------
-test_that("age groups are correct", {
-  # age groups is not a logical variable
-  expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
-                              v_year = c(2000, 2010, 2020),
-                              v_sex = "Total",
-                              v_age = seq(0, 15),
-                              age_groups = 55),
-               regexp = "age_groups must be a logical value (TRUE / FALSE)",
-               fixed = TRUE)
-
-  # Length of age_groups greater than one
-  expect_error(get_aging_rate(v_state = c("National", "Aguascalientes"),
-                                v_year = c(2000, 2010, 2020),
-                                v_sex = "Total",
-                                v_age = seq(0, 15),
-                                age_groups = c(TRUE, FALSE)))
-
-})
 
 ## Correct outputs ---------------------------------------------------------
 ### All possible vars -----------------------------------------------------
@@ -188,8 +152,9 @@ test_that("the output is correct when all the available vars are selected", {
   expect_silent(get_aging_rate(v_state    = unique(df_births_INEGI$state),
                                v_year     = seq(from = 1985, to = 2020, by = 1),
                                v_sex      = unique(df_mortrate_state_age_sex$sex),
-                               v_age      = seq(from = 0, to = 89, by = 1),
-                               age_groups = FALSE))
+                               v_age      = seq(from = 0, to = 89, by = 1)
+                               )
+                )
 })
 
 
@@ -199,8 +164,8 @@ test_that("the ungrouped output has the correct dimensions", {
   df_ar <- get_aging_rate(v_state = c("Guerrero", "Mexico City"),
                           v_year = seq(from = 1985, to = 2020, by = 1),
                           v_sex = unique(df_mortrate_state_age_sex$sex),
-                          v_age = seq(from = 0, to = 89, by = 10),
-                          age_groups = FALSE)
+                          v_age = seq(from = 0, to = 89, by = 10)
+                          )
 
   years  <- 36
   states <- 2
@@ -214,8 +179,7 @@ test_that("the ungrouped output has the correct dimensions", {
   df_ar <- get_aging_rate(v_state = c("Guerrero", "Mexico City"),
                           v_year = seq(from = 1985, to = 2020, by = 1),
                           v_sex = unique(df_mortrate_state_age_sex$sex),
-                          v_age = seq(from = 0, to = 89, by = 10),
-                          age_groups = TRUE)
+                          v_age = seq(from = 0, to = 89, by = 10))
 
   years_grp  <- 36
   states_grp <- 2
@@ -229,8 +193,7 @@ test_that("the ungrouped output has the correct dimensions", {
   df_ar <- get_aging_rate(v_state = c("Guerrero", "Mexico City"),
                           v_year = seq(from = 1985, to = 2020, by = 1),
                           v_sex = "Male",
-                          v_age = seq(from = 0, to = 89, by = 10),
-                          age_groups = TRUE)
+                          v_age = seq(from = 0, to = 89, by = 10))
 
   sexes <- 1
   size <- years*states*sexes*ages
@@ -241,8 +204,7 @@ test_that("the ungrouped output has the correct dimensions", {
   df_ar <- get_aging_rate(v_state = c("Guerrero", "Mexico City"),
                           v_year = 2010,
                           v_sex = "Male",
-                          v_age = seq(from = 0, to = 89, by = 10),
-                          age_groups = TRUE)
+                          v_age = seq(from = 0, to = 89, by = 10))
 
   years <- 1
   sexes <- 1
@@ -254,8 +216,7 @@ test_that("the ungrouped output has the correct dimensions", {
   df_ar <- get_aging_rate(v_state = c("Guerrero", "Mexico City"),
                           v_year = 2010,
                           v_sex = "Male",
-                          v_age = 45,
-                          age_groups = TRUE)
+                          v_age = 45)
 
   years <- 1
   sexes <- 1

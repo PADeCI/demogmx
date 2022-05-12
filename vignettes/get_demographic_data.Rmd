@@ -257,8 +257,7 @@ Below you will find some examples of how this function can be used as well as it
 get_aging_rate(v_state = "National",
                v_year = seq(2000, 2010),
                v_sex = "Total",
-               v_age = 47, 
-               age_groups = FALSE)
+               v_age = 47)
 ```
 
 ```{r}
@@ -266,8 +265,7 @@ get_aging_rate(v_state = "National",
 get_aging_rate(v_state = "National",
                v_year = seq(2000, 2010),
                v_sex = "Total",
-               v_age = 47, 
-               age_groups = TRUE)
+               v_age = 47)
 ```
 
 **NOTA**: creo que especifqué mal la función the `get_aging_rate` cuando la edad es cero.
