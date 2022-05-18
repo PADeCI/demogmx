@@ -46,7 +46,7 @@ get_death_population <- function( v_state = "National",
                                   v_year   = "2021",
                                   v_sex    = "Total",
                                   v_age    = c(0,5,15,25,45, 55,65,70),
-                                  age_groups = TRUE) {
+                                  age_groups = FALSE) {
 
   # Sanity Checks -----------------------------------------------------------
   # Check if selected state(s) is(are) part of the available options set
@@ -75,8 +75,7 @@ get_death_population <- function( v_state = "National",
   df_mort_outcome <- df_mortrate_state_age_sex %>%
     filter(state %in% v_state,
            year %in% v_year,
-           sex %in% v_sex) %>%
-    ungroup()
+           sex %in% v_sex)
 
   if (age_groups) {
     df_outcome <- df_mort_outcome %>%
@@ -86,7 +85,8 @@ get_death_population <- function( v_state = "National",
       # group_by(year, state, CVE_GEO, sex, age_group) %>%
       group_by(year, state, CVE_GEO, sex, age_group) %>%
       summarise(population = sum(population),
-                deaths     = sum(deaths)) %>%
+                deaths     = sum(deaths),
+                death_rate = sum(deaths)/sum(population)) %>%
       ungroup()
 
   } else if (age_groups == FALSE) {

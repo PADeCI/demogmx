@@ -16,10 +16,10 @@
 #' Load death data disaggregated by year, state, sex and age.
 #'
 #' \code{get_deaths} is a function that allows the user to get a demographic
-#' dataset regarding deaths and death rates, based on the given paramaters.
+#' dataset containing deaths and death rates, based on the given paramaters.
 #'
 #' @param v_state Character vector specifying the state(s) that the function
-#' will return
+#' will return.
 #' @param v_year Numeric vector that specifies the year(s) to return. Must have
 #' numbers between 1970 and 2050.
 #' @param v_sex Character vector that selects sex. Options: Female, Male and
@@ -47,7 +47,7 @@ get_deaths <- function(v_state   = "National",
                        v_year     = 2021,
                        v_sex      = "Total",
                        v_age      = c(0,5,15,25,45, 55,65,70),
-                       age_groups = TRUE) {
+                       age_groups = FALSE) {
 
   # Execute auxiliary function ----------------------------------------------
   df_death_aux <- get_death_population(v_state   = v_state,
@@ -58,7 +58,6 @@ get_deaths <- function(v_state   = "National",
 
   # Obtain death rate and remove population column --------------------------
   df_death <-  df_death_aux %>%
-    mutate(death_rate = deaths / population) %>%
     select(-population)
 
   return(df_death)

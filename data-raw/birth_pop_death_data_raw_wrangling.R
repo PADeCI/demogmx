@@ -334,7 +334,7 @@ df_mortrate_state_age_sex <- df_pop_state_age_sex_1 %>%
             by = c("year", "state", "CVE_GEO", "age", "sex")) %>%
   filter(year <= 2050) %>%
   select(year, state, CVE_GEO, age, sex, population, deaths) %>%
-  mutate(mort_rate = deaths/population)
+  mutate(death_rate = deaths/population)
 
 ## 05.02 Save data --------------------------------------------------------
 save(df_mortrate_state_age_sex, file = "data/df_mortrate_state_age_sex.rda")

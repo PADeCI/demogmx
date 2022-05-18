@@ -14,7 +14,7 @@ get_deaths(
 }
 \arguments{
 \item{v_state}{Character vector specifying the state(s) that the function
-will return}
+will return.}
 
 \item{v_year}{Numeric vector that specifies the year(s) to return. Must have
 numbers between 1970 and 2050.}
@@ -31,7 +31,7 @@ A demographic dataset based on the selected parameters
 }
 \description{
 \code{get_deaths} is a function that allows the user to get a demographic
-dataset regarding deaths and death rates, based on the given paramaters.
+dataset containing deaths and death rates, based on the given paramaters.
 }
 \examples{
 get_deaths(v_state =  "Chiapas",
