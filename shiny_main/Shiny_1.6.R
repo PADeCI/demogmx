@@ -189,7 +189,7 @@ ui <- navbarPage(
                sliderInput(inputId = "sel_year_aging",
                            label = "Year",
                            min = 1985, max = 2020,
-                           value = 2005,
+                           value = c(1985,2000),
                            step = 1,
                            ticks = TRUE,
                            sep = ""),
@@ -208,16 +208,21 @@ ui <- navbarPage(
                            ticks = TRUE,
                            dragRange = TRUE),
                h3(actionButton(inputId = "button_aging_age",
-                               label = "Get aging population by age",
+                               label = "Get aging population",
                                class = "btn-primary"),
                   align = "center"),
                h3(actionButton(inputId = "button_aging_rate",
-                               label = "Get aging rate by age",
+                               label = "Get aging rate",
                                class = "btn-primary"),
                   align = "center"),
                h3(downloadButton(outputId = "download_aging_data",
                                  label = "Download data"),
-                  align = "center")
+                  align = "center"),
+
+               br(),
+               h6("NOTE: - The year shown in the graphs is the corresponds to the maximum value of the slider"),
+               h6("      - The downloaded data includes all the years selected in the slider")
+
              ),
              mainPanel(
                h2(textOutput("txt_aging_age"),
@@ -2676,14 +2681,24 @@ server <- function(input, output, session) {
 
   ## Aging rate -----------------------------------------------------------
   ### Reactive objects ----------------------------------------------------
-  # Filtered dataset
+  # Dataset for plotting
   df_aging_server <- reactive({
     get_aging_rate(v_state = input$sel_state_aging,
-                   v_year = input$sel_year_aging,
+                   v_year = input$sel_year_aging[2],
                    v_sex = input$sel_sex_aging,
                    v_age = seq(input$sel_age_aging[1],
                                input$sel_age_aging[2])
                    )
+  })
+  # Dataset for downloading
+  df_aging_download <- reactive({
+    get_aging_rate(v_state = input$sel_state_aging,
+                   v_year = seq(input$sel_year_aging[1],
+                                input$sel_year_aging[2]),
+                   v_sex = input$sel_sex_aging,
+                   v_age = seq(input$sel_age_aging[1],
+                               input$sel_age_aging[2])
+    )
   })
   # To establish minor and major breaks in graphs's x-axis
   v_minor_breaks_aging <- reactive({
@@ -2758,7 +2773,7 @@ server <- function(input, output, session) {
   output$download_aging_data <- downloadHandler(
     filename = "aging_pop_data.csv",
     content = function(file) {
-      write.csv(x = df_aging_server(), file = file, row.names = FALSE)
+      write.csv(x = df_aging_download(), file = file, row.names = FALSE)
     }
   )
 
