@@ -5,7 +5,7 @@
 \alias{df_mortrate_state_age_sex}
 \title{Population and deaths data of Mexico, from 1970 to 2050.}
 \format{
-A data frame with 882,420 rows and 7 variables:
+A data frame with 882,090 rows and 7 variables:
 \describe{
 \item{year}{Year of the data}
 \item{state}{State of the data}

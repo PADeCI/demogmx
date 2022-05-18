@@ -94,7 +94,7 @@
 #' between 1970 and 2050. These estimations are disaggregated by year, state
 #' and sex
 #'
-#' @format A data frame with 882,420 rows and 7 variables:
+#' @format A data frame with 882,090 rows and 7 variables:
 #' \describe{
 #' \item{year}{Year of the data}
 #' \item{state}{State of the data}
