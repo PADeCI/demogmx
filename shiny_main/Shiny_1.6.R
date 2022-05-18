@@ -90,16 +90,23 @@ ui <- navbarPage(
            sidebarLayout(
              sidebarPanel(
                style = "position:fixed; width:33%;",
-               radioButtons(inputId = "mig_options_A",
-                            label = "Select an option",
-                            choices = list("International migration" = "International",
-                                           "Interstate migration" = "Interstate",
-                                           "Total migration" = "Total",
-                                           "Download data" = "download_mig_data"),
-                            selected = character(0),
-                            inline = FALSE),
-               uiOutput("ui_mig_options_B"),
-               uiOutput("ui_mig_options_C")
+               fluidRow(
+                 column(width = 6,
+                        radioButtons(inputId = "mig_options_A",
+                                     label = "Select an option",
+                                     choices = list("International migration" = "International",
+                                                    "Interstate migration" = "Interstate",
+                                                    "Total migration" = "Total",
+                                                    "Download data" = "download_mig_data"),
+                                     selected = character(0),
+                                     inline = FALSE)
+                        ),
+                 column(width = 6,
+                        uiOutput("ui_mig_options_B")
+                        )
+               ),
+               uiOutput("ui_mig_options_C"),
+               uiOutput("ui_mig_options_D")
              ),
              mainPanel(
                # Number
@@ -220,8 +227,9 @@ ui <- navbarPage(
                   align = "center"),
 
                br(),
-               h6("NOTE: - The year shown in the graphs is the corresponds to the maximum value of the slider"),
-               h6("      - The downloaded data includes all the years selected in the slider")
+               h6("NOTES:"),
+               h6("- The year shown in the graphs is the corresponds to the maximum value of the slider"),
+               h6("- The downloaded data includes all the years selected in the slider")
 
              ),
              mainPanel(
@@ -463,10 +471,200 @@ server <- function(input, output, session) {
     if (is.null(input$mig_options_A)) {
       return(NULL)
     }
-    else if (input$mig_options_A == "download_mig_data") { # Download data
+    else if (input$mig_options_A == "download_mig_data") {
+      return(NULL)
+    }
+    else { # New set of options for plotting
+      radioButtons(inputId = "mig_options_B",
+                   label = "Select a graph",
+                   choices = c("By year", "By age"),
+                   selected = character(0),
+                   inline = FALSE)
+    }
+  })
+
+  # Third set of inputs (Select state, year, age, sex, and go! buttons)
+  output$ui_mig_options_C <- renderUI({
+
+    if (is.null(input$mig_options_B)) {
+      return(NULL)
+    }
+    else if (input$mig_options_A == "download_mig_data") {
+      return(NULL)
+    }
+    else if (input$mig_options_B == "By year") {
 
       tagList(
+        selectInput(inputId = "sel_state_mig",
+                    label = "State(s)",
+                    choices = unique(df_birth_pop_states$state),
+                    selected = "National",
+                    multiple = TRUE,
+                    selectize = TRUE),
 
+        sliderInput(inputId = "sel_year_mig",
+                    label = "Year range",
+                    value = c(1990, 2010),
+                    min = 1970,
+                    max = 2050,
+                    step = 1,
+                    ticks = T,
+                    sep = ""),
+
+        selectInput(inputId = "sel_sex_mig",
+                    label = "Sex",
+                    choices = c("Female", "Male", "Total"),
+                    selected = "Total",
+                    multiple = TRUE,
+                    selectize = TRUE),
+
+        fluidRow(style = "margin-top:-2em;",
+          column(width = 3,
+                 h4("Number:", align = "center", style = "padding:20px;")
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_n_immigrants",
+                                 label = "Immigration",
+                                 class = "btn-primary"),
+                    align = "center"),
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_n_migrants",
+                                 label = "Net migration",
+                                 class = "btn-primary"),
+                    align = "center"),
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_n_emigrants",
+                                 label = "Emigration",
+                                 class = "btn-primary"),
+                    align = "center"),
+          )
+        ),
+
+        fluidRow(style = "margin-bottom:-2em;",
+          column(width = 3,
+                 h4("Rate:", align = "center", style = "padding:20px;")
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_r_immigrants",
+                                 label = "Immigration",
+                                 class = "btn-info"),
+                    align = "center"),
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_r_migrants",
+                                 label = "Net migration",
+                                 class = "btn-info"),
+                    align = "center"),
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_r_emigrants",
+                                 label = "Emigration",
+                                 class = "btn-info"),
+                    align = "center"),
+          ),
+        ),
+
+        h6("NOTE: In this option, the graphs show the migration data of all the ages.")
+      )
+
+    }
+    else if (input$mig_options_B == "By age") {
+
+      tagList(
+        selectInput(inputId = "sel_state_mig",
+                    label = "State(s)",
+                    choices = unique(df_birth_pop_states$state),
+                    selected = "National",
+                    multiple = TRUE,
+                    selectize = TRUE),
+
+        sliderInput(inputId = "sel_year_mig",
+                    label = "Year",
+                    value = 2005,
+                    min = 1970, max = 2050,
+                    step = 1,
+                    ticks = TRUE,
+                    sep = ""),
+
+        selectInput(inputId = "sel_sex_mig",
+                    label = "Sex",
+                    choices = c("Female", "Male", "Total"),
+                    selected = "Total",
+                    multiple = TRUE,
+                    selectize = TRUE),
+
+        sliderInput(inputId = "sel_age_mig",
+                    label = "Age",
+                    min = 0,
+                    max = 89,
+                    value = c(25,55),
+                    step = 1,
+                    ticks = TRUE,
+                    dragRange = TRUE),
+
+        fluidRow(style = "margin-top:-2em",
+          column(width = 3,
+                 h4("Number:", align = "center", style = "padding:20px;")
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_n_immigrants",
+                                 label = "Immigration",
+                                 class = "btn-primary"),
+                    align = "center"),
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_n_migrants",
+                                 label = "Net migration",
+                                 class = "btn-primary"),
+                    align = "center"),
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_n_emigrants",
+                                 label = "Emigration",
+                                 class = "btn-primary"),
+                    align = "center"),
+          )
+        ),
+
+        fluidRow(style = "margin-bottom:-2em",
+          column(width = 3,
+                 h4("Rate:", align = "center", style = "padding:20px;")
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_r_immigrants",
+                                 label = "Immigration",
+                                 class = "btn-info"),
+                    align = "center"),
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_r_migrants",
+                                 label = "Net migration",
+                                 class = "btn-info"),
+                    align = "center"),
+          ),
+          column(width = 3,
+                 h3(actionButton(inputId = "button_r_emigrants",
+                                 label = "Emigration",
+                                 class = "btn-info"),
+                    align = "center"),
+          ),
+        ),
+
+        br(),
+        h6("NOTE:In this option, the graphs show the migration data of selected age range in only one year.")
+      )
+    }
+  })
+  # Fourth set of inputs (Download data)
+  output$ui_mig_options_D <- renderUI({
+
+    if (is.null(input$mig_options_A)) {
+      return(NULL)
+    }
+    else if (input$mig_options_A == "download_mig_data") {
+      tagList(
         selectInput(inputId = "sel_type_mig",
                     label = "Type of migration",
                     choices = unique(df_migration_expanded$type),
@@ -511,190 +709,12 @@ server <- function(input, output, session) {
            align = "center")
       )
     }
-    else { # New set of options for plotting
-      radioButtons(inputId = "mig_options_B",
-                   label = "Select a graph",
-                   choices = c("By year", "By age"),
-                   selected = character(0),
-                   inline = TRUE)
+    else {
+      return(NULL)
     }
   })
 
-  # Third set of inputs (Select state, year, age, sex, and go! buttons)
-  output$ui_mig_options_C <- renderUI({
 
-    if (is.null(input$mig_options_B)) {
-      return(NULL)
-    }
-    else if (input$mig_options_A == "download_mig_data") {
-      return(NULL)
-    }
-    else if (input$mig_options_B == "By year") {
-
-      tagList(
-        selectInput(inputId = "sel_state_mig",
-                    label = "State(s)",
-                    choices = unique(df_birth_pop_states$state),
-                    selected = "National",
-                    multiple = TRUE,
-                    selectize = TRUE),
-
-        sliderInput(inputId = "sel_year_mig",
-                    label = "Year range",
-                    value = c(1990, 2010),
-                    min = 1970,
-                    max = 2050,
-                    step = 1,
-                    ticks = T,
-                    sep = ""),
-
-        selectInput(inputId = "sel_sex_mig",
-                    label = "Sex",
-                    choices = c("Female", "Male", "Total"),
-                    selected = "Total",
-                    multiple = TRUE,
-                    selectize = TRUE),
-
-        fluidRow(
-          column(width = 3,
-                 h4("Number:", align = "center", style = "padding:20px;")
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_n_immigrants",
-                                 label = "Immigration",
-                                 class = "btn-primary"),
-                    align = "center"),
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_n_migrants",
-                                 label = "Net migration",
-                                 class = "btn-primary"),
-                    align = "center"),
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_n_emigrants",
-                                 label = "Emigration",
-                                 class = "btn-primary"),
-                    align = "center"),
-          )
-        ),
-
-        fluidRow(
-          column(width = 3,
-                 h4("Rate:", align = "center", style = "padding:20px;")
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_r_immigrants",
-                                 label = "Immigration",
-                                 class = "btn-info"),
-                    align = "center"),
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_r_migrants",
-                                 label = "Net migration",
-                                 class = "btn-info"),
-                    align = "center"),
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_r_emigrants",
-                                 label = "Emigration",
-                                 class = "btn-info"),
-                    align = "center"),
-          ),
-        ),
-
-        br(),
-        h6("NOTE: In this option, the graphs show the migration data of all the ages.")
-      )
-
-    }
-    else if (input$mig_options_B == "By age") {
-
-      tagList(
-        selectInput(inputId = "sel_state_mig",
-                    label = "State(s)",
-                    choices = unique(df_birth_pop_states$state),
-                    selected = "National",
-                    multiple = TRUE,
-                    selectize = TRUE),
-
-        sliderInput(inputId = "sel_year_mig",
-                    label = "Year",
-                    value = 2005,
-                    min = 1970, max = 2050,
-                    step = 1,
-                    ticks = TRUE,
-                    sep = ""),
-
-        selectInput(inputId = "sel_sex_mig",
-                    label = "Sex",
-                    choices = c("Female", "Male", "Total"),
-                    selected = "Total",
-                    multiple = TRUE,
-                    selectize = TRUE),
-
-        sliderInput(inputId = "sel_age_mig",
-                    label = "Age",
-                    min = 0,
-                    max = 89,
-                    value = c(25,55),
-                    step = 1,
-                    ticks = TRUE,
-                    dragRange = TRUE),
-
-        fluidRow(
-          column(width = 3,
-                 h4("Number:", align = "center", style = "padding:20px;")
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_n_immigrants",
-                                 label = "Immigration",
-                                 class = "btn-primary"),
-                    align = "center"),
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_n_migrants",
-                                 label = "Net migration",
-                                 class = "btn-primary"),
-                    align = "center"),
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_n_emigrants",
-                                 label = "Emigration",
-                                 class = "btn-primary"),
-                    align = "center"),
-          )
-        ),
-
-        fluidRow(
-          column(width = 3,
-                 h4("Rate:", align = "center", style = "padding:20px;")
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_r_immigrants",
-                                 label = "Immigration",
-                                 class = "btn-info"),
-                    align = "center"),
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_r_migrants",
-                                 label = "Net migration",
-                                 class = "btn-info"),
-                    align = "center"),
-          ),
-          column(width = 3,
-                 h3(actionButton(inputId = "button_r_emigrants",
-                                 label = "Emigration",
-                                 class = "btn-info"),
-                    align = "center"),
-          ),
-        ),
-
-        br(),
-        h6("NOTE:In this option, the graphs show the migration data of selected age range in only one year.")
-      )
-    }
-  })
   ### Reactive objects ----------------------------------------------------
   # Filtered base dataset
   df_mig <- reactive({
@@ -805,7 +825,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Number of emigrants") +
+                           name = "Number of immigrants") +
         scale_x_continuous(name = "Age (Years)",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -967,7 +987,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Number of immigrants") +
+                           name = "Net number of migrants") +
         scale_x_continuous(name = "Year",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -995,7 +1015,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Number of emigrants") +
+                           name = "Net number of migrants") +
         scale_x_continuous(name = "Age (Years)",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1025,7 +1045,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Number of immigrants") +
+                           name = "Net number of migrants") +
         scale_x_continuous(name = "Year",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1053,7 +1073,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Number of immigrants") +
+                           name = "Net number of migrants") +
         scale_x_continuous(name = "Age (Years)",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1083,7 +1103,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Number of immigrants") +
+                           name = "Net number of migrants") +
         scale_x_continuous(name = "Year",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1111,7 +1131,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Number of immigrants") +
+                           name = "Net number of migrants") +
         scale_x_continuous(name = "Age (Years)",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1538,7 +1558,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Immigration rate") +
+                           name = "Net migration rate") +
         scale_x_continuous(name = "Year",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1566,7 +1586,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Immigration rate") +
+                           name = "Net migration rate") +
         scale_x_continuous(name = "Age (Years)",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1596,7 +1616,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Immigration rate") +
+                           name = "Net migration rate") +
         scale_x_continuous(name = "Year",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1624,7 +1644,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Immigration rate") +
+                           name = "Net migration rate") +
         scale_x_continuous(name = "Age (Years)",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1654,7 +1674,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Immigration rate") +
+                           name = "Net migration rate") +
         scale_x_continuous(name = "Year",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -1682,7 +1702,7 @@ server <- function(input, output, session) {
               text = element_text(size = 22),
               panel.grid.major.x = element_line(size = 1.5)) +
         scale_y_continuous(labels = scales::comma,
-                           name = "Immigration rate") +
+                           name = "Net migration rate") +
         scale_x_continuous(name = "Age (Years)",
                            breaks = v_major_breaks(),
                            minor_breaks = v_minor_breaks()) +
@@ -2714,7 +2734,7 @@ server <- function(input, output, session) {
   # Aging population by age
   txt_aging_age_server <- eventReactive(input$button_aging_age, {
     paste("Aging population from", input$sel_age_aging[1], " to ", input$sel_age_aging[2],
-          " years of age in ", input$sel_year_aging)
+          " years of age in ", input$sel_year_aging[2])
   })
   plt_aging_age_server <- eventReactive(input$button_aging_age, {
     # Create plot
@@ -2739,7 +2759,7 @@ server <- function(input, output, session) {
   # Aging rate by age
   txt_aging_rate_server <- eventReactive(input$button_aging_rate, {
     paste("Aging rate from", input$sel_age_aging[1], " to ", input$sel_age_aging[2],
-          " years of age in ", input$sel_year_aging)
+          " years of age in ", input$sel_year_aging[2])
   })
   plt_aging_rate_server <- eventReactive(input$button_aging_rate, {
     # Create plot
