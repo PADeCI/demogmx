@@ -6,6 +6,8 @@ library(dplyr)
 library(demogmx)
 library(shinythemes)
 library(shinycssloaders)
+library(devtools)
+
 
 # User Interface ----------------------------------------------------------
 ui <- navbarPage(

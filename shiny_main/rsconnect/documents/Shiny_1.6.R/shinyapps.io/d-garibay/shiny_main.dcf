@@ -1,0 +1,14 @@
+name: shiny_main
+title: shiny_main
+username:
+account: d-garibay
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6323711
+bundleId: 5917609
+url: https://d-garibay.shinyapps.io/shiny_main/
+when: 1652850293.1927
+lastSyncTime: 1652850293.1927
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: individual tabs/aging tab.R|individual tabs/migration tab.R|individual tabs/mortality tab.R|individual tabs/population tab.R|Shiny_1.2.R|Shiny_1.3.R|Shiny_1.4.R|Shiny_1.5.R|Shiny_1.R

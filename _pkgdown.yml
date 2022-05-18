@@ -11,8 +11,9 @@ navbar:
     - intro
     - reference
     - articles
-    - tutorials
-    - news
+    - shiny
+    # - tutorials
+    # - news
     right:
     - github
   components:
@@ -36,6 +37,9 @@ navbar:
         href: articles/demogmx_shiny.html
       - text: How to use the functions?
         href: articles/get_demographic_data.html
+    shiny:
+      text: ShinyApp
+      href: https://d-garibay.shinyapps.io/shiny_main/
 
 authors:
   David Garibay-Treviño:
