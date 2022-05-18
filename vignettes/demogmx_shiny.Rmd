@@ -61,27 +61,33 @@ For more information on the information sources please check the *Get demographi
 
 # Migration tab
 
-This tab has two initial sets of options. In the first, the user has to decide which one of the three types of migration available is going to use in the graphs **or** if the user is not interested in graphing and wants to get the data instead, *Download data* is a fourth option.
+This tab has two initial sets of options.
+
+-   In the first set, the user has to decide whether to graph or to download the selected data. Here there are three types of migration and a *Download data* option. If a migration type is selected, the user will be allowed to get plots related to the selected type of migration and if *Download data* is selected, all the possible migration parameters will be displayed so the user can filter the data as wished.
+
+-   The second set is optional and only is displayed if any of the types of migration is selected. We will talk more about it in the following.
 
 ## International, Interstate and Total migration
 
-The three types of migration are *International* migration, the *Interstate* migration and the *Total* migration, respectively. The Total migration is the aggregate of the other two. Note that if *National* is chosenin the State(s) option and Interstate migration is also selected, the graphs will be in blank because at a country level there is only international migration.
+There are three types of migration available in this app: *International*, *Interstate* and *Total* migration. The Total migration is the aggregate of the other two. Note that if the Interstate migration is selected and *National* is chosen in the State(s) parameter the graphs will be in blank because at a country level there is only international migration.
 
 ### By year or by age?
 
-Once the user have defined the type of migration, there is an additional set of two options that give the possibility to generate visualizations that show the data across multiple years (**by year**) or to generate them showing the migration characteristics by age based in the migration that occurred in a single year (**by age**).
+Once the user have defined the type of migration, there is an second set of options that give the possibility to generate visualizations that show the data across multiple years (**by year**) or to generate them showing the migration characteristics by age based in the migration that occurred in a single year (**by age**).
 
 In both cases the *state(s)* and the *sex(es)* shown in the visualization can be defined by the user. If *By year* is selected the date option will be a year range, otherwise, if *By age* is chosen,the date option will become a single year and an age option will appear, in it option the user must define the age range of the migration population included in the graphs.
 
 No matter the type of graph you choose (by year or by age) the available set of graphs will be the same. The main difference will be the X-axis of the graphs. If *By year* is chosen, it will show the selected years, if you choose *By age*, it will show the specified age range.
 
-Here are two examples of how the data can be seen:
+Finally, the plots allow to graph immigration (arrivals), emigration (departures) and the net migration (the difference between immigration and emigration). This info can be displayed in the raw number of people or by showing the rates in relation to the population of the location, given the rest of parameters.
 
-The graph number of emigrants selecting the option *By year* will show the emigration of each state, across the years.
+Below are two examples of how the plots can be displayed:
+
+-   The number of emigrants plot, selecting the option *By year,* will show the emigration of each state, across the years.
 
 ![](demog_shiny_figs/migration_by_year.png)
 
-The graph number of emigrants selecting the option *By age* will show the emigration of each state in one year disaggregating the information by ages in the X-axis.
+-   The number of emigrants plot, selecting the option *By age,* will show the emigration of each state in one year showing the selected ages in the X-axis.
 
 ![](demog_shiny_figs/migration_by_age.png)
 
@@ -159,3 +165,9 @@ In those graphs the X-axis represent the age of the population and, as in previo
 Once the parameter set is defined, the data user can be downloaded by clicking the *Download data* button **(7).** The format of the downloaded file is .csv.
 
 ![](demog_shiny_figs/aging_tab.png "Aging population tab"){width="100%"}
+
+It is important to note that the *Year* parameter is a two-bounded slider.
+
+-   The upper bound of the slider is used for plotting and for defining the maximum year that the downloaded dataset will take.
+
+-   The lower bound is only used to define the minimum year value that the downladed data will take.
