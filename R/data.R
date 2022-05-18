@@ -71,6 +71,12 @@
 #' Migration data of Mexico, from 1970 to 2050.
 #'
 #' A dataset containing the estimated migration by CONAPO between 1970 and 2050.
+#' This dataset is the expansion of \code{df_migration} by years and by age.
+#' The age was expanded by applying the population proportion in relation to
+#' the age group, the year and the state.
+#' The years were expanded, by equally distributing the population in each year
+#' group
+#'
 #' These estimations are disaggregated by year, state, sex and type of migration
 #' (immigration or emigration).
 #'

@@ -159,7 +159,7 @@ df_migration_expanded <- df_migration_aux3 %>%
 # 09 Save data ------------------------------------------------------------
 save(df_migration_expanded, file = "data/df_migration_expanded.rda")
 
-6# write.csv(df_migration_expanded, file = "data/df_migration_expanded.csv")
+# write.csv(df_migration_expanded, file = "data/df_migration_expanded.csv")
 
 
 
