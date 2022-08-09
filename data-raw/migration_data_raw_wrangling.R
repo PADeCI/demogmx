@@ -278,9 +278,9 @@ df_migration <- df_mig_inter_2 %>%
   tibble::as_tibble()
 
 # 03 Save data ---------------------------------------------------------
-# save(df_mig_states, file = "data/df_mig_states.rda")
-# save(df_mig_inter, file = "data/df_mig_inter.rda")
-save(df_migration, file = "data/df_migration.rda")
+# usethis::use_data(df_mig_states, overwrite = TRUE)
+# usethis::use_data(df_mig_inter,  overwrite = TRUE)
+usethis::use_data(df_migration,  overwrite = TRUE)
 
 # write.csv(df_mig_states, file = "data/df_mig_states.csv")
 # write.csv(df_mig_inter, file = "data/df_inter_mig.csv")

@@ -126,7 +126,7 @@ df_pop_state <- df_pop_state_age %>%
 ## 02.03 Save population projections data.frames --------------------------
 
 ### Save Population Projections data.frames
-# save(df_pop_state_age_sex, file = "data/df_pop_state_age_sex.rda")
+# usethis::use_data(df_pop_state_age_sex, overwrite = TRUE)
 
 # write.csv(df_pop_state_age_sex, "data/df_pop_state_age_sex.csv")
 
@@ -210,7 +210,7 @@ df_birth_state <- df_birth_state_agegrp %>%
   ungroup()
 
 ## 03.03 Save birth projections data.frames -------------------------------
-# save(df_birth_state, file = "data/df_birth_state.rda")
+# usethis::use_data(df_birth_state, overwrite = TRUE)
 
 # write.csv(df_birth_state, "data/df_birth_state.csv")
 
@@ -299,7 +299,7 @@ levels(df_mort_state_age_sex$state) <- v_names_states
 
 ## 04.03 Save mortality projections data.frames -------------------------------
 ### Save Mortality Projections data.frames
-# save(df_mort_state_age_sex, file = "data/df_mort_state_age_sex.rda")
+usethis::use_data(df_mort_state_age_sex, overwrite = TRUE)
 
 # write.csv(df_mort_state_age_sex, "data/df_mort_state_age_sex.csv")
 
@@ -337,7 +337,7 @@ df_mortrate_state_age_sex <- df_pop_state_age_sex_1 %>%
   mutate(death_rate = deaths/population)
 
 ## 05.02 Save data --------------------------------------------------------
-save(df_mortrate_state_age_sex, file = "data/df_mortrate_state_age_sex.rda")
+# usethis::use_data(df_mortrate_state_age_sex, overwrite = TRUE)
 
 
 # 06 Create birth rate data -----------------------------------------------
@@ -356,5 +356,5 @@ df_birth_pop_states <- df_pop_state_age_sex_2 %>%
             by = c("year", "state", "CVE_GEO"))
 
 ## 06.02 Save data --------------------------------------------------------
-save(df_birth_pop_states, file = "data/df_birth_pop_states.rda")
+# usethis::use_data(df_birth_pop_states, overwrite = TRUE)
 
