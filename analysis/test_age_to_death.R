@@ -54,7 +54,7 @@ bb-aa
 
 thh_norm <- thh / rowSums(thh)
 rowSums(thh_norm)
-test <- darthtools::samplev(thh_norm)
+test <- darthtools::samplev(m_Probs = thh_norm, m = 1)
 
 mean(test)
 
