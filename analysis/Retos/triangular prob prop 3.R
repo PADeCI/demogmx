@@ -47,9 +47,10 @@ df_tri <- (upper.tri(x = matrix(data = 1,
 colnames(df_tri) <- paste0("V", 0:109)
 
 # stack arrays vertically
-df_tri_exp <- do.call("rbind", replicate(n = (nrow(df_DP)/length(unique(df_mortrate$age))),
-                                         expr = df_tri,
-                                         simplify = FALSE))
+df_tri_exp <- do.call("rbind",
+                      replicate(n = (nrow(df_DP)/length(unique(df_mortrate$age))),
+                                expr = df_tri,
+                                simplify = FALSE))
 
 # Check that all dataframes have the correct dimensions
 dim(df_mortrate)
